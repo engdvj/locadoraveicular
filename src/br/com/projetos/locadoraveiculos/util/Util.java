@@ -2,9 +2,7 @@ package br.com.projetos.locadoraveiculos.util;
 
 import br.com.projetos.locadoraveiculos.model.clientes.Cliente;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class Util {
     public enum Tamanho {

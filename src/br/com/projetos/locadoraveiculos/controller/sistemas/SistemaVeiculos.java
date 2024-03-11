@@ -41,4 +41,9 @@ public class SistemaVeiculos implements Cadastrar<Veiculo> {
         veiculos.remove(veiculo);
         return false;
     }
+
+    @Override
+    public List<Veiculo> obterTipo() {
+        return null;
+    }
 }

@@ -4,6 +4,7 @@ import br.com.projetos.locadoraveiculos.controller.locadora.*;
 import br.com.projetos.locadoraveiculos.controller.sistemas.*;
 import br.com.projetos.locadoraveiculos.model.clientes.*;
 import br.com.projetos.locadoraveiculos.model.veiculo.*;
+import br.com.projetos.locadoraveiculos.service.*;
 import br.com.projetos.locadoraveiculos.util.Util;
 import br.com.projetos.locadoraveiculos.view.menu.MenuInicial;
 
@@ -42,10 +43,10 @@ public class App {
     }
 
     public static void main(String[] args) {
-    SistemaClientes sistemaClientes = new SistemaClientes(loadSampleClientes());
-    SistemaVeiculos sistemaVeiculos = new SistemaVeiculos(loadSampleVeiculos());
+    Cadastrar<Cliente> sistemaClientes = new SistemaClientes(loadSampleClientes());
+    Cadastrar<Veiculo> sistemaVeiculos = new SistemaVeiculos(loadSampleVeiculos());
 
-    SistemaAluguel sistemaDeAluguel = new SistemaAluguel(sistemaVeiculos,sistemaClientes);
+    Alugar sistemaDeAluguel = new SistemaAluguel(sistemaVeiculos,sistemaClientes);
 
     ControllerLocadora controllerLocadora = new ControllerLocadora("Locadora Dois Irmãos",sistemaDeAluguel);
 

@@ -1,11 +1,10 @@
 package br.com.projetos.locadoraveiculos.service;
 
-import br.com.projetos.locadoraveiculos.controller.sistemas.*;
-import br.com.projetos.locadoraveiculos.model.veiculo.Veiculo;
+import br.com.projetos.locadoraveiculos.model.clientes.Cliente;
 
-public interface Alugar{
-    SistemaVeiculos obterVeiculos();
-    SistemaClientes obterClientes();
-    boolean emprestar(Veiculo veiculo);
-    boolean devolver(Veiculo veiculo);
+public interface Alugar<T>{
+    Cadastrar<T> obterTipo();
+    Cadastrar<Cliente> obterClientes();
+    boolean emprestar(T t);
+    boolean devolver(T t);
 }

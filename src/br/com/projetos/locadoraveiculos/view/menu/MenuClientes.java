@@ -123,7 +123,7 @@ public class MenuClientes implements Apresentar {
     }
     private Cliente obterCliente() {
         System.out.println("Lista Atual de Clientes:\n");
-        for(Cliente cliente : controller.getSistemaDeClientes().getClientes()){
+        for(Cliente cliente : controller.getSistemaDeClientes().obterTipo()){
             System.out.println(cliente.obterNomeOrganizado());
         }
         System.out.println("\nDigite o nome do cliente ou da empresa:");
