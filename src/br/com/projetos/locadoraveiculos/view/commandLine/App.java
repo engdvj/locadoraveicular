@@ -12,13 +12,11 @@ import java.util.*;
 
 
 public class App {
-    private final ControllerLocadora controller;
     private final MenuInicial menuInicial;
     public static final Scanner scanner = new Scanner(System.in);
 
 
     public App(ControllerLocadora controllerLocadora) {
-        this.controller = controllerLocadora;
         this.menuInicial = new MenuInicial(controllerLocadora);
     }
 

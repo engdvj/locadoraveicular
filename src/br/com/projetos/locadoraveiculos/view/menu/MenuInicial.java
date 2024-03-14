@@ -7,7 +7,6 @@ import static br.com.projetos.locadoraveiculos.view.commandLine.App.scanner;
 
 public class MenuInicial implements Apresentar {
     private final ControllerLocadora controller;
-    private Apresentar menu;
     public MenuInicial(ControllerLocadora controllerLocadora) {
         this.controller = controllerLocadora;
     }
@@ -24,6 +23,7 @@ public class MenuInicial implements Apresentar {
                      (4) - Sair
                     """);
             String option = scanner.next();
+            Apresentar menu;
             switch (option) {
                 case "1":
                     menu = new MenuClientes(controller);
