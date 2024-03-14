@@ -4,6 +4,7 @@ import br.com.projetos.locadoraveiculos.controller.locadora.ControllerLocadora;
 import br.com.projetos.locadoraveiculos.model.clientes.*;
 import br.com.projetos.locadoraveiculos.service.Apresentar;
 
+import static br.com.projetos.locadoraveiculos.util.Validacoes.*;
 import static br.com.projetos.locadoraveiculos.view.commandLine.App.scanner;
 
 public class MenuClientes implements Apresentar {
@@ -61,18 +62,39 @@ public class MenuClientes implements Apresentar {
         if (valor == 1) {
             System.out.println("Digite o Nome do Cliente: ");
             String nomeCliente = scanner.nextLine();
+            boolean verifica = true;
+            String cpfCliente = null;
+
             System.out.println("Digite o CPF: ");
-            String cpfCliente = scanner.nextLine();
+            while (verifica) {
+                cpfCliente = scanner.nextLine();
+                if (validarDocumento(cpfCliente,"cpf")) {
+                    verifica = false;
+                }else{
+                    System.out.println("CPF Inválido! Tente novamente.");
+                }
+            }
             if (controller.getSistemaDeClientes().add(new ClientePF(nomeCliente, cpfCliente))) {
                 System.out.println("Cliente Adicionado com Sucesso!\n");
             } else {
                 System.out.println("Erro na criação do cliente!\n");
             }
+
         } else {
             System.out.println("Digite o Nome da Empresa: ");
             String nomeCliente = scanner.nextLine();
+            boolean verifica = true;
+            String cnpjCliente = null;
+
             System.out.println("Digite o CNPJ: ");
-            String cnpjCliente = scanner.nextLine();
+            while (verifica) {
+                cnpjCliente = scanner.nextLine();
+                if (validarDocumento(cnpjCliente,"cnpj")) {
+                    verifica = false;
+                }else{
+                    System.out.println("CNPJ Inválido! Tente novamente.");
+                }
+            }
             if (controller.getSistemaDeClientes().add(new ClientePJ(nomeCliente, cnpjCliente))) {
                 System.out.println("Cliente Adicionado com Sucesso!\n");
             } else {

@@ -1,15 +1,18 @@
 package br.com.projetos.locadoraveiculos.controller.sistemas;
 
 import br.com.projetos.locadoraveiculos.model.veiculo.Veiculo;
-import br.com.projetos.locadoraveiculos.service.Cadastrar;
+import br.com.projetos.locadoraveiculos.service.CRUD;
 import br.com.projetos.locadoraveiculos.util.Validacoes;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
-public class SistemaVeiculos implements Cadastrar<Veiculo> {
-    private List<Veiculo> veiculos;
 
-    public SistemaVeiculos(List<Veiculo> veiculos) {
+public class SistemaVeiculos implements CRUD<Veiculo> {
+    private HashSet<Veiculo> veiculos;
+
+    public SistemaVeiculos(HashSet<Veiculo> veiculos) {
         this.veiculos = veiculos;
     }
 
@@ -35,15 +38,13 @@ public class SistemaVeiculos implements Cadastrar<Veiculo> {
         }
         throw new IllegalStateException ("Veículo não encontrado!");
     }
-
     @Override
     public boolean remover(Veiculo veiculo) {
         veiculos.remove(veiculo);
         return false;
     }
-
     @Override
-    public List<Veiculo> obterTipo() {
+    public TreeSet<Veiculo> obterTipo() {
         return null;
     }
 }

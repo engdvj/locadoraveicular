@@ -30,4 +30,15 @@ public class ClientePJ extends Cliente{
         sb.append("CNPJ: ").append(CNPJ).append("\n");
         return sb.toString();
     }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass()!= o.getClass()) return false;
+        ClientePJ clientePJ = (ClientePJ) o;
+        return CNPJ.equals(clientePJ.CNPJ);
+    }
+    @Override
+    public int hashCode() {
+        return CNPJ.hashCode();
+    }
 }

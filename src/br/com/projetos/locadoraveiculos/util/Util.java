@@ -10,7 +10,10 @@ public class Util {
         MEDIO,
         SUV;
     }
-    public static void ordenarClientesPorNome(List<Cliente> clientes) {
-        Collections.sort(clientes, Comparator.comparing(Cliente::obterNomeOrganizado));
+    public static TreeSet<Cliente> ordenarClientesPorNome(HashSet<Cliente> clientes) {
+        Comparator<Cliente> comparadorPorNome = Comparator.comparing(Cliente::obterNomeOrganizado);
+        TreeSet<Cliente> ordenadoClientes = new TreeSet<>(comparadorPorNome);
+        ordenadoClientes.addAll(clientes); // Adicionando os clientes ao TreeSet, que serão ordenados
+        return ordenadoClientes;
     }
 }

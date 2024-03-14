@@ -3,13 +3,13 @@ package br.com.projetos.locadoraveiculos.controller.locadora;
 import br.com.projetos.locadoraveiculos.model.clientes.Cliente;
 import br.com.projetos.locadoraveiculos.model.veiculo.Veiculo;
 import br.com.projetos.locadoraveiculos.service.Alugar;
-import br.com.projetos.locadoraveiculos.service.Cadastrar;
+import br.com.projetos.locadoraveiculos.service.CRUD;
 
 public class ControllerLocadora {
 
     private String nome;
-    private Cadastrar<Veiculo> sistemaDeCarros;
-    private Cadastrar<Cliente> sistemaDeClientes;
+    private CRUD<Veiculo> sistemaDeCarros;
+    private CRUD<Cliente> sistemaDeClientes;
     private Alugar<Veiculo> sistemaDeAluguel;
     public ControllerLocadora(String nome, Alugar alugarCarros) {
         this.nome = nome;
@@ -20,10 +20,10 @@ public class ControllerLocadora {
     public String getNome() {
         return nome;
     }
-    public Cadastrar<Cliente> getSistemaDeClientes() {
+    public CRUD<Cliente> getSistemaDeClientes() {
         return sistemaDeClientes;
     }
-    public Cadastrar<Veiculo> getSistemaDeCarros() {
+    public CRUD<Veiculo> getSistemaDeCarros() {
         return sistemaDeCarros;
     }
     public Alugar<Veiculo> getSistemaDeAluguel() {

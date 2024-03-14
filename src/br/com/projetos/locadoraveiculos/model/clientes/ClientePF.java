@@ -32,4 +32,17 @@ public class ClientePF extends Cliente{
         sb.append("CPF: ").append(CPF).append("\n");
         return sb.toString();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass()!= o.getClass()) return false;
+        ClientePF clientePF = (ClientePF) o;
+        return CPF.equals(clientePF.CPF);
+    }
+    @Override
+    public int hashCode() {
+        return CPF.hashCode();
+    }
+
 }

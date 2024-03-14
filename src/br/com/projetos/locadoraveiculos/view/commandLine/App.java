@@ -8,9 +8,7 @@ import br.com.projetos.locadoraveiculos.service.*;
 import br.com.projetos.locadoraveiculos.util.Util;
 import br.com.projetos.locadoraveiculos.view.menu.MenuInicial;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 
 public class App {
@@ -27,14 +25,14 @@ public class App {
     public void run(){
         menuInicial.escolherOpcao();
     }
-    public static List<Veiculo> loadSampleVeiculos(){
-        List<Veiculo> veiculos = new ArrayList<>();
+    public static HashSet<Veiculo> loadSampleVeiculos(){
+        HashSet<Veiculo> veiculos = new HashSet<>();
         veiculos.add(new Veiculo("Ford", "Focus", "123456789", Util.Tamanho.MEDIO));
         veiculos.add(new Veiculo("Volkswagen", "Jetta", "123456789", Util.Tamanho.SUV));
         return veiculos;
     }
-    public static List<Cliente> loadSampleClientes(){
-        List<Cliente> clientes = new ArrayList<>();
+    public static HashSet<Cliente> loadSampleClientes(){
+        HashSet<Cliente> clientes = new HashSet<>();
         clientes.add(new ClientePF("Caio Brito", "123.456.789-10"));
         clientes.add(new ClientePF("Ingrid Gomes", "321.654.987-11"));
         clientes.add(new ClientePJ("COCA COLA", "45.997.418/0017-10"));
@@ -43,8 +41,8 @@ public class App {
     }
 
     public static void main(String[] args) {
-    Cadastrar<Cliente> sistemaClientes = new SistemaClientes(loadSampleClientes());
-    Cadastrar<Veiculo> sistemaVeiculos = new SistemaVeiculos(loadSampleVeiculos());
+    CRUD<Cliente> sistemaClientes = new SistemaClientes(loadSampleClientes());
+    CRUD<Veiculo> sistemaVeiculos = new SistemaVeiculos(loadSampleVeiculos());
 
     Alugar sistemaDeAluguel = new SistemaAluguel(sistemaVeiculos,sistemaClientes);
 

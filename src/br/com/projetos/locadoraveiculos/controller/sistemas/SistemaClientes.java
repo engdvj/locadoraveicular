@@ -1,21 +1,21 @@
 package br.com.projetos.locadoraveiculos.controller.sistemas;
 
 import br.com.projetos.locadoraveiculos.model.clientes.Cliente;
-import br.com.projetos.locadoraveiculos.service.Cadastrar;
+import br.com.projetos.locadoraveiculos.service.CRUD;
 import br.com.projetos.locadoraveiculos.util.*;
 
 
-import java.util.List;
+import java.util.*;
 
-public class SistemaClientes implements Cadastrar<Cliente> {
-    List<Cliente> clientes;
-    public SistemaClientes(List<Cliente> clientes) {
+public class SistemaClientes implements CRUD<Cliente> {
+    HashSet<Cliente> clientes;
+    public SistemaClientes(HashSet<Cliente> clientes) {
         this.clientes = clientes;
     }
     @Override
-    public List<Cliente> obterTipo() {
-        Util.ordenarClientesPorNome(clientes);
-        return clientes; }
+    public TreeSet<Cliente> obterTipo() {
+        TreeSet<Cliente> listaOrdenada = Util.ordenarClientesPorNome(clientes);
+        return listaOrdenada; }
 
     @Override
     public boolean add(Cliente cliente) {
