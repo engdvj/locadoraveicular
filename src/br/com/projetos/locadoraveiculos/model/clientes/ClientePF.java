@@ -29,16 +29,29 @@ public class ClientePF extends Cliente{
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Nome do Cliente: ").append(nome).append("\n");
-        sb.append("CPF: ").append(CPF).append("\n");
+        sb.append("CPF: ").append(formatoDocumento(CPF)).append("\n");
+        return sb.toString();
+    }
+    @Override
+    public String formatoDocumento(String CPF) {
+        StringBuilder sb = new StringBuilder(CPF);
+
+        sb.insert(3, '.');
+        sb.insert(7, '.');
+        sb.insert(11, '-');
+
         return sb.toString();
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass()!= o.getClass()) return false;
-        ClientePF clientePF = (ClientePF) o;
-        return CPF.equals(clientePF.CPF);
+        if (!(o instanceof ClientePF)) return false;
+        ClientePF outro = (ClientePF) o;
+        if (CPF == null) {
+            return outro.CPF == null;
+        } else {
+            return CPF.equals(outro.CPF);
+        }
     }
     @Override
     public int hashCode() {

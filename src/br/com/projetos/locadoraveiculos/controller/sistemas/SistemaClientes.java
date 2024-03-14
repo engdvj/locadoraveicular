@@ -19,8 +19,7 @@ public class SistemaClientes implements CRUD<Cliente> {
 
     @Override
     public boolean add(Cliente cliente) {
-        clientes.add(cliente);
-        return true;
+        return clientes.add(cliente);
     }
 
     @Override
@@ -33,8 +32,9 @@ public class SistemaClientes implements CRUD<Cliente> {
     @Override
     public Cliente realizarBusca(String nome) {
         if (Validacoes.validaNome(nome)) {
+            String nomeLowerCase = nome.toLowerCase();
             for (Cliente cliente : clientes) {
-                if (cliente.obterNomeOrganizado().contains(nome)) {
+                if (cliente.obterNomeOrganizado().toLowerCase().contains(nomeLowerCase)) {
                     return cliente;
                 }
             }

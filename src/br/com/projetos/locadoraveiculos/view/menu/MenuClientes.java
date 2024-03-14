@@ -74,10 +74,11 @@ public class MenuClientes implements Apresentar {
                     System.out.println("CPF Inválido! Tente novamente.");
                 }
             }
-            if (controller.getSistemaDeClientes().add(new ClientePF(nomeCliente, cpfCliente))) {
+            boolean adicionado = controller.getSistemaDeClientes().add(new ClientePF(nomeCliente, cpfCliente));
+            if (adicionado) {
                 System.out.println("Cliente Adicionado com Sucesso!\n");
             } else {
-                System.out.println("Erro na criação do cliente!\n");
+                System.out.println("Erro na criação do cliente! Cliente com este CPF já existe.\n");
             }
 
         } else {
@@ -95,10 +96,11 @@ public class MenuClientes implements Apresentar {
                     System.out.println("CNPJ Inválido! Tente novamente.");
                 }
             }
-            if (controller.getSistemaDeClientes().add(new ClientePJ(nomeCliente, cnpjCliente))) {
+            boolean adicionado = controller.getSistemaDeClientes().add(new ClientePJ(nomeCliente, cnpjCliente));
+            if (adicionado) {
                 System.out.println("Cliente Adicionado com Sucesso!\n");
             } else {
-                System.out.println("Erro na criação do cliente!\n");
+                System.out.println("Erro na criação do cliente! Cliente com este CNPJ já existe.\n");
             }
         }
     }

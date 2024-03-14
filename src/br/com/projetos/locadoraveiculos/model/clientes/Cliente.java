@@ -7,5 +7,6 @@ public abstract class Cliente {
     public abstract String obterNomeOrganizado();
     public abstract String getDocumento();
     public abstract void setDocumento(String document);
+    public abstract String formatoDocumento(String documento);
 
 }

@@ -33,10 +33,10 @@ public class App {
     }
     public static HashSet<Cliente> loadSampleClientes(){
         HashSet<Cliente> clientes = new HashSet<>();
-        clientes.add(new ClientePF("Caio Brito", "123.456.789-10"));
-        clientes.add(new ClientePF("Ingrid Gomes", "321.654.987-11"));
-        clientes.add(new ClientePJ("COCA COLA", "45.997.418/0017-10"));
-        clientes.add(new ClientePJ("PEPSICO DO BRASIL", "31.565.104/0020-30"));
+        clientes.add(new ClientePF("Caio Brito", "12345678910"));
+        clientes.add(new ClientePF("Ingrid Gomes", "32165498711"));
+        clientes.add(new ClientePJ("COCA COLA", "45997418001710"));
+        clientes.add(new ClientePJ("PEPSICO DO BRASIL", "31565104002030"));
         return clientes;
     }
 
