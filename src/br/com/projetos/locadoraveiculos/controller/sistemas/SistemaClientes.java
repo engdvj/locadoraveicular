@@ -13,9 +13,8 @@ public class SistemaClientes implements CRUD<Cliente> {
         this.clientes = clientes;
     }
     @Override
-    public TreeSet<Cliente> obterTipo() {
-        TreeSet<Cliente> listaOrdenada = Util.ordenarClientesPorNome(clientes);
-        return listaOrdenada; }
+    public TreeSet<Cliente> obterLista() {
+        return Util.ordenar(clientes,Comparator.comparing(Cliente::obterNomeOrganizado)); }
 
     @Override
     public boolean add(Cliente cliente) {
@@ -23,7 +22,7 @@ public class SistemaClientes implements CRUD<Cliente> {
     }
 
     @Override
-    public Cliente editar(Cliente clienteAnterior,Cliente clienteNovo) {
+    public Cliente editar(Cliente clienteAnterior, Cliente clienteNovo) {
         clienteAnterior.setNome(clienteNovo.getNome());
         clienteAnterior.setDocumento(clienteNovo.getDocumento());
         return null;

@@ -46,4 +46,11 @@ public class Veiculo {
     public void setTamanhoVeiculo(Enum<Tamanho> tamanhoVeiculo) {
         this.tamanhoVeiculo = tamanhoVeiculo;
     }
+
+    public String obterNomeOrganizado(){
+        StringBuilder sb = new StringBuilder();
+        sb.append(tamanhoVeiculo).append(" - ").append(modelo);
+        return sb.toString();
+    }
+
 }

@@ -1,6 +1,7 @@
 package br.com.projetos.locadoraveiculos.util;
 
 import br.com.projetos.locadoraveiculos.model.clientes.Cliente;
+import br.com.projetos.locadoraveiculos.model.veiculo.Veiculo;
 
 import java.util.*;
 
@@ -10,10 +11,9 @@ public class Util {
         MEDIO,
         SUV;
     }
-    public static TreeSet<Cliente> ordenarClientesPorNome(HashSet<Cliente> clientes) {
-        Comparator<Cliente> comparadorPorNome = Comparator.comparing(Cliente::obterNomeOrganizado);
-        TreeSet<Cliente> ordenadoClientes = new TreeSet<>(comparadorPorNome);
-        ordenadoClientes.addAll(clientes); // Adicionando os clientes ao TreeSet, que serão ordenados
-        return ordenadoClientes;
+    public static <T> TreeSet<T> ordenar(Set<T> objetos, Comparator<T> comparador) {
+        TreeSet<T> ordenado = new TreeSet<>(comparador);
+        ordenado.addAll(objetos);
+        return ordenado;
     }
 }

@@ -2,34 +2,43 @@ package br.com.projetos.locadoraveiculos.view.commandLine;
 
 import br.com.projetos.locadoraveiculos.controller.locadora.*;
 import br.com.projetos.locadoraveiculos.controller.sistemas.*;
+import br.com.projetos.locadoraveiculos.model.agencia.Agencia;
 import br.com.projetos.locadoraveiculos.model.clientes.*;
 import br.com.projetos.locadoraveiculos.model.veiculo.*;
 import br.com.projetos.locadoraveiculos.service.*;
 import br.com.projetos.locadoraveiculos.util.Util;
 import br.com.projetos.locadoraveiculos.view.menu.MenuInicial;
 
+import java.time.LocalTime;
 import java.util.*;
 
 
 public class App {
-    private final MenuInicial menuInicial;
+    public static Apresentar menu;
     public static final Scanner scanner = new Scanner(System.in);
 
 
     public App(ControllerLocadora controllerLocadora) {
-        this.menuInicial = new MenuInicial(controllerLocadora);
+        menu = new MenuInicial(controllerLocadora);
     }
 
-    public void run(){
-        menuInicial.escolherOpcao();
+    public void run() {
+        menu.escolherOpcao();
     }
-    public static HashSet<Veiculo> loadSampleVeiculos(){
+
+    public static HashSet<Veiculo> loadSampleVeiculos() {
         HashSet<Veiculo> veiculos = new HashSet<>();
         veiculos.add(new Veiculo("Ford", "Focus", "123456789", Util.Tamanho.MEDIO));
         veiculos.add(new Veiculo("Volkswagen", "Jetta", "123456789", Util.Tamanho.SUV));
+        veiculos.add(new Veiculo("Chevrolet", "Cruze", "987654321", Util.Tamanho.PEQUENO));
+        veiculos.add(new Veiculo("Fiat", "Toro", "234567891", Util.Tamanho.PEQUENO));
+        veiculos.add(new Veiculo("Honda", "Civic", "345678912", Util.Tamanho.MEDIO));
+        veiculos.add(new Veiculo("Toyota", "Corolla", "456789123", Util.Tamanho.MEDIO));
+        veiculos.add(new Veiculo("Renault", "Duster", "567891234", Util.Tamanho.SUV));
         return veiculos;
     }
-    public static HashSet<Cliente> loadSampleClientes(){
+
+    public static HashSet<Cliente> loadSampleClientes() {
         HashSet<Cliente> clientes = new HashSet<>();
         clientes.add(new ClientePF("Caio Brito", "12345678910"));
         clientes.add(new ClientePF("Ingrid Gomes", "32165498711"));
@@ -37,17 +46,22 @@ public class App {
         clientes.add(new ClientePJ("PEPSICO DO BRASIL", "31565104002030"));
         return clientes;
     }
+    public static Agencia loadSampleAgencia(){
+        Agencia agencia = new Agencia("Dois Irmãos", "Rua Duque de Caxias", LocalTime.of(9, 0), LocalTime.of(18, 0));
+        return agencia;
+    }
 
     public static void main(String[] args) {
-    CRUD<Cliente> sistemaClientes = new SistemaClientes(loadSampleClientes());
-    CRUD<Veiculo> sistemaVeiculos = new SistemaVeiculos(loadSampleVeiculos());
+        Agencia agencia = loadSampleAgencia();
+        CRUD<Cliente> sistemaClientes = new SistemaClientes(loadSampleClientes());
+        CRUD<Veiculo> sistemaVeiculos = new SistemaVeiculos(loadSampleVeiculos());
 
-    Alugar sistemaDeAluguel = new SistemaAluguel(sistemaVeiculos,sistemaClientes);
+        Alugar sistemaDeAluguel = new SistemaAluguel(agencia, sistemaVeiculos, sistemaClientes);
 
-    ControllerLocadora controllerLocadora = new ControllerLocadora("Locadora Dois Irmãos",sistemaDeAluguel);
+        ControllerLocadora controllerLocadora = new ControllerLocadora(sistemaDeAluguel);
 
-    App cliApp = new App(controllerLocadora);
+        App cliApp = new App(controllerLocadora);
 
-    cliApp.run();
+        cliApp.run();
     }
 }

@@ -1,6 +1,6 @@
 package br.com.projetos.locadoraveiculos.model.clientes;
 
-public class ClientePF extends Cliente{
+public class ClientePF extends Cliente {
     private String CPF;
 
     public ClientePF(String nome, String CPF) {
