@@ -15,7 +15,7 @@ public class MenuInicial implements Apresentar {
     public void escolherOpcao() {
         boolean sair = false;
         while (!sair) {
-            System.out.println("\nSeja Bem Vindo a " + controller.getNome()+"\n");
+            System.out.println("\nSeja Bem Vindo a " + controller.getSistemaDeAluguel().getAgencia().getNome()+"\n");
             System.out.println("""               
                     Escolha uma opção abaixo:
                      (1) - Clientes

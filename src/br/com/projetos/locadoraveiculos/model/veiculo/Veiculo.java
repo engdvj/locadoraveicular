@@ -1,14 +1,15 @@
 package br.com.projetos.locadoraveiculos.model.veiculo;
 
+import br.com.projetos.locadoraveiculos.service.Lista;
 import br.com.projetos.locadoraveiculos.util.Util.Tamanho;
 
-public class Veiculo {
+public class Veiculo implements Lista {
     private String marca;
     private String modelo;
     private String placa;
-    Enum<Tamanho> tamanhoVeiculo;
+    private Tamanho tamanhoVeiculo;
 
-    public Veiculo(String marca, String modelo, String placa, Enum<Tamanho> tamanhoVeiculo) {
+    public Veiculo(String marca, String modelo, String placa, Tamanho tamanhoVeiculo) {
         this.marca = marca;
         this.modelo = modelo;
         this.placa = placa;
@@ -27,7 +28,7 @@ public class Veiculo {
         return placa;
     }
 
-    public Enum<Tamanho> getTamanhoVeiculo() {
+    public Tamanho getTamanhoVeiculo() {
         return tamanhoVeiculo;
     }
 
@@ -43,7 +44,13 @@ public class Veiculo {
         this.placa = placa;
     }
 
-    public void setTamanhoVeiculo(Enum<Tamanho> tamanhoVeiculo) {
+    public void setTamanhoVeiculo(Tamanho tamanhoVeiculo) {
         this.tamanhoVeiculo = tamanhoVeiculo;
+    }
+
+    public String obterNomeOrganizado(){
+        StringBuilder sb = new StringBuilder();
+        sb.append(tamanhoVeiculo).append(" - ").append(modelo);
+        return sb.toString();
     }
 }

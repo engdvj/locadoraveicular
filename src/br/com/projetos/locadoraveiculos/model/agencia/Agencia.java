@@ -2,13 +2,13 @@ package br.com.projetos.locadoraveiculos.model.agencia;
 
 import java.time.LocalTime;
 
-public class AgenciaAluguel {
+public class Agencia {
     private String nome;
     private String endereco;
     private LocalTime horarioAbertura;
     private LocalTime horarioFechamento;
 
-    public AgenciaAluguel(String nome, String endereco, LocalTime horarioAbertura, LocalTime horarioFechamento) {
+    public Agencia(String nome, String endereco, LocalTime horarioAbertura, LocalTime horarioFechamento) {
         this.nome = nome;
         this.endereco = endereco;
         this.horarioAbertura = horarioAbertura;

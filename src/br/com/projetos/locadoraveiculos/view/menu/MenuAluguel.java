@@ -1,29 +1,28 @@
 package br.com.projetos.locadoraveiculos.view.menu;
 
 import br.com.projetos.locadoraveiculos.controller.locadora.ControllerLocadora;
-import br.com.projetos.locadoraveiculos.controller.sistemas.SistemaAgencias;
-import br.com.projetos.locadoraveiculos.model.agencia.AgenciaAluguel;
 import br.com.projetos.locadoraveiculos.model.clientes.Cliente;
+import br.com.projetos.locadoraveiculos.model.veiculo.Veiculo;
 import br.com.projetos.locadoraveiculos.service.Apresentar;
+import br.com.projetos.locadoraveiculos.util.Util;
 
-import static br.com.projetos.locadoraveiculos.view.commandLine.App.scanner;
+import static br.com.projetos.locadoraveiculos.view.commandLine.App.*;
 
 public class MenuAluguel implements Apresentar {
     private final ControllerLocadora controller;
-
     public MenuAluguel(ControllerLocadora controller) {
         this.controller = controller;
     }
-
     @Override
     public void escolherOpcao() {
         boolean continuar = true;
         while (continuar) {
             System.out.println("""
                     Escolha uma opção abaixo:
-                     (1) - Alugar um Veiculo
-                     (2) - Devolver um Veiculo
-                     (3) - Voltar ao Menu Anterior
+                     (1) - Alugar um veículo
+                     (2) - Devolver um veículo
+                     (3) - Ver informações
+                     (4) - Voltar ao Menu Anterior
                     """);
             String option = scanner.next();
             switch (option) {
@@ -34,31 +33,24 @@ public class MenuAluguel implements Apresentar {
                     devolverVeiculo();
                     break;
                 case "3":
-                    continuar = false;
+                    verInformacoes();
+                    break;
+                case "4":
+                    continuar = false; // Encerra o loop, voltando ao menu anterior
                     break;
                 default:
                     System.out.println("Opção Inválida!");
             }
         }
     }
-
     private void alugarVeiculo() {
-        System.out.println("Escolha o local para retirada: ");
-        obterAgencia();
-        int valor = scanner.nextInt();
-        scanner.nextLine();
-        System.out.println("Alugado com sucesso!");
+        Util.listar("Clientes", controller.getSistemaDeAluguel().obterClientes().obterLista());
+        Util.listar("Veiculos", controller.getSistemaDeAluguel().obterVeiculos().obterLista());
     }
 
-    private void devolverVeiculo(){
-
-        System.out.println("Devolvido com sucesso!");
+    private void devolverVeiculo() {
     }
 
-    private void obterAgencia() {
-        for(AgenciaAluguel agenciaAluguel : controller.getSistemDeAgencias().obterTipo()){
-            System.out.println(agenciaAluguel.getNome());
-
-        }
+    private void verInformacoes() {
     }
 }

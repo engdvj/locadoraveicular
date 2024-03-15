@@ -3,9 +3,10 @@ package br.com.projetos.locadoraveiculos.view.menu;
 import br.com.projetos.locadoraveiculos.controller.locadora.ControllerLocadora;
 import br.com.projetos.locadoraveiculos.model.clientes.*;
 import br.com.projetos.locadoraveiculos.service.Apresentar;
+import br.com.projetos.locadoraveiculos.util.Util;
 
 import static br.com.projetos.locadoraveiculos.util.Validacoes.*;
-import static br.com.projetos.locadoraveiculos.view.commandLine.App.scanner;
+import static br.com.projetos.locadoraveiculos.view.commandLine.App.*;
 
 public class MenuClientes implements Apresentar {
     private final ControllerLocadora controller;
@@ -30,7 +31,7 @@ public class MenuClientes implements Apresentar {
                     novoCliente();
                     break;
                 case "2":
-                    verDadosCliente();
+                    verDados();
                     break;
                 case "3":
                     editarCliente();
@@ -46,6 +47,7 @@ public class MenuClientes implements Apresentar {
             }
         }
     }
+
     private void novoCliente() {
         System.out.println("""
                 Escolha o tipo de cliente:
@@ -74,7 +76,7 @@ public class MenuClientes implements Apresentar {
                     System.out.println("CPF Inválido! Tente novamente.");
                 }
             }
-            boolean adicionado = controller.getSistemaDeClientes().add(new ClientePF(nomeCliente, cpfCliente));
+            boolean adicionado = controller.getSistemaDeAluguel().obterClientes().add(new ClientePF(nomeCliente, cpfCliente));
             if (adicionado) {
                 System.out.println("Cliente Adicionado com Sucesso!\n");
             } else {
@@ -96,7 +98,7 @@ public class MenuClientes implements Apresentar {
                     System.out.println("CNPJ Inválido! Tente novamente.");
                 }
             }
-            boolean adicionado = controller.getSistemaDeClientes().add(new ClientePJ(nomeCliente, cnpjCliente));
+            boolean adicionado = controller.getSistemaDeAluguel().obterClientes().add(new ClientePJ(nomeCliente, cnpjCliente));
             if (adicionado) {
                 System.out.println("Cliente Adicionado com Sucesso!\n");
             } else {
@@ -104,13 +106,13 @@ public class MenuClientes implements Apresentar {
             }
         }
     }
-    private void verDadosCliente() {
+    public void verDados() {
         Cliente cliente = obterCliente();
         if(cliente != null) {
-                System.out.println(cliente);
-            }else{
-                System.out.println("Cliente não encontrado!\n");
-            }
+            System.out.println(cliente);
+        }else{
+            System.out.println("Cliente não encontrado!\n");
+        }
     }
     private void editarCliente() {
         Cliente cliente = obterCliente();
@@ -120,7 +122,7 @@ public class MenuClientes implements Apresentar {
                 String nomeCliente = scanner.nextLine();
                 System.out.println("Digite o novo CPF do Cliente: ");
                 String cpfCliente = scanner.nextLine();
-                controller.getSistemaDeClientes().editar(cliente,new ClientePF(nomeCliente, cpfCliente));
+                controller.getSistemaDeAluguel().obterClientes().editar(cliente,new ClientePF(nomeCliente, cpfCliente));
                 System.out.println("Cliente editado com sucesso!\n");
 
             }else{
@@ -128,7 +130,7 @@ public class MenuClientes implements Apresentar {
                 String nomeCliente = scanner.nextLine();
                 System.out.println("Digite o novo CNPJ da empresa: ");
                 String cpfCliente = scanner.nextLine();
-                controller.getSistemaDeClientes().editar(cliente,new ClientePJ(nomeCliente, cpfCliente));
+                controller.getSistemaDeAluguel().obterClientes().editar(cliente,new ClientePJ(nomeCliente, cpfCliente));
                 System.out.println("Cliente editado com sucesso!\n");
 
             }
@@ -139,20 +141,17 @@ public class MenuClientes implements Apresentar {
     private void excluirCliente() {
         Cliente cliente = obterCliente();
         if(cliente!= null) {
-                controller.getSistemaDeClientes().remover(cliente);
+                controller.getSistemaDeAluguel().obterClientes().remover(cliente);
                 System.out.println("Cliente excluído com sucesso!\n");
             }else{
                 System.out.println("Cliente não encontrado!\n");
             }
     }
     private Cliente obterCliente() {
-        System.out.println("Lista Atual de Clientes:\n");
-        for(Cliente cliente : controller.getSistemaDeClientes().obterTipo()){
-            System.out.println(cliente.obterNomeOrganizado());
-        }
+        Util.listar("Clientes", controller.getSistemaDeAluguel().obterClientes().obterLista());
         System.out.println("\nDigite o nome do cliente ou da empresa:");
         scanner.nextLine();
         String nomeCliente = scanner.nextLine();
-        return controller.getSistemaDeClientes().realizarBusca(nomeCliente);
+        return controller.getSistemaDeAluguel().obterClientes().realizarBusca(nomeCliente);
     }
 }

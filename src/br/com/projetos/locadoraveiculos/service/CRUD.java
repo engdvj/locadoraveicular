@@ -10,5 +10,5 @@ public interface CRUD<T>{
     T editar(T item,T newItem);
     T realizarBusca(String nome);
     boolean remover(T item);
-    TreeSet<T> obterTipo();
+    TreeSet<T> obterLista();
 }

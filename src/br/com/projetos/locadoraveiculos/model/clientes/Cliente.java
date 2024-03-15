@@ -1,6 +1,8 @@
 package br.com.projetos.locadoraveiculos.model.clientes;
 
-public abstract class Cliente {
+import br.com.projetos.locadoraveiculos.service.Lista;
+
+public abstract class Cliente implements Lista {
     protected String nome;
     public String getNome() { return nome; }
     public void setNome(String nome) { this.nome = nome; }
