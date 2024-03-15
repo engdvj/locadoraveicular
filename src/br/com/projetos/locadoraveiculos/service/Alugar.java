@@ -2,9 +2,13 @@ package br.com.projetos.locadoraveiculos.service;
 
 import br.com.projetos.locadoraveiculos.model.clientes.Cliente;
 
-public interface Alugar<T>{
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
+public interface Alugar<T, S, U>{
     CRUD<T> obterTipo();
     CRUD<Cliente> obterClientes();
-    boolean emprestar(T t);
-    boolean devolver(T t);
+    boolean alugar(T x, S y, U z, LocalDateTime horarioRetirada);
+    boolean devolver(T x, S y, U z, LocalDateTime horarioDevolucao);
 }
