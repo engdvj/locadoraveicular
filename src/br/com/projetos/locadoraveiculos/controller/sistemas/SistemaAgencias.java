@@ -2,6 +2,9 @@ package br.com.projetos.locadoraveiculos.controller.sistemas;
 
 import br.com.projetos.locadoraveiculos.model.agencia.AgenciaAluguel;
 import br.com.projetos.locadoraveiculos.service.CRUD;
+import br.com.projetos.locadoraveiculos.util.Util;
+
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.TreeSet;
 
@@ -34,6 +37,9 @@ public class SistemaAgencias implements CRUD<AgenciaAluguel> {
 
     @Override
     public TreeSet<AgenciaAluguel> obterTipo() {
-        return null;
+        return Util.ordenarPorNome(agencias, Comparator.comparing(AgenciaAluguel::getNome));
     }
+
+
+
 }

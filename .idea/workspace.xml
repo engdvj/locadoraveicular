@@ -5,14 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f12b4e23-557c-4220-9f76-0a4dd7553fc5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/controller/sistemas/SistemaAgencias.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/model/agencia/AgenciaAluguel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/controller/locadora/ControllerLocadora.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/controller/locadora/ControllerLocadora.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/controller/sistemas/SistemaAgencias.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/controller/sistemas/SistemaAgencias.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/controller/sistemas/SistemaAluguel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/controller/sistemas/SistemaAluguel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/service/Alugar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/service/Alugar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/util/Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/util/Util.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/view/commandLine/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/view/commandLine/App.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/view/menu/MenuAluguel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/view/menu/MenuAluguel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/view/menu/MenuClientes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/view/menu/MenuClientes.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +49,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "testeAluguel",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Davi Costa/Desktop/Projetos_ADA/catalogo-IMDB",
@@ -89,7 +90,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1709910134962</updated>
-      <workItem from="1710424662360" duration="17079000" />
+      <workItem from="1710424662360" duration="24090000" />
     </task>
     <servers />
   </component>
@@ -106,5 +107,31 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/view/menu/MenuAluguel.java</url>
+          <line>57</line>
+          <properties class="br.com.projetos.locadoraveiculos.view.menu.MenuAluguel" method="obterAgencia">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="br.com.projetos.locadoraveiculos.controller.locadora.ControllerLocadora" memberName="sistemDeAgencias" />
+      </pinned-members>
+    </pin-to-top-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="controller.sistemDeAgencias" />
+        <watch expression="controller.sistemDeAgencias" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

@@ -16,4 +16,10 @@ public class Util {
         ordenadoClientes.addAll(clientes); // Adicionando os clientes ao TreeSet, que serão ordenados
         return ordenadoClientes;
     }
+
+    public static <T> TreeSet<T> ordenarPorNome(Set<T> objetos, Comparator<T> comparador) {
+        TreeSet<T> ordenado = new TreeSet<>(comparador);
+        ordenado.addAll(objetos);
+        return ordenado;
+    }
 }

@@ -5,9 +5,7 @@ import br.com.projetos.locadoraveiculos.model.clientes.Cliente;
 import br.com.projetos.locadoraveiculos.model.veiculo.Veiculo;
 import br.com.projetos.locadoraveiculos.service.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 public class SistemaAluguel implements Alugar<Cliente, Veiculo, AgenciaAluguel> {
     private CRUD<Veiculo> veiculos;
@@ -27,6 +25,10 @@ public class SistemaAluguel implements Alugar<Cliente, Veiculo, AgenciaAluguel> 
     @Override
     public CRUD<Cliente> obterClientes() {
         return clientes;
+    }
+    @Override
+    public CRUD<AgenciaAluguel> obterAgencias() {
+        return agencias;
     }
     @Override
     public boolean alugar(Cliente cliente, Veiculo veiculo, AgenciaAluguel agenciaAluguel, LocalDateTime horarioRetirada) {

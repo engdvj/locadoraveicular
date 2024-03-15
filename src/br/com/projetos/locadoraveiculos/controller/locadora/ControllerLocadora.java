@@ -11,12 +11,14 @@ public class ControllerLocadora {
     private String nome;
     private CRUD<Veiculo> sistemaDeCarros;
     private CRUD<Cliente> sistemaDeClientes;
+    private CRUD<AgenciaAluguel> sistemDeAgencias;
     private Alugar<Cliente, Veiculo, AgenciaAluguel> sistemaDeAluguel;
     public ControllerLocadora(String nome, Alugar alugarCarros) {
         this.nome = nome;
         this.sistemaDeAluguel = alugarCarros;
         this.sistemaDeCarros =  alugarCarros.obterTipo();
         this.sistemaDeClientes = alugarCarros.obterClientes();
+        this.sistemDeAgencias = alugarCarros.obterAgencias();
     }
     public String getNome() {
         return nome;
@@ -27,6 +29,7 @@ public class ControllerLocadora {
     public CRUD<Veiculo> getSistemaDeCarros() {
         return sistemaDeCarros;
     }
+    public CRUD<AgenciaAluguel> getSistemDeAgencias() {return sistemDeAgencias; }
     public Alugar<Cliente, Veiculo, AgenciaAluguel> getSistemaDeAluguel() {
         return sistemaDeAluguel;
     }

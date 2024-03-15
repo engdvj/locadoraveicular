@@ -44,7 +44,7 @@ public class App {
     public static HashSet<AgenciaAluguel> loadSampleAgencias(){
         HashSet<AgenciaAluguel> agencias = new HashSet<>();
         agencias.add(new AgenciaAluguel("Centro","Rua das Amoras", LocalTime.of(8,0), LocalTime.of(18,0)));
-        agencias.add(new AgenciaAluguel("Aeroporto","Rua Aires de Almeida", LocalTime.of(6,0), LocalTime.of(0,0)));
+        agencias.add(new AgenciaAluguel("Peroporto","Rua Aires de Almeida", LocalTime.of(6,0), LocalTime.of(0,0)));
         return agencias ;
     }
 

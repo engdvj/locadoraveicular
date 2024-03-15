@@ -1,6 +1,9 @@
 package br.com.projetos.locadoraveiculos.view.menu;
 
 import br.com.projetos.locadoraveiculos.controller.locadora.ControllerLocadora;
+import br.com.projetos.locadoraveiculos.controller.sistemas.SistemaAgencias;
+import br.com.projetos.locadoraveiculos.model.agencia.AgenciaAluguel;
+import br.com.projetos.locadoraveiculos.model.clientes.Cliente;
 import br.com.projetos.locadoraveiculos.service.Apresentar;
 
 import static br.com.projetos.locadoraveiculos.view.commandLine.App.scanner;
@@ -41,10 +44,21 @@ public class MenuAluguel implements Apresentar {
 
     private void alugarVeiculo() {
         System.out.println("Escolha o local para retirada: ");
+        obterAgencia();
+        int valor = scanner.nextInt();
+        scanner.nextLine();
         System.out.println("Alugado com sucesso!");
     }
 
     private void devolverVeiculo(){
+
         System.out.println("Devolvido com sucesso!");
+    }
+
+    private void obterAgencia() {
+        for(AgenciaAluguel agenciaAluguel : controller.getSistemDeAgencias().obterTipo()){
+            System.out.println(agenciaAluguel.getNome());
+
+        }
     }
 }

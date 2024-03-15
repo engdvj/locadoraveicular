@@ -153,7 +153,6 @@ public class MenuClientes implements Apresentar {
         System.out.println("\nDigite o nome do cliente ou da empresa:");
         scanner.nextLine();
         String nomeCliente = scanner.nextLine();
-        Cliente cliente = controller.getSistemaDeClientes().realizarBusca(nomeCliente);
-        return cliente;
+        return controller.getSistemaDeClientes().realizarBusca(nomeCliente);
     }
 }
