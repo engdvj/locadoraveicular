@@ -1,15 +1,15 @@
 package br.com.projetos.locadoraveiculos.view.menu;
 
 import br.com.projetos.locadoraveiculos.controller.locadora.ControllerLocadora;
-import br.com.projetos.locadoraveiculos.event.Aluguel;
-import br.com.projetos.locadoraveiculos.model.clientes.Cliente;
-import br.com.projetos.locadoraveiculos.model.veiculo.Veiculo;
+import br.com.projetos.locadoraveiculos.model.eventos.Aluguel;
+import br.com.projetos.locadoraveiculos.model.entidades.clientes.Cliente;
+import br.com.projetos.locadoraveiculos.model.entidades.veiculo.Veiculo;
 import br.com.projetos.locadoraveiculos.service.Apresentar;
 import br.com.projetos.locadoraveiculos.util.Util;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+import java.time.format.*;
+
 
 import static br.com.projetos.locadoraveiculos.view.commandLine.App.*;
 
@@ -29,7 +29,7 @@ public class MenuAluguel implements Apresentar {
                      (3) - Ver informações
                      (4) - Voltar ao Menu Anterior
                     """);
-            String option = scanner.next();
+            String option = scanner.nextLine();
             switch (option) {
                 case "1":
                     alugarVeiculo();
@@ -49,9 +49,6 @@ public class MenuAluguel implements Apresentar {
         }
     }
     private void alugarVeiculo() {
-        if (scanner.hasNextLine()) {
-            scanner.nextLine();
-        }
         Util.listar("Clientes", controller.getSistemaDeAluguel().obterClientes().obterLista());
         System.out.println("\nEscolha um cliente da lista acima:");
         String nomeCliente = scanner.nextLine();
@@ -79,7 +76,7 @@ public class MenuAluguel implements Apresentar {
 
         Aluguel aluguel = new Aluguel(veiculo, cliente, dataEvento);
 
-        controller.getSistemaDeAluguel().emprestar(aluguel);
+        controller.getSistemaDeAluguel().emprestar(aluguel.veiculo());
 
         System.out.println("Veículo alugado com sucesso para " + cliente.getNome() + " em " + dataEvento.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
     }
@@ -88,5 +85,6 @@ public class MenuAluguel implements Apresentar {
     }
 
     private void verInformacoes() {
+
     }
 }

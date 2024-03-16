@@ -1,7 +1,7 @@
 package br.com.projetos.locadoraveiculos.view.menu;
 
 import br.com.projetos.locadoraveiculos.controller.locadora.ControllerLocadora;
-import br.com.projetos.locadoraveiculos.model.clientes.*;
+import br.com.projetos.locadoraveiculos.model.entidades.clientes.*;
 import br.com.projetos.locadoraveiculos.service.Apresentar;
 import br.com.projetos.locadoraveiculos.util.Util;
 

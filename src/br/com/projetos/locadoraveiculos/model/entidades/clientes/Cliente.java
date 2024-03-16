@@ -1,4 +1,4 @@
-package br.com.projetos.locadoraveiculos.model.clientes;
+package br.com.projetos.locadoraveiculos.model.entidades.clientes;
 
 import br.com.projetos.locadoraveiculos.service.Lista;
 

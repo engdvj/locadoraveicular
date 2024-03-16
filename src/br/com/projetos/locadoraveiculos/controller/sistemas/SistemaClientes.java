@@ -1,6 +1,6 @@
 package br.com.projetos.locadoraveiculos.controller.sistemas;
 
-import br.com.projetos.locadoraveiculos.model.clientes.Cliente;
+import br.com.projetos.locadoraveiculos.model.entidades.clientes.Cliente;
 import br.com.projetos.locadoraveiculos.service.CRUD;
 import br.com.projetos.locadoraveiculos.util.*;
 

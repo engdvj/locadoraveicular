@@ -15,7 +15,7 @@ public class MenuInicial implements Apresentar {
     public void escolherOpcao() {
         boolean sair = false;
         while (!sair) {
-            System.out.println("\nSeja Bem Vindo a " + controller.getSistemaDeAluguel().getAgencia().getNome()+"\n");
+            System.out.println("\nSeja Bem Vindo a " + controller.getSistemaDeAluguel().getAgencia().nome()+"\n");
             System.out.println("""               
                     Escolha uma opção abaixo:
                      (1) - Clientes
@@ -23,7 +23,7 @@ public class MenuInicial implements Apresentar {
                      (3) - Aluguéis
                      (4) - Sair
                     """);
-            String option = scanner.next();
+            String option = scanner.nextLine();
             switch (option) {
                 case "1":
                     menu = new MenuClientes(controller);
@@ -39,7 +39,7 @@ public class MenuInicial implements Apresentar {
                     break;
                 case "4":
                     System.out.println("Saindo...");
-                    sair = true; // Altera a condição do loop para sair
+                    sair = true;
                     break;
                 default:
                     System.out.println("Opção Inválida!");

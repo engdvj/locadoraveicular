@@ -1,4 +1,4 @@
-package br.com.projetos.locadoraveiculos.model.veiculo;
+package br.com.projetos.locadoraveiculos.model.entidades.veiculo;
 
 import br.com.projetos.locadoraveiculos.service.Lista;
 import br.com.projetos.locadoraveiculos.util.Util.Tamanho;

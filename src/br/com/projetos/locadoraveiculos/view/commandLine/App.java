@@ -2,10 +2,10 @@ package br.com.projetos.locadoraveiculos.view.commandLine;
 
 import br.com.projetos.locadoraveiculos.controller.locadora.*;
 import br.com.projetos.locadoraveiculos.controller.sistemas.*;
-import br.com.projetos.locadoraveiculos.event.Aluguel;
-import br.com.projetos.locadoraveiculos.model.agencia.Agencia;
-import br.com.projetos.locadoraveiculos.model.clientes.*;
-import br.com.projetos.locadoraveiculos.model.veiculo.*;
+import br.com.projetos.locadoraveiculos.model.eventos.Aluguel;
+import br.com.projetos.locadoraveiculos.model.entidades.agencia.Agencia;
+import br.com.projetos.locadoraveiculos.model.entidades.clientes.*;
+import br.com.projetos.locadoraveiculos.model.entidades.veiculo.*;
 import br.com.projetos.locadoraveiculos.service.*;
 import br.com.projetos.locadoraveiculos.util.Util;
 import br.com.projetos.locadoraveiculos.view.menu.MenuInicial;

@@ -1,4 +1,4 @@
-package br.com.projetos.locadoraveiculos.model.clientes;
+package br.com.projetos.locadoraveiculos.model.entidades.clientes;
 
 public class ClientePJ extends Cliente{
     private String CNPJ;
