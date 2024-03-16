@@ -6,6 +6,7 @@ import br.com.projetos.locadoraveiculos.model.entidades.clientes.Cliente;
 import br.com.projetos.locadoraveiculos.model.entidades.veiculo.Veiculo;
 import br.com.projetos.locadoraveiculos.service.Apresentar;
 import br.com.projetos.locadoraveiculos.util.Util;
+import br.com.projetos.locadoraveiculos.util.Validacoes;
 
 import java.time.LocalDateTime;
 import java.time.format.*;
@@ -59,24 +60,38 @@ public class MenuAluguel implements Apresentar {
         String modeloVeiculo = scanner.nextLine();
         Veiculo veiculo = controller.getSistemaDeAluguel().obterVeiculos().realizarBusca(modeloVeiculo);
 
-        System.out.println("Defina uma data para buscar o veículo (formato: DD/MM/AAAA):");
-        String dataInput = scanner.nextLine();
-
-        System.out.println("Defina um horário para buscar o veículo (formato: HH:MM):");
-        String horaInput = scanner.nextLine();
-
+        boolean verifica = true;
+        DateTimeFormatter formatado = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        String data = "";
+        String hora = "";
         LocalDateTime dataEvento;
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-            dataEvento = LocalDateTime.parse(dataInput + " " + horaInput, formatter);
-        } catch (DateTimeParseException e) {
-            System.out.println("Formato de data/horário inválido. Cancelando o aluguel.");
-            return;
+
+        System.out.println("Defina uma data para buscar o veículo (formato: DD/MM/AAAA):");
+        while (verifica){
+            String dataInput = scanner.nextLine();
+            if (Validacoes.validarData(dataInput)){
+                data = dataInput;
+                verifica = false;
+            } else {
+                System.out.println("Data Inválida! Digite Novamente.");
+            }
         }
 
+        System.out.println("Defina um horário para buscar o veículo (formato: HH:MM):");
+        while (!verifica){
+            String horaInput = scanner.nextLine();
+            if (Validacoes.validarHora(horaInput)){
+                hora = horaInput;
+                verifica = true;
+            } else {
+                System.out.println("Hora Inválida! Digite Novamente.");
+            }
+        }
+
+        dataEvento = LocalDateTime.parse(data + " " + hora,formatado);
         Aluguel aluguel = new Aluguel(veiculo, cliente, dataEvento);
 
-        controller.getSistemaDeAluguel().emprestar(aluguel.veiculo());
+        controller.getSistemaDeAluguel().emprestar(aluguel);
 
         System.out.println("Veículo alugado com sucesso para " + cliente.getNome() + " em " + dataEvento.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
     }
