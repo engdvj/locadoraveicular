@@ -2,14 +2,16 @@ package br.com.projetos.locadoraveiculos.view.commandLine;
 
 import br.com.projetos.locadoraveiculos.controller.locadora.*;
 import br.com.projetos.locadoraveiculos.controller.sistemas.*;
-import br.com.projetos.locadoraveiculos.model.agencia.Agencia;
-import br.com.projetos.locadoraveiculos.model.clientes.*;
-import br.com.projetos.locadoraveiculos.model.veiculo.*;
+import br.com.projetos.locadoraveiculos.model.eventos.Aluguel;
+import br.com.projetos.locadoraveiculos.model.entidades.agencia.Agencia;
+import br.com.projetos.locadoraveiculos.model.entidades.clientes.*;
+import br.com.projetos.locadoraveiculos.model.entidades.veiculo.*;
 import br.com.projetos.locadoraveiculos.service.*;
 import br.com.projetos.locadoraveiculos.util.Util;
 import br.com.projetos.locadoraveiculos.view.menu.MenuInicial;
 
-import java.time.LocalTime;
+import java.time.*;
+
 import java.util.*;
 
 
@@ -46,8 +48,25 @@ public class App {
         clientes.add(new ClientePJ("PEPSICO DO BRASIL", "31565104002030"));
         return clientes;
     }
+    public static HashSet<Aluguel> loadSampleContratos() {
+        HashSet<Veiculo> veiculos = loadSampleVeiculos();
+        HashSet<Cliente> clientes = loadSampleClientes();
+
+        HashSet<Aluguel> contratos = new HashSet<>();
+        Iterator<Veiculo> veiculoIterator = veiculos.iterator();
+        Iterator<Cliente> clienteIterator = clientes.iterator();
+
+        int index = 0;
+        while (veiculoIterator.hasNext() && clienteIterator.hasNext() && index < veiculos.size() && index < clientes.size()) {
+            LocalDateTime dataEvento = LocalDateTime.of(2024, Month.MARCH, 10 + index, 10 + (index % 4), 0);
+            contratos.add(new Aluguel(veiculoIterator.next(), clienteIterator.next(), dataEvento));
+            index++;
+        }
+        System.out.println(contratos);
+        return contratos;
+    }
     public static Agencia loadSampleAgencia(){
-        Agencia agencia = new Agencia("Dois Irmãos", "Rua Duque de Caxias", LocalTime.of(9, 0), LocalTime.of(18, 0));
+        Agencia agencia = new Agencia("Dois Irmãos", "Rua Duque de Caxias", LocalTime.of(9, 0), LocalTime.of(18, 0),loadSampleContratos());
         return agencia;
     }
 

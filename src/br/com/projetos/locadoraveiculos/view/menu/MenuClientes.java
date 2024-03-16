@@ -1,8 +1,9 @@
 package br.com.projetos.locadoraveiculos.view.menu;
 
 import br.com.projetos.locadoraveiculos.controller.locadora.ControllerLocadora;
-import br.com.projetos.locadoraveiculos.model.clientes.*;
+import br.com.projetos.locadoraveiculos.model.entidades.clientes.*;
 import br.com.projetos.locadoraveiculos.service.Apresentar;
+import br.com.projetos.locadoraveiculos.util.Util;
 
 import static br.com.projetos.locadoraveiculos.util.Validacoes.*;
 import static br.com.projetos.locadoraveiculos.view.commandLine.App.*;
@@ -147,12 +148,12 @@ public class MenuClientes implements Apresentar {
             }
     }
     private Cliente obterCliente() {
-        listarClientes();
+        Util.listar("Clientes", controller.getSistemaDeAluguel().obterClientes().obterLista());
         System.out.println("\nDigite o nome do cliente ou da empresa:");
         scanner.nextLine();
         String nomeCliente = scanner.nextLine();
-        Cliente cliente = controller.getSistemaDeAluguel().obterClientes().realizarBusca(nomeCliente);
-        return cliente;
+        return controller.getSistemaDeAluguel().obterClientes().realizarBusca(nomeCliente);
+
     }
 
     private void listarClientes() {

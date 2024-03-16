@@ -1,7 +1,6 @@
 package br.com.projetos.locadoraveiculos.controller.sistemas;
 
-import br.com.projetos.locadoraveiculos.model.clientes.Cliente;
-import br.com.projetos.locadoraveiculos.model.veiculo.Veiculo;
+import br.com.projetos.locadoraveiculos.model.entidades.veiculo.Veiculo;
 import br.com.projetos.locadoraveiculos.service.CRUD;
 import br.com.projetos.locadoraveiculos.util.Util;
 import br.com.projetos.locadoraveiculos.util.Validacoes;
@@ -13,7 +12,6 @@ import java.util.TreeSet;
 
 public class SistemaVeiculos implements CRUD<Veiculo> {
     private HashSet<Veiculo> veiculos;
-
     public SistemaVeiculos(HashSet<Veiculo> veiculos) {
         this.veiculos = veiculos;
     }
@@ -52,6 +50,6 @@ public class SistemaVeiculos implements CRUD<Veiculo> {
     }
     @Override
     public TreeSet<Veiculo> obterLista() {
-        return Util.ordenar(veiculos, Comparator.comparing(Veiculo::obterNomeOrganizado));
+        return Util.ordenar(veiculos, Comparator.comparing(Veiculo::getTamanhoVeiculo).thenComparing(Veiculo::obterNomeOrganizado));
     }
 }

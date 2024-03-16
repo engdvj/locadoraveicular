@@ -1,4 +1,4 @@
-package br.com.projetos.locadoraveiculos.model.clientes;
+package br.com.projetos.locadoraveiculos.model.entidades.clientes;
 
 public class ClientePJ extends Cliente {
     private String CNPJ;
@@ -18,6 +18,12 @@ public class ClientePJ extends Cliente {
         this.CNPJ = CNPJ;
     }
 
+    public String obterNomeOrganizado() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("PJ - ").append(nome);
+        return sb.toString();
+    }
+
     @Override
     public String formatoDocumento(String CNPJ) {
         StringBuilder sb = new StringBuilder(CNPJ);
@@ -27,12 +33,6 @@ public class ClientePJ extends Cliente {
         sb.insert(10, '/');
         sb.insert(15, '-');
 
-        return sb.toString();
-    }
-
-    public String obterNomeOrganizado() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("PJ - ").append(nome);
         return sb.toString();
     }
     @Override

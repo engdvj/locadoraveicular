@@ -1,4 +1,4 @@
-package br.com.projetos.locadoraveiculos.model.clientes;
+package br.com.projetos.locadoraveiculos.model.entidades.clientes;
 
 public class ClientePF extends Cliente {
     private String CPF;
@@ -9,13 +9,6 @@ public class ClientePF extends Cliente {
     }
 
     @Override
-    public String obterNomeOrganizado() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("PF - ").append(nome);
-        return sb.toString();
-    }
-
-    @Override
     public String getDocumento() {
         return this.CPF;
     }
@@ -23,6 +16,13 @@ public class ClientePF extends Cliente {
     @Override
     public void setDocumento(String CPF) {
         this.CPF = CPF;
+    }
+
+    @Override
+    public String obterNomeOrganizado() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("PF - ").append(nome);
+        return sb.toString();
     }
 
     @Override

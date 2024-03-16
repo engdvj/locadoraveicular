@@ -1,6 +1,6 @@
 package br.com.projetos.locadoraveiculos.controller.locadora;
 
-import br.com.projetos.locadoraveiculos.model.veiculo.Veiculo;
+import br.com.projetos.locadoraveiculos.model.entidades.veiculo.Veiculo;
 import br.com.projetos.locadoraveiculos.service.Alugar;
 
 public class ControllerLocadora {

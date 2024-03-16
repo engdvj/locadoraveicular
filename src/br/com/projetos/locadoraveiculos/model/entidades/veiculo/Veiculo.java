@@ -1,14 +1,15 @@
-package br.com.projetos.locadoraveiculos.model.veiculo;
+package br.com.projetos.locadoraveiculos.model.entidades.veiculo;
 
+import br.com.projetos.locadoraveiculos.service.Lista;
 import br.com.projetos.locadoraveiculos.util.Util.Tamanho;
 
-public class Veiculo {
+public class Veiculo implements Lista {
     private String marca;
     private String modelo;
     private String placa;
-    Enum<Tamanho> tamanhoVeiculo;
+    private Tamanho tamanhoVeiculo;
 
-    public Veiculo(String marca, String modelo, String placa, Enum<Tamanho> tamanhoVeiculo) {
+    public Veiculo(String marca, String modelo, String placa, Tamanho tamanhoVeiculo) {
         this.marca = marca;
         this.modelo = modelo;
         this.placa = placa;
@@ -27,7 +28,7 @@ public class Veiculo {
         return placa;
     }
 
-    public Enum<Tamanho> getTamanhoVeiculo() {
+    public Tamanho getTamanhoVeiculo() {
         return tamanhoVeiculo;
     }
 
@@ -43,22 +44,33 @@ public class Veiculo {
         this.placa = placa;
     }
 
-    public void setTamanhoVeiculo(Enum<Tamanho> tamanhoVeiculo) {
+    public void setTamanhoVeiculo(Tamanho tamanhoVeiculo) {
         this.tamanhoVeiculo = tamanhoVeiculo;
     }
 
-    public String obterNomeOrganizado() {
+    public String obterNomeOrganizado(){
         StringBuilder sb = new StringBuilder();
         sb.append(tamanhoVeiculo).append(" - ").append(modelo);
         return sb.toString();
     }
-
     @Override
     public String toString() {
-        return "\nVeiculo:\n" +
-               marca + " " +
-               modelo + " " +
-               "\nPlaca-|" + placa.substring(0, 3) + "-" + placa.substring(3) + "|" + " \n"
-               + tamanhoVeiculo;
+        return "Marca: " + marca + "\n" +
+               "Modelo: " + modelo + "\n" +
+               "Placa: " + placa + "\n" +
+               "Tamanho: " + tamanhoVeiculo;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Veiculo)) return false;
+        Veiculo veiculo = (Veiculo) o;
+        return placa.equals(veiculo.placa);
+    }
+
+    @Override
+    public int hashCode() {
+        return placa.hashCode();
     }
 }
