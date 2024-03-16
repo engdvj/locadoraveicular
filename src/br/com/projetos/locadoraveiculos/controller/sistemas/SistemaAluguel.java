@@ -8,7 +8,7 @@ import br.com.projetos.locadoraveiculos.service.*;
 
 import java.util.HashSet;
 
-public class SistemaAluguel implements Alugar<Aluguel> {
+public class SistemaAluguel implements Alugar<Veiculo> {
     private Agencia agencia;
     private CRUD<Veiculo> veiculos;
     private CRUD<Cliente> clientes;

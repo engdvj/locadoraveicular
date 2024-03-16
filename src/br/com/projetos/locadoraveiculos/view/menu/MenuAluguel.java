@@ -76,7 +76,7 @@ public class MenuAluguel implements Apresentar {
 
         Aluguel aluguel = new Aluguel(veiculo, cliente, dataEvento);
 
-        controller.getSistemaDeAluguel().emprestar(aluguel.veiculo());
+        controller.getSistemaDeAluguel().emprestar(aluguel);
 
         System.out.println("Veículo alugado com sucesso para " + cliente.getNome() + " em " + dataEvento.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
     }

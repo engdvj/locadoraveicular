@@ -9,6 +9,6 @@ public interface Alugar<T>{
     Agencia getAgencia();
     CRUD<Veiculo> obterVeiculos();
     CRUD<Cliente> obterClientes();
-    boolean emprestar(T t);
-    boolean devolver(T t);
+    boolean emprestar(Aluguel aluguel);
+    boolean devolver(Aluguel aluguel);
 }
