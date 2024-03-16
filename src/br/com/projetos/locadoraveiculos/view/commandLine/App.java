@@ -2,6 +2,7 @@ package br.com.projetos.locadoraveiculos.view.commandLine;
 
 import br.com.projetos.locadoraveiculos.controller.locadora.*;
 import br.com.projetos.locadoraveiculos.controller.sistemas.*;
+import br.com.projetos.locadoraveiculos.event.Aluguel;
 import br.com.projetos.locadoraveiculos.model.agencia.Agencia;
 import br.com.projetos.locadoraveiculos.model.clientes.*;
 import br.com.projetos.locadoraveiculos.model.veiculo.*;
@@ -9,7 +10,9 @@ import br.com.projetos.locadoraveiculos.service.*;
 import br.com.projetos.locadoraveiculos.util.Util;
 import br.com.projetos.locadoraveiculos.view.menu.MenuInicial;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.Month;
 import java.util.*;
 
 
@@ -46,8 +49,24 @@ public class App {
         clientes.add(new ClientePJ("PEPSICO DO BRASIL", "31565104002030"));
         return clientes;
     }
+    public static List<Aluguel> loadSampleContratos() {
+        HashSet<Veiculo> veiculos = loadSampleVeiculos();
+        HashSet<Cliente> clientes = loadSampleClientes();
+
+        List<Aluguel> contratos = new ArrayList<>();
+        Iterator<Veiculo> veiculoIterator = veiculos.iterator();
+        Iterator<Cliente> clienteIterator = clientes.iterator();
+
+        int index = 0;
+        while (veiculoIterator.hasNext() && clienteIterator.hasNext() && index < veiculos.size() && index < clientes.size()) {
+            LocalDateTime dataEvento = LocalDateTime.of(2024, Month.MARCH, 10 + index, 10 + (index % 4), 0);
+            contratos.add(new Aluguel(veiculoIterator.next(), clienteIterator.next(), dataEvento));
+            index++;
+        }
+        return contratos;
+    }
     public static Agencia loadSampleAgencia(){
-        Agencia agencia = new Agencia("Dois Irmãos", "Rua Duque de Caxias", LocalTime.of(9, 0), LocalTime.of(18, 0));
+        Agencia agencia = new Agencia("Dois Irmãos", "Rua Duque de Caxias", LocalTime.of(9, 0), LocalTime.of(18, 0),loadSampleContratos());
         return agencia;
     }
 

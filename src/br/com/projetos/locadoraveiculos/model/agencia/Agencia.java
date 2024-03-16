@@ -1,18 +1,23 @@
 package br.com.projetos.locadoraveiculos.model.agencia;
 
+import br.com.projetos.locadoraveiculos.event.Aluguel;
+
 import java.time.LocalTime;
+import java.util.List;
 
 public class Agencia {
     private String nome;
     private String endereco;
     private LocalTime horarioAbertura;
     private LocalTime horarioFechamento;
+    private List<Aluguel> contratos;
 
-    public Agencia(String nome, String endereco, LocalTime horarioAbertura, LocalTime horarioFechamento) {
+    public Agencia(String nome, String endereco, LocalTime horarioAbertura, LocalTime horarioFechamento, List<Aluguel> contratos) {
         this.nome = nome;
         this.endereco = endereco;
         this.horarioAbertura = horarioAbertura;
         this.horarioFechamento = horarioFechamento;
+        this.contratos = contratos;
     }
 
     public String getNome() {

@@ -1,5 +1,6 @@
 package br.com.projetos.locadoraveiculos.controller.sistemas;
 
+import br.com.projetos.locadoraveiculos.event.Aluguel;
 import br.com.projetos.locadoraveiculos.model.agencia.Agencia;
 import br.com.projetos.locadoraveiculos.model.clientes.Cliente;
 import br.com.projetos.locadoraveiculos.model.veiculo.Veiculo;
@@ -27,7 +28,9 @@ public class SistemaAluguel implements Alugar<Veiculo> {
         return clientes;
     }
     @Override
-    public boolean emprestar(Veiculo veiculo, Cliente cliente) { return false; }
+    public boolean emprestar(Aluguel aluguel) {
+        return true;
+    }
     @Override
     public boolean devolver(Veiculo veiculo) {
         return false;

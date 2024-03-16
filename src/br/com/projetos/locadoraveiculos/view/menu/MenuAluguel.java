@@ -1,10 +1,15 @@
 package br.com.projetos.locadoraveiculos.view.menu;
 
 import br.com.projetos.locadoraveiculos.controller.locadora.ControllerLocadora;
+import br.com.projetos.locadoraveiculos.event.Aluguel;
 import br.com.projetos.locadoraveiculos.model.clientes.Cliente;
 import br.com.projetos.locadoraveiculos.model.veiculo.Veiculo;
 import br.com.projetos.locadoraveiculos.service.Apresentar;
 import br.com.projetos.locadoraveiculos.util.Util;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 import static br.com.projetos.locadoraveiculos.view.commandLine.App.*;
 
@@ -44,17 +49,39 @@ public class MenuAluguel implements Apresentar {
         }
     }
     private void alugarVeiculo() {
+        if (scanner.hasNextLine()) {
+            scanner.nextLine();
+        }
         Util.listar("Clientes", controller.getSistemaDeAluguel().obterClientes().obterLista());
         System.out.println("\nEscolha um cliente da lista acima:");
-        Cliente cliente = controller.getSistemaDeAluguel().obterClientes().realizarBusca(scanner.nextLine());
-        scanner.nextLine();
+        String nomeCliente = scanner.nextLine();
+        Cliente cliente = controller.getSistemaDeAluguel().obterClientes().realizarBusca(nomeCliente);
 
         Util.listar("Veiculos", controller.getSistemaDeAluguel().obterVeiculos().obterLista());
         System.out.println("\nEscolha um veículo da lista acima:");
-        Veiculo veiculo = controller.getSistemaDeAluguel().obterVeiculos().realizarBusca(scanner.nextLine());
-        scanner.nextLine();
+        String modeloVeiculo = scanner.nextLine();
+        Veiculo veiculo = controller.getSistemaDeAluguel().obterVeiculos().realizarBusca(modeloVeiculo);
 
-        controller.getSistemaDeAluguel().emprestar(veiculo,cliente);
+        System.out.println("Defina uma data para buscar o veículo (formato: DD/MM/AAAA):");
+        String dataInput = scanner.nextLine();
+
+        System.out.println("Defina um horário para buscar o veículo (formato: HH:MM):");
+        String horaInput = scanner.nextLine();
+
+        LocalDateTime dataEvento;
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+            dataEvento = LocalDateTime.parse(dataInput + " " + horaInput, formatter);
+        } catch (DateTimeParseException e) {
+            System.out.println("Formato de data/horário inválido. Cancelando o aluguel.");
+            return;
+        }
+
+        Aluguel aluguel = new Aluguel(veiculo, cliente, dataEvento);
+
+        controller.getSistemaDeAluguel().emprestar(aluguel);
+
+        System.out.println("Veículo alugado com sucesso para " + cliente.getNome() + " em " + dataEvento.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
     }
 
     private void devolverVeiculo() {
