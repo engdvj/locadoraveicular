@@ -1,6 +1,6 @@
 package br.com.projetos.locadoraveiculos.model.entidades.clientes;
 
-public class ClientePJ extends Cliente{
+public class ClientePJ extends Cliente {
     private String CNPJ;
 
     public ClientePJ(String nome, String CNPJ) {

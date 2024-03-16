@@ -9,7 +9,7 @@ import br.com.projetos.locadoraveiculos.service.*;
 import java.util.HashSet;
 import java.util.Set;
 
-public class SistemaAluguel implements Alugar<Aluguel> {
+public class SistemaAluguel implements Alugar<Veiculo> {
 
     private Agencia agencia;
     private CRUD<Veiculo> veiculos;
@@ -26,14 +26,18 @@ public class SistemaAluguel implements Alugar<Aluguel> {
     @Override
     public CRUD<Veiculo> obterVeiculos() {
         CRUD<Veiculo> veiculosDisponiveis = veiculos;
-         for (Veiculo veiculo : veiculos.obterLista()) {
-             for (Aluguel contrato : agencia.contratos()) {
+        for (Veiculo veiculo : veiculos.obterLista()) {
+            for (Aluguel contrato : agencia.contratos()) {
                 if (contrato.veiculo().equals(veiculo)) {
                     veiculosDisponiveis.remover(veiculo);
                 }
             }
         }
         return veiculosDisponiveis;
+    }
+    @Override
+    public CRUD<Veiculo> obterTipo() {
+        return veiculos;
     }
     @Override
     public CRUD<Cliente> obterClientes() {
@@ -47,6 +51,9 @@ public class SistemaAluguel implements Alugar<Aluguel> {
         return false;
         }
     }
+
+    public boolean emprestar(Veiculo veiculo) { return false; }
+
     @Override
     public boolean devolver(Aluguel aluguel) {
         return false;
@@ -61,5 +68,4 @@ public class SistemaAluguel implements Alugar<Aluguel> {
         }
         return contratosPorCliente;
     }
-
 }

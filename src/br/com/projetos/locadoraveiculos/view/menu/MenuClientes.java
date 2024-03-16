@@ -153,5 +153,14 @@ public class MenuClientes implements Apresentar {
         scanner.nextLine();
         String nomeCliente = scanner.nextLine();
         return controller.getSistemaDeAluguel().obterClientes().realizarBusca(nomeCliente);
+
     }
+
+    private void listarClientes() {
+        System.out.println("Lista Atual de Clientes:\n");
+        for(Cliente cliente : controller.getSistemaDeAluguel().obterClientes().obterLista()){
+            System.out.println(cliente.obterNomeOrganizado());
+        }
+    }
+
 }

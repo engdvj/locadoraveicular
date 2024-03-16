@@ -3,11 +3,10 @@ package br.com.projetos.locadoraveiculos.view.menu;
 import br.com.projetos.locadoraveiculos.controller.locadora.ControllerLocadora;
 import br.com.projetos.locadoraveiculos.service.Apresentar;
 
-import static br.com.projetos.locadoraveiculos.view.commandLine.App.scanner;
+import static br.com.projetos.locadoraveiculos.view.commandLine.App.*;
 
 public class MenuInicial implements Apresentar {
     private final ControllerLocadora controller;
-    private Apresentar menu;
     public MenuInicial(ControllerLocadora controllerLocadora) {
         this.controller = controllerLocadora;
     }
@@ -15,6 +14,7 @@ public class MenuInicial implements Apresentar {
     public void escolherOpcao() {
         boolean sair = false;
         while (!sair) {
+
             System.out.println("\nSeja Bem Vindo a " + controller.getSistemaDeAluguel().getAgencia().nome()+"\n");
             System.out.println("""               
                     Escolha uma opção abaixo:

@@ -15,6 +15,8 @@ import java.util.Set;
 
 import static br.com.projetos.locadoraveiculos.view.commandLine.App.*;
 
+import static br.com.projetos.locadoraveiculos.view.commandLine.App.*;
+
 public class MenuAluguel implements Apresentar {
     private final ControllerLocadora controller;
     public MenuAluguel(ControllerLocadora controller) {
@@ -136,6 +138,13 @@ public class MenuAluguel implements Apresentar {
     }
 
     private void verInformacoes() {
-
+        System.out.println("Lista de Clientes:");
+        for(Cliente cliente: controller.getSistemaDeAluguel().obterClientes().obterLista()){
+            System.out.println(cliente.obterNomeOrganizado());
+        }
+        System.out.println("\nLista de Veículos:");
+        for(Veiculo veiculo: controller.getSistemaDeAluguel().obterTipo().obterLista()){
+            System.out.println(veiculo.obterNomeOrganizado());
+        }
     }
 }

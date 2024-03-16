@@ -1,8 +1,5 @@
 package br.com.projetos.locadoraveiculos.service;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.SortedSet;
 import java.util.TreeSet;
 
 public interface CRUD<T>{

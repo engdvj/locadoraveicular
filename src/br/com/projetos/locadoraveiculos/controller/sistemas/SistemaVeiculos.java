@@ -24,12 +24,17 @@ public class SistemaVeiculos implements CRUD<Veiculo> {
 
     @Override
     public Veiculo editar(Veiculo veiculoAnterior, Veiculo veiculoNovo) {
+        veiculoAnterior.setMarca(veiculoNovo.getMarca());
+        veiculoAnterior.setModelo(veiculoNovo.getModelo());
+        veiculoAnterior.setPlaca(veiculoNovo.getPlaca());
+        veiculoAnterior.setTamanhoVeiculo(veiculoNovo.getTamanhoVeiculo());
         return null;
     }
 
     @Override
     public Veiculo realizarBusca(String nome) {
         if(Validacoes.validaNome(nome)) {
+            nome = nome.substring(0, 1).toUpperCase() + nome.substring(1).toLowerCase();
             for (Veiculo veiculo : veiculos) {
                 if (veiculo.getModelo().contains(nome)) {
                     return veiculo;
