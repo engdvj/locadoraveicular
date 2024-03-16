@@ -47,10 +47,18 @@ public class Veiculo {
         this.tamanhoVeiculo = tamanhoVeiculo;
     }
 
-    public String obterNomeOrganizado(){
+    public String obterNomeOrganizado() {
         StringBuilder sb = new StringBuilder();
         sb.append(tamanhoVeiculo).append(" - ").append(modelo);
         return sb.toString();
     }
 
+    @Override
+    public String toString() {
+        return "\nVeiculo:\n" +
+               marca + " " +
+               modelo + " " +
+               "\nPlaca-|" + placa.substring(0, 3) + "-" + placa.substring(3) + "|" + " \n"
+               + tamanhoVeiculo;
+    }
 }
