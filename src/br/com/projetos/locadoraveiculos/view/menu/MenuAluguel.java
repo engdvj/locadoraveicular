@@ -45,7 +45,16 @@ public class MenuAluguel implements Apresentar {
     }
     private void alugarVeiculo() {
         Util.listar("Clientes", controller.getSistemaDeAluguel().obterClientes().obterLista());
+        System.out.println("\nEscolha um cliente da lista acima:");
+        Cliente cliente = controller.getSistemaDeAluguel().obterClientes().realizarBusca(scanner.nextLine());
+        scanner.nextLine();
+
         Util.listar("Veiculos", controller.getSistemaDeAluguel().obterVeiculos().obterLista());
+        System.out.println("\nEscolha um veículo da lista acima:");
+        Veiculo veiculo = controller.getSistemaDeAluguel().obterVeiculos().realizarBusca(scanner.nextLine());
+        scanner.nextLine();
+
+        controller.getSistemaDeAluguel().emprestar(veiculo,cliente);
     }
 
     private void devolverVeiculo() {

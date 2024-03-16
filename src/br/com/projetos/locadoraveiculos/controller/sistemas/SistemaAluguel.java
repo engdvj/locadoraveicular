@@ -27,7 +27,7 @@ public class SistemaAluguel implements Alugar<Veiculo> {
         return clientes;
     }
     @Override
-    public boolean emprestar(Veiculo veiculo) { return false; }
+    public boolean emprestar(Veiculo veiculo, Cliente cliente) { return false; }
     @Override
     public boolean devolver(Veiculo veiculo) {
         return false;

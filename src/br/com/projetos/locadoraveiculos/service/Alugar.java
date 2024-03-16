@@ -8,6 +8,6 @@ public interface Alugar<T>{
     Agencia getAgencia();
     CRUD<Veiculo> obterVeiculos();
     CRUD<Cliente> obterClientes();
-    boolean emprestar(T t);
+    boolean emprestar(T t,Cliente cliente);
     boolean devolver(T t);
 }
