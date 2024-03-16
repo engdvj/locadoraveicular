@@ -6,9 +6,8 @@ import br.com.projetos.locadoraveiculos.model.entidades.clientes.Cliente;
 import br.com.projetos.locadoraveiculos.model.entidades.veiculo.Veiculo;
 import br.com.projetos.locadoraveiculos.service.*;
 
-import java.util.HashSet;
+public class SistemaAluguel implements Alugar<Aluguel> {
 
-public class SistemaAluguel implements Alugar<Veiculo> {
     private Agencia agencia;
     private CRUD<Veiculo> veiculos;
     private CRUD<Cliente> clientes;
@@ -38,7 +37,7 @@ public class SistemaAluguel implements Alugar<Veiculo> {
     public boolean emprestar(Aluguel aluguel) {
         if(getAgencia().contratos().add(aluguel)){
             return true;
-        }else{
+        } else{
         return false;
         }
     }
