@@ -53,4 +53,24 @@ public class Veiculo implements Lista {
         sb.append(tamanhoVeiculo).append(" - ").append(modelo);
         return sb.toString();
     }
+    @Override
+    public String toString() {
+        return "Marca: " + marca + "\n" +
+               "Modelo: " + modelo + "\n" +
+               "Placa: " + placa + "\n" +
+               "Tamanho: " + tamanhoVeiculo;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Veiculo)) return false;
+        Veiculo veiculo = (Veiculo) o;
+        return placa.equals(veiculo.placa);
+    }
+
+    @Override
+    public int hashCode() {
+        return placa.hashCode();
+    }
 }

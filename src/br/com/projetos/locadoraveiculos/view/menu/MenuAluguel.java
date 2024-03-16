@@ -10,6 +10,7 @@ import br.com.projetos.locadoraveiculos.util.Validacoes;
 
 import java.time.LocalDateTime;
 import java.time.format.*;
+import java.util.Set;
 
 
 import static br.com.projetos.locadoraveiculos.view.commandLine.App.*;
@@ -50,14 +51,10 @@ public class MenuAluguel implements Apresentar {
         }
     }
     private void alugarVeiculo() {
-        Util.listar("Clientes", controller.getSistemaDeAluguel().obterClientes().obterLista());
-        System.out.println("\nEscolha um cliente da lista acima:");
-        String nomeCliente = scanner.nextLine();
+        String nomeCliente = buscarCliente();
         Cliente cliente = controller.getSistemaDeAluguel().obterClientes().realizarBusca(nomeCliente);
 
-        Util.listar("Veiculos", controller.getSistemaDeAluguel().obterVeiculos().obterLista());
-        System.out.println("\nEscolha um veículo da lista acima:");
-        String modeloVeiculo = scanner.nextLine();
+        String modeloVeiculo = buscarVeiculoLivre();
         Veiculo veiculo = controller.getSistemaDeAluguel().obterVeiculos().realizarBusca(modeloVeiculo);
 
         boolean verifica = true;
@@ -93,10 +90,49 @@ public class MenuAluguel implements Apresentar {
 
         controller.getSistemaDeAluguel().emprestar(aluguel);
 
-        System.out.println("Veículo alugado com sucesso para " + cliente.getNome() + " em " + dataEvento.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
+        System.out.println("Veículo alugado com sucesso para " + cliente.getNome() + " em " + dataEvento.format(DateTimeFormatter.ofPattern("dd/MM/yyyy - HH:mm")));
+    }
+
+    private String buscarCliente() {
+        Util.listar("Clientes Cadastados", controller.getSistemaDeAluguel().obterClientes().obterLista());
+        System.out.println("\nDigite o nome de um cliente:");
+        String nomeCliente = scanner.nextLine();
+        return nomeCliente;
+    }
+    private String buscarVeiculoLivre() {
+        Util.listar("Veiculos Disponíveis", controller.getSistemaDeAluguel().obterVeiculos().obterLista());
+        System.out.println("\nDigite o modelo de um veículo:");
+        String modeloVeiculo = scanner.nextLine();
+        return modeloVeiculo;
+    }
+    private String buscarVeiculoOcupado() {
+        String nomeCliente = buscarCliente();
+        Cliente cliente = controller.getSistemaDeAluguel().obterClientes().realizarBusca(nomeCliente);
+        // Supondo que obterContratosCliente seja um método que retorna todos os contratos para um dado cliente.
+        Set<Aluguel> contratosPorCliente = controller.getSistemaDeAluguel().obterContratosCliente(cliente);
+
+        if (!contratosPorCliente.isEmpty()) {
+            System.out.println("Veículos Alugados pelo cliente " + nomeCliente + ":");
+            for (Aluguel aluguel : contratosPorCliente) {
+                System.out.println(aluguel.veiculo().getModelo() + " - " + aluguel.veiculo().getPlaca());
+            }
+        } else {
+            System.out.println("Nenhum veículo alugado encontrado para o cliente: " + nomeCliente);
+            return null; // Retornar null se nenhum veículo for encontrado.
+        }
+
+        System.out.println("\nDigite a placa de um veículo para devolver:");
+        String placaVeiculo = scanner.nextLine();
+        return placaVeiculo; // Retorna a placa para usar na devolução.
     }
 
     private void devolverVeiculo() {
+        String nomeCliente = buscarCliente();
+        Cliente cliente = controller.getSistemaDeAluguel().obterClientes().realizarBusca(nomeCliente);
+
+        String modeloVeiculo = buscarVeiculoOcupado();
+        Veiculo veiculo = controller.getSistemaDeAluguel().obterVeiculos().realizarBusca(modeloVeiculo);
+
     }
 
     private void verInformacoes() {

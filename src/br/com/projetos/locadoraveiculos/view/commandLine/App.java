@@ -49,11 +49,11 @@ public class App {
         clientes.add(new ClientePJ("PEPSICO DO BRASIL", "31565104002030"));
         return clientes;
     }
-    public static List<Aluguel> loadSampleContratos() {
+    public static HashSet<Aluguel> loadSampleContratos() {
         HashSet<Veiculo> veiculos = loadSampleVeiculos();
         HashSet<Cliente> clientes = loadSampleClientes();
 
-        List<Aluguel> contratos = new ArrayList<>();
+        HashSet<Aluguel> contratos = new HashSet<>();
         Iterator<Veiculo> veiculoIterator = veiculos.iterator();
         Iterator<Cliente> clienteIterator = clientes.iterator();
 
@@ -63,6 +63,7 @@ public class App {
             contratos.add(new Aluguel(veiculoIterator.next(), clienteIterator.next(), dataEvento));
             index++;
         }
+        System.out.println(contratos);
         return contratos;
     }
     public static Agencia loadSampleAgencia(){

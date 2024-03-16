@@ -12,7 +12,6 @@ import java.util.TreeSet;
 
 public class SistemaVeiculos implements CRUD<Veiculo> {
     private HashSet<Veiculo> veiculos;
-
     public SistemaVeiculos(HashSet<Veiculo> veiculos) {
         this.veiculos = veiculos;
     }
