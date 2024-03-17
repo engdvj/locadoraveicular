@@ -22,10 +22,13 @@ public class SistemaClientes implements CRUD<Cliente> {
     }
 
     @Override
-    public Cliente editar(Cliente clienteAnterior, Cliente clienteNovo) {
-        clienteAnterior.setNome(clienteNovo.getNome());
-        clienteAnterior.setDocumento(clienteNovo.getDocumento());
-        return clienteNovo;
+    public boolean editar(Cliente clienteAnterior, Cliente clienteNovo) {
+        if(add(clienteNovo)){
+            remover(clienteAnterior);
+            return true;
+        }else{
+            return false;
+        }
     }
 
     @Override

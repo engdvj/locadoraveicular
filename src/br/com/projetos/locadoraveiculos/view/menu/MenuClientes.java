@@ -131,9 +131,12 @@ public class MenuClientes implements Apresentar {
                         System.out.println("CPF Inválido! Tente novamente.");
                     }
                 }
-                controller.getSistemaDeAluguel().obterClientes().editar(cliente,new ClientePF(nomeCliente, cpfCliente));
-                System.out.println("Cliente editado com sucesso!\n");
-
+                boolean adicionado = controller.getSistemaDeAluguel().obterClientes().editar(cliente,new ClientePF(nomeCliente, cpfCliente));
+                if (adicionado) {
+                    System.out.println("Cliente editado com Sucesso!\n");
+                } else {
+                    System.out.println("Erro na criação do cliente! Cliente com este CPF já existe.\n");
+                }
             }else{
                 boolean verifica = true;
                 String cnpjCliente = null;
@@ -148,8 +151,12 @@ public class MenuClientes implements Apresentar {
                         System.out.println("CPF Inválido! Tente novamente.");
                     }
                 }
-                controller.getSistemaDeAluguel().obterClientes().editar(cliente,new ClientePJ(nomeCliente, cnpjCliente));
-                System.out.println("Cliente editado com sucesso!\n");
+                boolean adicionado = controller.getSistemaDeAluguel().obterClientes().editar(cliente,new ClientePJ(nomeCliente, cnpjCliente));
+                if (adicionado) {
+                    System.out.println("Cliente editado com Sucesso!\n");
+                } else {
+                    System.out.println("Erro na criação do cliente! Cliente com este CPF já existe.\n");
+                }
 
             }
         }else{

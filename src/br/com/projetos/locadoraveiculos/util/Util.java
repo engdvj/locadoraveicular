@@ -1,6 +1,6 @@
 package br.com.projetos.locadoraveiculos.util;
 
-import br.com.projetos.locadoraveiculos.service.Lista;
+import br.com.projetos.locadoraveiculos.service.Listar;
 
 
 import java.util.*;
@@ -17,9 +17,9 @@ public class Util {
         return ordenado;
     }
 
-    public static <T> void listar(String mensagem, Set<? extends Lista> conjunto) {
+    public static <T> void listar(String mensagem, Set<? extends Listar> conjunto) {
         System.out.println("Lista de " + mensagem + ":");
-        for (Lista elemento : conjunto) {
+        for (Listar elemento : conjunto) {
             System.out.println(elemento.obterNomeOrganizado());
         }
     }

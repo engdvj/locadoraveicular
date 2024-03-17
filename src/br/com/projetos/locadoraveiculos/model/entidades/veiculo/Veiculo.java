@@ -1,9 +1,9 @@
 package br.com.projetos.locadoraveiculos.model.entidades.veiculo;
 
-import br.com.projetos.locadoraveiculos.service.Lista;
+import br.com.projetos.locadoraveiculos.service.Listar;
 import br.com.projetos.locadoraveiculos.util.Util.Tamanho;
 
-public class Veiculo implements Lista {
+public class Veiculo implements Listar {
     private String marca;
     private String modelo;
     private String placa;

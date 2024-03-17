@@ -1,5 +1,5 @@
 package br.com.projetos.locadoraveiculos.service;
 
-public interface Lista {
+public interface Listar {
     String obterNomeOrganizado();
 }

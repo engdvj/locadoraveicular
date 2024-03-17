@@ -2,12 +2,12 @@ package br.com.projetos.locadoraveiculos.model.eventos;
 
 import br.com.projetos.locadoraveiculos.model.entidades.clientes.Cliente;
 import br.com.projetos.locadoraveiculos.model.entidades.veiculo.Veiculo;
-import br.com.projetos.locadoraveiculos.service.Lista;
+import br.com.projetos.locadoraveiculos.service.Listar;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public record Aluguel (Veiculo veiculo, Cliente cliente, LocalDateTime dataAluguel) implements Lista {
+public record Aluguel (Veiculo veiculo, Cliente cliente, LocalDateTime dataAluguel) implements Listar {
 
     @Override
     public String obterNomeOrganizado() {

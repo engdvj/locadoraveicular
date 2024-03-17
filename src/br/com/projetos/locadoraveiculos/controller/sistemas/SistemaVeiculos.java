@@ -23,12 +23,12 @@ public class SistemaVeiculos implements CRUD<Veiculo> {
     }
 
     @Override
-    public Veiculo editar(Veiculo veiculoAnterior, Veiculo veiculoNovo) {
+    public boolean editar(Veiculo veiculoAnterior, Veiculo veiculoNovo) {
         veiculoAnterior.setMarca(veiculoNovo.getMarca());
         veiculoAnterior.setModelo(veiculoNovo.getModelo());
         veiculoAnterior.setPlaca(veiculoNovo.getPlaca());
         veiculoAnterior.setTamanhoVeiculo(veiculoNovo.getTamanhoVeiculo());
-        return null;
+        return false;
     }
 
     @Override
