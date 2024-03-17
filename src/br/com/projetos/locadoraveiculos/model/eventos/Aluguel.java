@@ -7,14 +7,16 @@ import br.com.projetos.locadoraveiculos.service.Listar;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public record Aluguel (Veiculo veiculo, Cliente cliente, LocalDateTime dataRetirada) implements Listar {
+public record Aluguel (Veiculo veiculo, Cliente cliente, LocalDateTime dataRetirada,String endereco) implements Listar {
 
     @Override
     public String obterNomeOrganizado() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         return new StringBuilder()
                 .append("Detalhes do Aluguel:\n")
-                .append("Veículo: ")
+                .append("Endereço para a coleta: ")
+                .append(endereco)
+                .append("\nVeículo: ")
                 .append(veiculo.getMarca())
                 .append(" ")
                 .append(veiculo.getModelo())
@@ -24,7 +26,7 @@ public record Aluguel (Veiculo veiculo, Cliente cliente, LocalDateTime dataRetir
                 .append(cliente.obterNomeOrganizado()) // assumindo que Cliente tem um método obterNomeOrganizado
                 .append(" - Documento: ")
                 .append(cliente.getDocumento()) // assegure-se de que este método esteja disponível em Cliente
-                .append("\nData do Evento: ")
+                .append("\nData do Aluguel: ")
                 .append(dataRetirada.format(formatter)).append("\n\n")
                 .toString();
     }

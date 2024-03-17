@@ -89,7 +89,7 @@ public class MenuAluguel implements Apresentar {
         }
 
         dataEvento = LocalDateTime.parse(data + " " + hora,formatado);
-        Aluguel aluguel = new Aluguel(veiculo, cliente, dataEvento);
+        Aluguel aluguel = new Aluguel(veiculo, cliente, dataEvento,controller.getSistemaDeAluguel().getAgencia().endereco());
 
         controller.getSistemaDeAluguel().emprestar(aluguel);
 
