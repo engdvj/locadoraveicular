@@ -1,6 +1,7 @@
 package br.com.projetos.locadoraveiculos.view.menu;
 
 import br.com.projetos.locadoraveiculos.controller.locadora.ControllerLocadora;
+import br.com.projetos.locadoraveiculos.model.eventos.Devolucao;
 import br.com.projetos.locadoraveiculos.service.Apresentar;
 
 import java.util.Scanner;
@@ -10,12 +11,13 @@ import static br.com.projetos.locadoraveiculos.view.commandLine.ConsoleUI.scanne
 public class MenuPagamento implements Apresentar {
 
     private final ControllerLocadora controller;
-
+    private Devolucao devolucao;
     private final GerenciadorDeMenu gerenciadorDeMenu;
 
-    public MenuPagamento(ControllerLocadora controller, GerenciadorDeMenu gerenciadorDeMenu) {
+    public MenuPagamento(ControllerLocadora controller, GerenciadorDeMenu gerenciadorDeMenu, Devolucao devolucao) {
         this.controller = controller;
         this.gerenciadorDeMenu = gerenciadorDeMenu;
+        this.devolucao = devolucao;
     }
 
 

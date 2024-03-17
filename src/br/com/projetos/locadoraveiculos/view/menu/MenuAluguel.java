@@ -39,8 +39,8 @@ public class MenuAluguel implements Apresentar {
                     alugarVeiculo();
                     break;
                 case "2":
-                    devolverVeiculo();
-                    gerenciadorDeMenu.setMenuAtual(new MenuPagamento(controller, gerenciadorDeMenu));
+                    Devolucao devolucao = devolverVeiculo();
+                    gerenciadorDeMenu.setMenuAtual(new MenuPagamento(controller, gerenciadorDeMenu,devolucao));
                     gerenciadorDeMenu.exibirMenuAtual();
                     break;
                 case "3":
@@ -96,7 +96,7 @@ public class MenuAluguel implements Apresentar {
         System.out.println("Veículo alugado com sucesso para " + cliente.getNome() + " em " + dataEvento.format(DateTimeFormatter.ofPattern("dd/MM/yyyy - HH:mm")));
     }
 
-    private void devolverVeiculo() {
+    private Devolucao devolverVeiculo() {
         String nomeCliente = buscarCliente();
         Cliente cliente = controller.getSistemaDeAluguel().obterClientes().realizarBusca(nomeCliente);
         Aluguel aluguel;
@@ -143,6 +143,7 @@ public class MenuAluguel implements Apresentar {
         Devolucao devolucao = new Devolucao (aluguel,dataEvento);
         controller.getSistemaDeAluguel().devolver(devolucao);
         System.out.println(devolucao);
+        return devolucao;
     }
     private String buscarCliente() {
         Util.listar("Clientes Cadastados", controller.getSistemaDeAluguel().obterClientes().obterLista());
