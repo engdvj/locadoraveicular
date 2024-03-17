@@ -7,6 +7,7 @@ import br.com.projetos.locadoraveiculos.model.entidades.clientes.Cliente;
 import br.com.projetos.locadoraveiculos.model.entidades.veiculo.Veiculo;
 import br.com.projetos.locadoraveiculos.service.Alugar;
 import br.com.projetos.locadoraveiculos.service.CRUD;
+import br.com.projetos.locadoraveiculos.service.Pagar;
 
 import static br.com.projetos.locadoraveiculos.data.AgenciasDataLoader.loadSampleAgencia;
 import static br.com.projetos.locadoraveiculos.data.ClientesDataLoader.loadSampleClientes;
@@ -20,7 +21,7 @@ public class InicializarAplicacao {
         CRUD<Veiculo> sistemaVeiculos = new SistemaVeiculos(loadSampleVeiculos());
 
         Alugar sistemaDeAluguel = new SistemaAluguel(agencia, sistemaVeiculos, sistemaClientes);
-
-        return new ControllerLocadora(sistemaDeAluguel);
+        Pagar sistemaDePagamento = new SistemaPagamento(agencia);
+        return new ControllerLocadora(sistemaDeAluguel,sistemaDePagamento);
     }
 }

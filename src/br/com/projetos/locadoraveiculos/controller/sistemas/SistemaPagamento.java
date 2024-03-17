@@ -7,6 +7,8 @@ import br.com.projetos.locadoraveiculos.model.eventos.Pagamento;
 import br.com.projetos.locadoraveiculos.service.Pagar;
 
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SistemaPagamento implements Pagar {
 
@@ -18,35 +20,41 @@ public class SistemaPagamento implements Pagar {
     }
 
     @Override
-    public double calcularPagamento(Devolucao devolucao){
-        long diffMinutos = ChronoUnit.MINUTES.between(devolucao.aluguel().dataRetirada(), devolucao.dataDevolucao());
-        long numeroDiarias;
+    public ArrayList<Double> calcularPagamento(Devolucao devolucao){
+        ArrayList<Double> informacoesPagamento = new ArrayList<>();
         double valorDiarias;
+        long diffMinutos = ChronoUnit.MINUTES.between(devolucao.aluguel().dataRetirada(), devolucao.dataDevolucao());
+        double numeroDiarias;
+        double valorDescontado = 0;
         if (diffMinutos % 1440 == 0){
-            numeroDiarias = diffMinutos/1440;
+            numeroDiarias = diffMinutos / 1440.0;
         } else {
-            numeroDiarias = (diffMinutos/1440) + 1;
+            numeroDiarias = (diffMinutos / 1440.0) + 1;
         }
+        informacoesPagamento.add(numeroDiarias);
         if (devolucao.aluguel().cliente() instanceof ClientePF){
-            if ( numeroDiarias > 5 ) {
-                valorDiarias = (devolucao.aluguel().veiculo().getTamanhoVeiculo().getValor() * numeroDiarias)*0.95;
+            if (numeroDiarias > 5){
+                valorDiarias = (devolucao.aluguel().veiculo().getTamanhoVeiculo().getValor() * numeroDiarias) * 0.95;
+                valorDescontado = (devolucao.aluguel().veiculo().getTamanhoVeiculo().getValor() * numeroDiarias) * 0.05;
             } else {
                 valorDiarias = devolucao.aluguel().veiculo().getTamanhoVeiculo().getValor() * numeroDiarias;
             }
         } else {
             if (numeroDiarias > 3){
-                valorDiarias = (devolucao.aluguel().veiculo().getTamanhoVeiculo().getValor() * numeroDiarias)*0.9;
+                valorDiarias = (devolucao.aluguel().veiculo().getTamanhoVeiculo().getValor() * numeroDiarias) * 0.9;
+                valorDescontado = (devolucao.aluguel().veiculo().getTamanhoVeiculo().getValor() * numeroDiarias) * 0.1;
             } else {
                 valorDiarias = devolucao.aluguel().veiculo().getTamanhoVeiculo().getValor() * numeroDiarias;
             }
-
         }
-        return valorDiarias;
+        informacoesPagamento.add(valorDescontado);
+        informacoesPagamento.add(valorDiarias);
+        return informacoesPagamento;
     }
 
     @Override
-    public void imprimirRecido(Pagamento pagamento) {
-
+    public void imprimirRecido(ArrayList<Double> dadosPagamento) {
+        System.out.printf("Numero de diarias: %.0f\n Desconto Aplicado: %.2f\n Valor Total: %.2f ",dadosPagamento.get(0),dadosPagamento.get(1),dadosPagamento.get(2));
     }
 
 

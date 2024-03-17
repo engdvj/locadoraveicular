@@ -9,10 +9,15 @@ import br.com.projetos.locadoraveiculos.service.Pagar;
 public class ControllerLocadora {
     private Pagar sistemaDePagamento;
     private Alugar<Veiculo> sistemaDeAluguel;
-    public ControllerLocadora(Alugar alugarCarros) {
+    public ControllerLocadora(Alugar alugarCarros,Pagar sistemaDePagamento) {
+        this.sistemaDePagamento = sistemaDePagamento;
         this.sistemaDeAluguel = alugarCarros;
     }
     public Alugar<Veiculo> getSistemaDeAluguel() {
         return sistemaDeAluguel;
+    }
+
+    public Pagar getSistemaDePagamento() {
+        return sistemaDePagamento;
     }
 }
