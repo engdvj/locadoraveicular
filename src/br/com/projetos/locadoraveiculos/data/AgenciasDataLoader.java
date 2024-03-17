@@ -8,7 +8,9 @@ import static br.com.projetos.locadoraveiculos.data.ContratosDataLoader.*;
 
 public class AgenciasDataLoader {
     public static Agencia loadSampleAgencia(){
-        Agencia agencia = new Agencia("Dois Irmãos", "Rua Duque de Caxias", LocalTime.of(9, 0), LocalTime.of(18, 0),loadSampleContratosAtivos(),loadSampleContratosInativos(loadSampleContratosAtivos()) );
+        String nome = "Dois Irmãos";
+        String endereco = "Rua Duque de Caxias";
+        Agencia agencia = new Agencia(nome, endereco, LocalTime.of(9, 0), LocalTime.of(18, 0),loadSampleContratosAtivos(endereco),loadSampleContratosInativos(loadSampleContratosAtivos(endereco)) );
         return agencia;
     }
 }

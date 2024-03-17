@@ -1,5 +1,6 @@
 package br.com.projetos.locadoraveiculos.data;
 
+import br.com.projetos.locadoraveiculos.model.entidades.agencia.Agencia;
 import br.com.projetos.locadoraveiculos.model.entidades.clientes.Cliente;
 import br.com.projetos.locadoraveiculos.model.entidades.veiculo.Veiculo;
 import br.com.projetos.locadoraveiculos.model.eventos.Aluguel;
@@ -9,12 +10,14 @@ import java.time.*;
 import java.util.*;
 
 
+import static br.com.projetos.locadoraveiculos.data.AgenciasDataLoader.loadSampleAgencia;
 import static br.com.projetos.locadoraveiculos.data.ClientesDataLoader.*;
 import static br.com.projetos.locadoraveiculos.data.VeiculosDataLoader.*;
 
 public class ContratosDataLoader {
 
-    public static HashSet<Aluguel> loadSampleContratosAtivos() {
+    public static HashSet<Aluguel> loadSampleContratosAtivos(String endereco) {
+
         HashSet<Veiculo> veiculos = loadSampleVeiculos();
         HashSet<Cliente> clientes = loadSampleClientes();
 
@@ -26,7 +29,7 @@ public class ContratosDataLoader {
         int index = 0;
         while (veiculoIterator.hasNext() && clienteIterator.hasNext() && index < veiculos.size() && index < clientes.size()) {
             LocalDateTime dataEvento = LocalDateTime.of(2024, Month.MARCH, 10 + index, 10 + (index % 4), 0);
-            Aluguel aluguel = new Aluguel(veiculoIterator.next(), clienteIterator.next(), dataEvento);
+            Aluguel aluguel = new Aluguel(veiculoIterator.next(), clienteIterator.next(), dataEvento,endereco);
             contratosAtivos.add(aluguel);
             index++;
         }

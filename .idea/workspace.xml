@@ -5,10 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f12b4e23-557c-4220-9f76-0a4dd7553fc5" name="Changes" comment="Inicio da implementação de Pagamento">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_03_2024_13_10__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_03_2024_13_10__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/data/AgenciasDataLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/data/AgenciasDataLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/data/ContratosDataLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/data/ContratosDataLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/model/eventos/Aluguel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/model/eventos/Aluguel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/model/eventos/Devolucao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/model/eventos/Devolucao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/view/menu/MenuAluguel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/view/menu/MenuAluguel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/view/menu/MenuPagamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/view/menu/MenuPagamento.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +52,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "Pagamento",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Davi Costa/Desktop/Projetos_ADA/catalogo-IMDB",

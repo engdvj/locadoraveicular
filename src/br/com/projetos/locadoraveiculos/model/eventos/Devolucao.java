@@ -12,7 +12,9 @@ public record Devolucao(Aluguel aluguel, LocalDateTime dataDevolucao) implements
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         return new StringBuilder()
                 .append("Detalhes da Devolucao:\n")
-                .append("Veículo: ")
+                .append("Endereço para devolução: ")
+                .append(aluguel.endereco())
+                .append("\nVeículo: ")
                 .append(aluguel.veiculo().getMarca())
                 .append(" ")
                 .append(aluguel.veiculo().getModelo())
