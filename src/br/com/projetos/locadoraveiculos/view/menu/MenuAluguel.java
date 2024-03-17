@@ -137,6 +137,7 @@ public class MenuAluguel implements Apresentar {
         if (sucesso) {
             System.out.println("Veículo devolvido com sucesso.");
             System.out.println(devolucao);
+
         } else {
             System.out.println("Falha ao tentar devolver o veículo.");
         }

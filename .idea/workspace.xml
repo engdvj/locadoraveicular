@@ -5,21 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f12b4e23-557c-4220-9f76-0a4dd7553fc5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/data/AgenciasDataLoader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/data/ClientesDataLoader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/data/ContratosDataLoader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/data/VeiculosDataLoader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/view/commandLine/ConsoleUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/view/commandLine/InicializarAplicacao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/view/menu/GerenciadorDeMenu.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/controller/sistemas/SistemaPagamento.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/model/eventos/Pagamento.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/view/menu/MenuPagamento.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/controller/sistemas/SistemaAluguel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/controller/sistemas/SistemaAluguel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/data/AgenciasDataLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/data/AgenciasDataLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/data/ContratosDataLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/data/ContratosDataLoader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/model/entidades/agencia/Agencia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/model/entidades/agencia/Agencia.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/view/commandLine/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/view/commandLine/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/model/eventos/Aluguel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/model/eventos/Aluguel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/model/eventos/Devolucao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/model/eventos/Devolucao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/view/menu/MenuAluguel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/view/menu/MenuAluguel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/view/menu/MenuClientes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/view/menu/MenuClientes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/view/menu/MenuInicial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/view/menu/MenuInicial.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/view/menu/MenuVeiculos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/view/menu/MenuVeiculos.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,10 +55,15 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "Estrutura",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Davi Costa/Desktop/Projetos_ADA/catalogo-IMDB",
-    "node.js.selected.package.tslint": "(autodetect)"
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -89,8 +89,13 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1709910134962</updated>
+      <workItem from="1710687447639" duration="43000" />
+      <workItem from="1710687500855" duration="4282000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
