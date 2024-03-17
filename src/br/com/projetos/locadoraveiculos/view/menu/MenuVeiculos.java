@@ -64,12 +64,13 @@ public class MenuVeiculos implements Apresentar {
         boolean validado = false;
         String placa = "";
         while (!validado) {
-            System.out.print("Digite a placa do veículo");
+            System.out.print("Digite a placa do veículo:");
             placa = scanner.nextLine().toUpperCase();
             if (Validacoes.validarPlaca(placa)) {
+                System.out.println("Placa validada");
                 validado = true;
-            }
-            System.out.println("Placa invalida, digite no padrão MercoSul");
+            } else {
+            System.out.println("Placa invalida, digite no padrão MercoSul");}
         }
         System.out.println("\nQual o tamanho do veículo?");
         System.out.println("""
@@ -82,7 +83,7 @@ public class MenuVeiculos implements Apresentar {
 
         Util.Tamanho tamanho = Util.Tamanho.valueOf(tamanhoVeiculo);
         System.out.println(tamanho);
-        controller.getSistemaDeAluguel().obterTipo().add(new Veiculo(marca, modelo, placa, tamanho));
+        controller.getSistemaDeAluguel().obterVeiculos().add(new Veiculo(marca, modelo, placa, tamanho));
     }
 
     public void editarVeiculo() {
@@ -116,7 +117,7 @@ public class MenuVeiculos implements Apresentar {
             String tamanhoEnum = scanner.nextLine().toUpperCase();
             Util.Tamanho tamanho = Util.Tamanho.valueOf(tamanhoEnum);
 
-            controller.getSistemaDeAluguel().obterTipo().editar(editarVeiculo, new Veiculo(marca, modelo, placa, tamanho));
+            controller.getSistemaDeAluguel().obterVeiculos().editar(editarVeiculo, new Veiculo(marca, modelo, placa, tamanho));
 
         } else {
             System.out.println("Veiculo não encontrado");
@@ -127,14 +128,13 @@ public class MenuVeiculos implements Apresentar {
     public void excluirVeiculo() {
         Veiculo apagarVeiculo = obterVeiculo();
         if (apagarVeiculo != null) {
-            controller.getSistemaDeAluguel().obterTipo().remover(apagarVeiculo);
+            controller.getSistemaDeAluguel().obterVeiculos().remover(apagarVeiculo);
         } else {
             System.out.println("Não foi possivel encontar o veiculo");
         }
     }
 
     public void veiculoDetalhado() {
-        listarVeiculo();
         Veiculo veiculo = obterVeiculo();
         if (veiculo != null) {
             System.out.println(veiculo);
@@ -143,20 +143,21 @@ public class MenuVeiculos implements Apresentar {
         }
     }
 
-    public void listarVeiculo() {
-        System.out.println("\nLista de veiculos\n");
-        for (Veiculo veiculo : controller.getSistemaDeAluguel().obterTipo().obterLista()) {
-            System.out.println(veiculo.obterNomeOrganizado());
-        }
-    }
-
     public Veiculo obterVeiculo() {
-        listarVeiculo();
+        Util.listar("Veiculos", controller.getSistemaDeAluguel().obterVeiculos().obterLista());
+        System.out.println("\nDigite o nome do Veiculo:");
         String pesquisaVeiculo = scanner.nextLine();
         if (!pesquisaVeiculo.isEmpty()) {
-            return controller.getSistemaDeAluguel().obterTipo().realizarBusca(pesquisaVeiculo);
+            return controller.getSistemaDeAluguel().obterVeiculos().realizarBusca(pesquisaVeiculo);
         } else {
             return null;
         }
     }
+
+//    public void listarVeiculo() {
+//        System.out.println("\nLista de veiculos\n");
+//        for (Veiculo veiculo : controller.getSistemaDeAluguel().obterVeiculos().obterLista()) {
+//            System.out.println(veiculo.obterNomeOrganizado());
+//        }
+//    }
 }

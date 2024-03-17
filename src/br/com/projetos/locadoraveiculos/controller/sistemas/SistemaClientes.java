@@ -25,7 +25,7 @@ public class SistemaClientes implements CRUD<Cliente> {
     public Cliente editar(Cliente clienteAnterior, Cliente clienteNovo) {
         clienteAnterior.setNome(clienteNovo.getNome());
         clienteAnterior.setDocumento(clienteNovo.getDocumento());
-        return null;
+        return clienteNovo;
     }
 
     @Override

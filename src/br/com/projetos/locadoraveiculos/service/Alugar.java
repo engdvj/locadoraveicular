@@ -8,8 +8,8 @@ import java.util.Set;
 
 public interface Alugar<T>{
     Agencia getAgencia();
+    CRUD<Veiculo> obterVeiculosDisponiveis();
     CRUD<Veiculo> obterVeiculos();
-    CRUD<T> obterTipo();
     CRUD<Cliente> obterClientes();
     Set<Aluguel> obterContratosCliente(Cliente cliente);
     boolean emprestar(Aluguel aluguel);

@@ -24,7 +24,7 @@ public class SistemaAluguel implements Alugar<Veiculo> {
         return this.agencia;
     }
     @Override
-    public CRUD<Veiculo> obterVeiculos() {
+    public CRUD<Veiculo> obterVeiculosDisponiveis() {
         CRUD<Veiculo> veiculosDisponiveis = veiculos;
         for (Veiculo veiculo : veiculos.obterLista()) {
             for (Aluguel contrato : agencia.contratos()) {
@@ -36,7 +36,7 @@ public class SistemaAluguel implements Alugar<Veiculo> {
         return veiculosDisponiveis;
     }
     @Override
-    public CRUD<Veiculo> obterTipo() {
+    public CRUD<Veiculo> obterVeiculos() {
         return veiculos;
     }
     @Override

@@ -15,8 +15,6 @@ import java.util.Set;
 
 import static br.com.projetos.locadoraveiculos.view.commandLine.App.*;
 
-import static br.com.projetos.locadoraveiculos.view.commandLine.App.*;
-
 public class MenuAluguel implements Apresentar {
     private final ControllerLocadora controller;
     public MenuAluguel(ControllerLocadora controller) {
@@ -57,7 +55,7 @@ public class MenuAluguel implements Apresentar {
         Cliente cliente = controller.getSistemaDeAluguel().obterClientes().realizarBusca(nomeCliente);
 
         String modeloVeiculo = buscarVeiculoLivre();
-        Veiculo veiculo = controller.getSistemaDeAluguel().obterVeiculos().realizarBusca(modeloVeiculo);
+        Veiculo veiculo = controller.getSistemaDeAluguel().obterVeiculosDisponiveis().realizarBusca(modeloVeiculo);
 
         boolean verifica = true;
         DateTimeFormatter formatado = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
@@ -98,14 +96,12 @@ public class MenuAluguel implements Apresentar {
     private String buscarCliente() {
         Util.listar("Clientes Cadastados", controller.getSistemaDeAluguel().obterClientes().obterLista());
         System.out.println("\nDigite o nome de um cliente:");
-        String nomeCliente = scanner.nextLine();
-        return nomeCliente;
+        return scanner.nextLine();
     }
     private String buscarVeiculoLivre() {
-        Util.listar("Veiculos Disponíveis", controller.getSistemaDeAluguel().obterVeiculos().obterLista());
+        Util.listar("Veiculos Disponíveis", controller.getSistemaDeAluguel().obterVeiculosDisponiveis().obterLista());
         System.out.println("\nDigite o modelo de um veículo:");
-        String modeloVeiculo = scanner.nextLine();
-        return modeloVeiculo;
+        return scanner.nextLine();
     }
     private String buscarVeiculoOcupado() {
         String nomeCliente = buscarCliente();
@@ -124,8 +120,7 @@ public class MenuAluguel implements Apresentar {
         }
 
         System.out.println("\nDigite a placa de um veículo para devolver:");
-        String placaVeiculo = scanner.nextLine();
-        return placaVeiculo; // Retorna a placa para usar na devolução.
+        return scanner.nextLine(); // Retorna a placa para usar na devolução.
     }
 
     private void devolverVeiculo() {
@@ -133,7 +128,7 @@ public class MenuAluguel implements Apresentar {
         Cliente cliente = controller.getSistemaDeAluguel().obterClientes().realizarBusca(nomeCliente);
 
         String modeloVeiculo = buscarVeiculoOcupado();
-        Veiculo veiculo = controller.getSistemaDeAluguel().obterVeiculos().realizarBusca(modeloVeiculo);
+        Veiculo veiculo = controller.getSistemaDeAluguel().obterVeiculosDisponiveis().realizarBusca(modeloVeiculo);
 
     }
 
@@ -143,7 +138,7 @@ public class MenuAluguel implements Apresentar {
             System.out.println(cliente.obterNomeOrganizado());
         }
         System.out.println("\nLista de Veículos:");
-        for(Veiculo veiculo: controller.getSistemaDeAluguel().obterTipo().obterLista()){
+        for(Veiculo veiculo: controller.getSistemaDeAluguel().obterVeiculosDisponiveis().obterLista()){
             System.out.println(veiculo.obterNomeOrganizado());
         }
     }

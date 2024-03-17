@@ -10,7 +10,7 @@ public class ClientePF extends Cliente {
 
     @Override
     public String getDocumento() {
-        return this.CPF;
+        return CPF;
     }
 
     @Override

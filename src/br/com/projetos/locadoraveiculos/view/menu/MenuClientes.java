@@ -64,9 +64,9 @@ public class MenuClientes implements Apresentar {
         if (valor == 1) {
             System.out.println("Digite o Nome do Cliente: ");
             String nomeCliente = scanner.nextLine();
+
             boolean verifica = true;
             String cpfCliente = null;
-
             System.out.println("Digite o CPF: ");
             while (verifica) {
                 cpfCliente = scanner.nextLine();
@@ -118,19 +118,37 @@ public class MenuClientes implements Apresentar {
         Cliente cliente = obterCliente();
         if(cliente!= null) {
             if(cliente instanceof ClientePF) {
+                boolean verifica = true;
+                String cpfCliente = null;
                 System.out.println("Digite o novo nome do Cliente: ");
                 String nomeCliente = scanner.nextLine();
                 System.out.println("Digite o novo CPF do Cliente: ");
-                String cpfCliente = scanner.nextLine();
+                while (verifica) {
+                    cpfCliente = scanner.nextLine();
+                    if (validarDocumento(cpfCliente,"cpf")) {
+                        verifica = false;
+                    }else{
+                        System.out.println("CPF Inválido! Tente novamente.");
+                    }
+                }
                 controller.getSistemaDeAluguel().obterClientes().editar(cliente,new ClientePF(nomeCliente, cpfCliente));
                 System.out.println("Cliente editado com sucesso!\n");
 
             }else{
+                boolean verifica = true;
+                String cnpjCliente = null;
                 System.out.println("Digite o novo nome da empresa: ");
                 String nomeCliente = scanner.nextLine();
                 System.out.println("Digite o novo CNPJ da empresa: ");
-                String cpfCliente = scanner.nextLine();
-                controller.getSistemaDeAluguel().obterClientes().editar(cliente,new ClientePJ(nomeCliente, cpfCliente));
+                while (verifica) {
+                    cnpjCliente = scanner.nextLine();
+                    if (validarDocumento(cnpjCliente,"cnpj")) {
+                        verifica = false;
+                    }else{
+                        System.out.println("CPF Inválido! Tente novamente.");
+                    }
+                }
+                controller.getSistemaDeAluguel().obterClientes().editar(cliente,new ClientePJ(nomeCliente, cnpjCliente));
                 System.out.println("Cliente editado com sucesso!\n");
 
             }
@@ -156,11 +174,11 @@ public class MenuClientes implements Apresentar {
 
     }
 
-    private void listarClientes() {
-        System.out.println("Lista Atual de Clientes:\n");
-        for(Cliente cliente : controller.getSistemaDeAluguel().obterClientes().obterLista()){
-            System.out.println(cliente.obterNomeOrganizado());
-        }
-    }
+//    private void listarClientes() {
+//        System.out.println("Lista Atual de Clientes:\n");
+//        for(Cliente cliente : controller.getSistemaDeAluguel().obterClientes().obterLista()){
+//            System.out.println(cliente.obterNomeOrganizado());
+//        }
+//    }
 
 }

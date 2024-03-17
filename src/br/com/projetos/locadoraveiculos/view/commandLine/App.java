@@ -30,13 +30,13 @@ public class App {
 
     public static HashSet<Veiculo> loadSampleVeiculos() {
         HashSet<Veiculo> veiculos = new HashSet<>();
-        veiculos.add(new Veiculo("Ford", "Focus", "123456789", Util.Tamanho.MEDIO));
-        veiculos.add(new Veiculo("Volkswagen", "Jetta", "123456789", Util.Tamanho.SUV));
-        veiculos.add(new Veiculo("Chevrolet", "Cruze", "987654321", Util.Tamanho.PEQUENO));
-        veiculos.add(new Veiculo("Fiat", "Toro", "234567891", Util.Tamanho.PEQUENO));
-        veiculos.add(new Veiculo("Honda", "Civic", "345678912", Util.Tamanho.MEDIO));
-        veiculos.add(new Veiculo("Toyota", "Corolla", "456789123", Util.Tamanho.MEDIO));
-        veiculos.add(new Veiculo("Renault", "Duster", "567891234", Util.Tamanho.SUV));
+        veiculos.add(new Veiculo("Ford", "Focus", "ABC1D23", Util.Tamanho.MEDIO));
+        veiculos.add(new Veiculo("Volkswagen", "Jetta", "XYZ9A87", Util.Tamanho.SUV));
+        veiculos.add(new Veiculo("Chevrolet", "Cruze", "DEF2B45", Util.Tamanho.PEQUENO));
+        veiculos.add(new Veiculo("Fiat", "Toro", "QWE6C78", Util.Tamanho.PEQUENO));
+        veiculos.add(new Veiculo("Honda", "Civic", "FHT7F89", Util.Tamanho.MEDIO));
+        veiculos.add(new Veiculo("Toyota", "Corolla", "DWX8H23", Util.Tamanho.MEDIO));
+        veiculos.add(new Veiculo("Renault", "Duster", "DWX8H27", Util.Tamanho.SUV));
         return veiculos;
     }
 
