@@ -4,17 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f12b4e23-557c-4220-9f76-0a4dd7553fc5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/controller/sistemas/SistemaPagamento.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/model/eventos/Pagamento.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/view/menu/MenuPagamento.java" afterDir="false" />
+    <list default="true" id="f12b4e23-557c-4220-9f76-0a4dd7553fc5" name="Changes" comment="Inicio da implementação de Pagamento">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/data/AgenciasDataLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/data/AgenciasDataLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/data/ContratosDataLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/data/ContratosDataLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/model/entidades/agencia/Agencia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/model/entidades/agencia/Agencia.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/model/eventos/Aluguel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/model/eventos/Aluguel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/model/eventos/Devolucao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/model/eventos/Devolucao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/view/menu/MenuAluguel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/view/menu/MenuAluguel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/view/menu/MenuPagamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/view/menu/MenuPagamento.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,8 +84,17 @@
       <option name="presentableId" value="Default" />
       <updated>1709910134962</updated>
       <workItem from="1710687447639" duration="43000" />
-      <workItem from="1710687500855" duration="4282000" />
+      <workItem from="1710687500855" duration="6531000" />
     </task>
+    <task id="LOCAL-00001" summary="Inicio da implementação de Pagamento">
+      <option name="closed" value="true" />
+      <created>1710691836961</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1710691836961</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -107,6 +110,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Inicio da implementação de Pagamento" />
+    <option name="LAST_COMMIT_MESSAGE" value="Inicio da implementação de Pagamento" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

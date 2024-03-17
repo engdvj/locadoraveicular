@@ -38,6 +38,7 @@ public class MenuAluguel implements Apresentar {
                     break;
                 case "2":
                     devolverVeiculo();
+
                     break;
                 case "3":
                     //verInformacoes();
@@ -95,13 +96,17 @@ public class MenuAluguel implements Apresentar {
     private void devolverVeiculo() {
         String nomeCliente = buscarCliente();
         Cliente cliente = controller.getSistemaDeAluguel().obterClientes().realizarBusca(nomeCliente);
+        Aluguel aluguel;
+        String placaVeiculo;
 
-        String placaVeiculo = buscarVeiculoOcupado(cliente);
-        Aluguel aluguel = controller.getSistemaDeAluguel().buscarAluguel(cliente, placaVeiculo);
-        if (aluguel == null) {
-            System.out.println("Nenhum aluguel encontrado para o cliente com o veículo especificado.");
-            return;
-        }
+        do {
+            placaVeiculo = buscarVeiculoOcupado(cliente);
+            aluguel = controller.getSistemaDeAluguel().buscarAluguel(cliente, placaVeiculo);
+
+            if (aluguel == null) {
+                System.out.println("Placa digitada incorreta. Por favor, tente novamente.");
+            }
+        } while (aluguel == null);
 
         boolean verifica = true;
         DateTimeFormatter formatado = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
@@ -133,14 +138,8 @@ public class MenuAluguel implements Apresentar {
 
         dataEvento = LocalDateTime.parse(data + " " + hora,formatado);
         Devolucao devolucao = new Devolucao (aluguel,dataEvento);
-        boolean sucesso = controller.getSistemaDeAluguel().devolver(aluguel);
-        if (sucesso) {
-            System.out.println("Veículo devolvido com sucesso.");
-            System.out.println(devolucao);
-
-        } else {
-            System.out.println("Falha ao tentar devolver o veículo.");
-        }
+        controller.getSistemaDeAluguel().devolver(aluguel);
+        System.out.println(devolucao);
     }
     private String buscarCliente() {
         Util.listar("Clientes Cadastados", controller.getSistemaDeAluguel().obterClientes().obterLista());
@@ -167,7 +166,7 @@ public class MenuAluguel implements Apresentar {
         }
 
         System.out.println("\nDigite a placa de um veículo para devolver:");
-        return scanner.nextLine(); // Retorna a placa para usar na devolução.
+        return scanner.nextLine().toUpperCase(); // Retorna a placa para usar na devolução.
     }
 
 

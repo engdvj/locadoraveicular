@@ -24,7 +24,7 @@ public record Devolucao(Aluguel aluguel, LocalDateTime dataDevolucao) implements
                 .append(aluguel.cliente().getDocumento()) // assegure-se de que este método esteja disponível em Cliente
                 .append("\nData do Aluguel: ")
                 .append(aluguel.dataRetirada().format(formatter))
-                .append("\nData da Devolucao: \"")
+                .append("\nData da Devolucao: ")
                 .append(dataDevolucao().format(formatter))
                 .append("\n\n")
                 .toString();

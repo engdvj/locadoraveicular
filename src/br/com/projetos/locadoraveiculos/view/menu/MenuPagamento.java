@@ -27,9 +27,8 @@ public class MenuPagamento implements Apresentar {
         while (!sair) {
             System.out.println("""
                     Escolha uma opção abaixo:
-                     (1) - Orçamento
-                     (2) - Realizar Pagamento
-                     (3) - Sair
+                     (1) - Realizar Pagamento - Cartão de Crédito
+                     (2) - Realizar Pagamento - PIX
                     """);
             String option = scanner.nextLine();
             switch (option) {
