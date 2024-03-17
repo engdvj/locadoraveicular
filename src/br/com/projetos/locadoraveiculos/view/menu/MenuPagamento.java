@@ -33,17 +33,10 @@ public class MenuPagamento implements Apresentar {
             String option = scanner.nextLine();
             switch (option) {
                 case "1":
-                    gerenciadorDeMenu.setMenuAtual(new MenuClientes(controller, gerenciadorDeMenu));
+                    pagamentoCartao();
                     break;
                 case "2":
-                    gerenciadorDeMenu.setMenuAtual(new MenuVeiculos(controller, gerenciadorDeMenu));
-                    break;
-                case "3":
-                    gerenciadorDeMenu.setMenuAtual(new MenuAluguel(controller, gerenciadorDeMenu));
-                    break;
-                case "4":
-                    System.out.println("Saindo...");
-                    sair = true;
+                    pagamentoPix();
                     break;
                 default:
                     System.out.println("Opção Inválida!");
@@ -52,5 +45,12 @@ public class MenuPagamento implements Apresentar {
                 gerenciadorDeMenu.exibirMenuAtual();
             }
         }
+    }
+
+    private void pagamentoCartao(){
+        System.out.println(controller.getSistemaDeAluguel().getAgencia().contratosInativos());
+    }
+    private void pagamentoPix(){
+        System.out.println(controller.getSistemaDeAluguel().getAgencia().contratosInativos());
     }
 }

@@ -17,8 +17,10 @@ import static br.com.projetos.locadoraveiculos.view.commandLine.ConsoleUI.scanne
 
 public class MenuAluguel implements Apresentar {
     private final ControllerLocadora controller;
-    public MenuAluguel(ControllerLocadora controller,GerenciadorDeMenu gerenciador) {
+    private final GerenciadorDeMenu gerenciadorDeMenu;
+    public MenuAluguel(ControllerLocadora controller,GerenciadorDeMenu gerenciadorDeMenu) {
         this.controller = controller;
+        this.gerenciadorDeMenu = gerenciadorDeMenu;
     }
     @Override
     public void escolherOpcao() {
@@ -38,7 +40,8 @@ public class MenuAluguel implements Apresentar {
                     break;
                 case "2":
                     devolverVeiculo();
-
+                    gerenciadorDeMenu.setMenuAtual(new MenuPagamento(controller, gerenciadorDeMenu));
+                    gerenciadorDeMenu.exibirMenuAtual();
                     break;
                 case "3":
                     //verInformacoes();
@@ -138,7 +141,7 @@ public class MenuAluguel implements Apresentar {
 
         dataEvento = LocalDateTime.parse(data + " " + hora,formatado);
         Devolucao devolucao = new Devolucao (aluguel,dataEvento);
-        controller.getSistemaDeAluguel().devolver(aluguel);
+        controller.getSistemaDeAluguel().devolver(devolucao);
         System.out.println(devolucao);
     }
     private String buscarCliente() {

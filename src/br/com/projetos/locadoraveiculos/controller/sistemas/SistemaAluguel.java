@@ -4,6 +4,7 @@ import br.com.projetos.locadoraveiculos.model.eventos.Aluguel;
 import br.com.projetos.locadoraveiculos.model.entidades.agencia.Agencia;
 import br.com.projetos.locadoraveiculos.model.entidades.clientes.Cliente;
 import br.com.projetos.locadoraveiculos.model.entidades.veiculo.Veiculo;
+import br.com.projetos.locadoraveiculos.model.eventos.Devolucao;
 import br.com.projetos.locadoraveiculos.service.*;
 
 import java.util.HashSet;
@@ -53,8 +54,9 @@ public class SistemaAluguel implements Alugar<Veiculo> {
     }
 
     @Override
-    public boolean devolver(Aluguel aluguel) {
-        if(getAgencia().contratosAtivos().remove(aluguel)){
+    public boolean devolver(Devolucao devolucao) {
+        if(getAgencia().contratosAtivos().remove(devolucao.aluguel())){
+            getAgencia().contratosInativos().add(devolucao);
             return true;
         } else{
             return false;
