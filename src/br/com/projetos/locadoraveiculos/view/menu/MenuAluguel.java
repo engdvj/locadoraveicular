@@ -17,8 +17,10 @@ import static br.com.projetos.locadoraveiculos.view.commandLine.ConsoleUI.scanne
 
 public class MenuAluguel implements Apresentar {
     private final ControllerLocadora controller;
-    public MenuAluguel(ControllerLocadora controller,GerenciadorDeMenu gerenciador) {
+    private final GerenciadorDeMenu gerenciadorDeMenu;
+    public MenuAluguel(ControllerLocadora controller,GerenciadorDeMenu gerenciadorDeMenu) {
         this.controller = controller;
+        this.gerenciadorDeMenu = gerenciadorDeMenu;
     }
     @Override
     public void escolherOpcao() {
@@ -37,8 +39,9 @@ public class MenuAluguel implements Apresentar {
                     alugarVeiculo();
                     break;
                 case "2":
-                    devolverVeiculo();
-
+                    Devolucao devolucao = devolverVeiculo();
+                    gerenciadorDeMenu.setMenuAtual(new MenuPagamento(controller, gerenciadorDeMenu,devolucao));
+                    gerenciadorDeMenu.exibirMenuAtual();
                     break;
                 case "3":
                     //verInformacoes();
@@ -93,7 +96,7 @@ public class MenuAluguel implements Apresentar {
         System.out.println("Veículo alugado com sucesso para " + cliente.getNome() + " em " + dataEvento.format(DateTimeFormatter.ofPattern("dd/MM/yyyy - HH:mm")));
     }
 
-    private void devolverVeiculo() {
+    private Devolucao devolverVeiculo() {
         String nomeCliente = buscarCliente();
         Cliente cliente = controller.getSistemaDeAluguel().obterClientes().realizarBusca(nomeCliente);
         Aluguel aluguel;
@@ -138,8 +141,9 @@ public class MenuAluguel implements Apresentar {
 
         dataEvento = LocalDateTime.parse(data + " " + hora,formatado);
         Devolucao devolucao = new Devolucao (aluguel,dataEvento);
-        controller.getSistemaDeAluguel().devolver(aluguel);
+        controller.getSistemaDeAluguel().devolver(devolucao);
         System.out.println(devolucao);
+        return devolucao;
     }
     private String buscarCliente() {
         Util.listar("Clientes Cadastados", controller.getSistemaDeAluguel().obterClientes().obterLista());

@@ -3,6 +3,7 @@ import br.com.projetos.locadoraveiculos.model.eventos.Aluguel;
 import br.com.projetos.locadoraveiculos.model.entidades.agencia.Agencia;
 import br.com.projetos.locadoraveiculos.model.entidades.clientes.Cliente;
 import br.com.projetos.locadoraveiculos.model.entidades.veiculo.Veiculo;
+import br.com.projetos.locadoraveiculos.model.eventos.Devolucao;
 
 import java.util.Set;
 
@@ -14,5 +15,5 @@ public interface Alugar<T>{
     Aluguel buscarAluguel(Cliente cliente, String placa) ;
     Set<Aluguel> obterContratosCliente(Cliente cliente);
     boolean emprestar(Aluguel aluguel);
-    boolean devolver(Aluguel aluguel);
+    boolean devolver(Devolucao devolucao);
 }
