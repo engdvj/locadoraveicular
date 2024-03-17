@@ -12,7 +12,7 @@ import static br.com.projetos.locadoraveiculos.view.commandLine.ConsoleUI.scanne
 public class MenuVeiculos implements Apresentar {
     private final ControllerLocadora controller;
 
-    public MenuVeiculos(ControllerLocadora controller,GerenciadorDeMenu gerenciador) {
+    public MenuVeiculos(ControllerLocadora controller, GerenciadorDeMenu gerenciador) {
         this.controller = controller;
     }
 
@@ -56,69 +56,143 @@ public class MenuVeiculos implements Apresentar {
     }
 
     public void adicionarVeiculo() {
+
+        boolean validacaoMarca = true;
+        String marca = null;
         System.out.print("Digite marca do veículo: ");
-        String marca = scanner.nextLine();
+        do {
+            marca = scanner.nextLine();
+            if (Validacoes.validaNome(marca)) {
+                marca = marca.substring(0, 1).toUpperCase() + marca.substring(1).toLowerCase();
+                validacaoMarca = false;
+            } else {
+                System.out.println("A marca não pode ser vazio!");
+            }
+        } while (validacaoMarca);
 
+        boolean validacaoModelo = true;
+        String modelo = null;
         System.out.print("Digite o modelo do veículo: ");
-        String modelo = scanner.nextLine();
+        do {
+            modelo = scanner.nextLine();
+            if (Validacoes.validaNome(modelo)) {
+                modelo = modelo.substring(0, 1).toUpperCase() + modelo.substring(1).toLowerCase();
+                validacaoModelo = false;
+            } else {
+                System.out.println("Modelo não pode ser vazio!");
+            }
+        } while (validacaoModelo);
 
-        boolean validado = false;
-        String placa = "";
-        while (!validado) {
-            System.out.print("Digite a placa do veículo:");
+        boolean validacaoplaca = true;
+        String placa = null;
+        System.out.print("Digite a placa do veículo:");
+        do {
             placa = scanner.nextLine().toUpperCase();
             if (Validacoes.validarPlaca(placa)) {
                 System.out.println("Placa validada");
-                validado = true;
+                validacaoplaca = false;
             } else {
-            System.out.println("Placa invalida, digite no padrão MercoSul");}
-        }
-        System.out.println("\nQual o tamanho do veículo?");
-        System.out.println("""
-                Pequeno
-                Medio
-                SUV
-                """);
-        System.out.print("->");
-        String tamanhoVeiculo = scanner.nextLine().toUpperCase();
+                System.out.println("Placa invalida, digite no padrão MercoSul");
+            }
+        } while (validacaoplaca);
 
-        Util.Tamanho tamanho = Util.Tamanho.valueOf(tamanhoVeiculo);
-        System.out.println(tamanho);
-        controller.getSistemaDeAluguel().obterVeiculos().add(new Veiculo(marca, modelo, placa, tamanho));
+        System.out.println("\nQual o tamanho do veículo?");
+        Util.Tamanho tamanho = null;
+
+        while (true) {
+            System.out.println("""
+                    Pequeno
+                    Medio
+                    SUV
+                    """);
+            System.out.print("->");
+
+            String tamanhoVeiculo = scanner.nextLine().toUpperCase();
+            if (tamanhoVeiculo.equals("PEQUENO") || tamanhoVeiculo.equals("MEDIO") || tamanhoVeiculo.equals("SUV")) {
+                tamanho = Util.Tamanho.valueOf(tamanhoVeiculo);
+                break;
+            } else {
+                System.out.println("Digite um tamanho válido");
+            }
+        }
+            boolean adicionado = controller.getSistemaDeAluguel().obterVeiculos().add(new Veiculo(marca, modelo, placa, tamanho));
+        if (adicionado){
+            System.out.println("Veiculo adicionado com sucesso!");
+        }else{
+            System.out.println("Veiculo não pode ser adicionado, placa já existe!");
+        }
     }
+
 
     public void editarVeiculo() {
         System.out.println("Editar veiculo");
         Veiculo editarVeiculo = obterVeiculo();
         if (editarVeiculo != null) {
-            System.out.print("Digite a nova marca: ");
-            String marca = scanner.nextLine();
 
-            System.out.print("Digite o novo modelo: ");
-            String modelo = scanner.nextLine();
+            boolean validacaoMarca = true;
+            String novaMarca = null;
+            System.out.print("qual a nova marca do veículo: ");
+            do {
+                novaMarca = scanner.nextLine();
+                if (Validacoes.validaNome(novaMarca)) {
+                    novaMarca = novaMarca.substring(0, 1).toUpperCase() + novaMarca.substring(1).toLowerCase();
+                    validacaoMarca = false;
+                } else {
+                    System.out.println("A marca não pode estar vazia!");
+                }
+            } while (validacaoMarca);
 
-            String placa = "";
-            boolean validacao = false;
+            boolean validacaoModelo = true;
+            String novoModelo = null;
+            System.out.print("Digite o modelo do veículo: ");
+            do {
+                novoModelo = scanner.nextLine();
+                if (Validacoes.validaNome(novoModelo)) {
+                    novoModelo = novoModelo.substring(0, 1).toUpperCase() + novoModelo.substring(1).toLowerCase();
+                    validacaoModelo = false;
+                } else {
+                    System.out.println("Modelo não pode ser vazio!");
+                }
+            } while (validacaoModelo);
 
-            while (!validacao) {
-                System.out.print("Digite a nova placa: ");
-                placa = scanner.nextLine().toUpperCase();
-                if (Validacoes.validarPlaca(placa)) {
-                    validacao = true;
+            boolean validacaoplaca = true;
+            String novaPlaca = null;
+            System.out.print("Digite a placa do veículo:");
+            do {
+                novaPlaca = scanner.nextLine().toUpperCase();
+                if (Validacoes.validarPlaca(novaPlaca)) {
+                    System.out.println("Placa validada");
+                    validacaoplaca = false;
                 } else {
                     System.out.println("Placa invalida, digite no padrão MercoSul");
                 }
-            }
-            System.out.println("\nDigite o novo tamanho");
-            System.out.print("""
-                    Pequeno
-                    Medio
-                    Suv
-                    """);
-            String tamanhoEnum = scanner.nextLine().toUpperCase();
-            Util.Tamanho tamanho = Util.Tamanho.valueOf(tamanhoEnum);
+            } while (validacaoplaca);
 
-            controller.getSistemaDeAluguel().obterVeiculos().editar(editarVeiculo, new Veiculo(marca, modelo, placa, tamanho));
+            System.out.println("\nQual o tamanho do veículo?");
+            Util.Tamanho tamanho = null;
+
+            while (true) {
+                System.out.println("""
+                        Pequeno
+                        Medio
+                        SUV
+                        """);
+                System.out.print("->");
+
+                String tamanhoVeiculo = scanner.nextLine().toUpperCase();
+                if (tamanhoVeiculo.equals("PEQUENO") || tamanhoVeiculo.equals("MEDIO") || tamanhoVeiculo.equals("SUV")) {
+                    tamanho = Util.Tamanho.valueOf(tamanhoVeiculo);
+                    break;
+                } else {
+                    System.out.println("Digite um tamanho válido");
+                }
+            }
+
+            if (controller.getSistemaDeAluguel().obterVeiculos().editar(editarVeiculo, new Veiculo(novaMarca, novoModelo, novaPlaca, tamanho))){
+                System.out.println("Veiculo editado com sucesso");
+            }else{
+                System.out.println("Não foi possivel adicionar veiculo");
+            }
 
         } else {
             System.out.println("Veiculo não encontrado");
@@ -155,10 +229,4 @@ public class MenuVeiculos implements Apresentar {
         }
     }
 
-//    public void listarVeiculo() {
-//        System.out.println("\nLista de veiculos\n");
-//        for (Veiculo veiculo : controller.getSistemaDeAluguel().obterVeiculos().obterLista()) {
-//            System.out.println(veiculo.obterNomeOrganizado());
-//        }
-//    }
 }

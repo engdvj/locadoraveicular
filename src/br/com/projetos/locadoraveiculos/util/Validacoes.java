@@ -49,7 +49,7 @@ public class Validacoes {
         }
     }
     public static boolean validarPlaca(String placa) {
-        String regex = "^[A-Za-z]{3}[0-9][A-Za-z][0-9]{2}$";
+        String regex = "^[A-Za-z]{3}[0-9][A-Ja-j][0-9]{2}$";
 
         Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
 
