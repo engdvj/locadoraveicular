@@ -52,13 +52,16 @@ public class SistemaAluguel implements Alugar<Veiculo> {
         }
     }
 
-    public boolean emprestar(Veiculo veiculo) { return false; }
-
     @Override
     public boolean devolver(Aluguel aluguel) {
-        return false;
+        if(getAgencia().contratos().remove(aluguel)){
+            return true;
+        } else{
+            return false;
+        }
     }
 
+    @Override
     public Set<Aluguel> obterContratosCliente(Cliente cliente) {
         Set<Aluguel> contratosPorCliente = new HashSet<>();
         for (Aluguel aluguel : agencia.contratos()) {
@@ -67,5 +70,14 @@ public class SistemaAluguel implements Alugar<Veiculo> {
             }
         }
         return contratosPorCliente;
+    }
+    @Override
+    public Aluguel buscarAluguel(Cliente cliente, String placa) {
+        for (Aluguel aluguel : agencia.contratos()) {
+            if (aluguel.cliente().equals(cliente) && aluguel.veiculo().getPlaca().equals(placa)) {
+                return aluguel;
+            }
+        }
+        return null;
     }
 }

@@ -7,7 +7,7 @@ import br.com.projetos.locadoraveiculos.service.Lista;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public record Aluguel (Veiculo veiculo, Cliente cliente, LocalDateTime dataEvento) implements Lista {
+public record Aluguel (Veiculo veiculo, Cliente cliente, LocalDateTime dataAluguel) implements Lista {
 
     @Override
     public String obterNomeOrganizado() {
@@ -25,7 +25,7 @@ public record Aluguel (Veiculo veiculo, Cliente cliente, LocalDateTime dataEvent
                 .append(" - Documento: ")
                 .append(cliente.getDocumento()) // assegure-se de que este método esteja disponível em Cliente
                 .append("\nData do Evento: ")
-                .append(dataEvento.format(formatter)).append("\n\n")
+                .append(dataAluguel.format(formatter)).append("\n\n")
                 .toString();
     }
     @Override

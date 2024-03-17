@@ -11,6 +11,7 @@ public interface Alugar<T>{
     CRUD<Veiculo> obterVeiculosDisponiveis();
     CRUD<Veiculo> obterVeiculos();
     CRUD<Cliente> obterClientes();
+    Aluguel buscarAluguel(Cliente cliente, String placa) ;
     Set<Aluguel> obterContratosCliente(Cliente cliente);
     boolean emprestar(Aluguel aluguel);
     boolean devolver(Aluguel aluguel);
