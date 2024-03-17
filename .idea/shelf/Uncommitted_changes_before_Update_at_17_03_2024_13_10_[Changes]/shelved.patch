@@ -1,0 +1,462 @@
+Index: src/br/com/projetos/locadoraveiculos/view/menu/MenuVeiculos.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package br.com.projetos.locadoraveiculos.view.menu;\r\n\r\nimport br.com.projetos.locadoraveiculos.controller.locadora.ControllerLocadora;\r\nimport br.com.projetos.locadoraveiculos.model.entidades.veiculo.*;\r\nimport br.com.projetos.locadoraveiculos.service.Apresentar;\r\nimport br.com.projetos.locadoraveiculos.util.Util;\r\nimport br.com.projetos.locadoraveiculos.util.Validacoes;\r\n\r\nimport static br.com.projetos.locadoraveiculos.view.commandLine.App.scanner;\r\n\r\npublic class MenuVeiculos implements Apresentar {\r\n    private final ControllerLocadora controller;\r\n\r\n    public MenuVeiculos(ControllerLocadora controller) {\r\n        this.controller = controller;\r\n    }\r\n\r\n    @Override\r\n    public void escolherOpcao() {\r\n        boolean continuar = true;\r\n        while (continuar) {\r\n\r\n            System.out.println(\"\\nMenu Veiculo\\n\");\r\n\r\n            System.out.println(\"\"\"\r\n                    (1) - Adicionar veiculo\r\n                    (2) - Editar veiculo\r\n                    (3) - Apagar veiculo\r\n                    (4) - Pesquisar veiculo\r\n                    (5) - Voltar para o menu anterior\r\n                    \"\"\");\r\n\r\n            System.out.print(\"->\");\r\n            String opcao = scanner.nextLine();\r\n            switch (opcao) {\r\n                case \"1\":\r\n                    adicionarVeiculo();\r\n                    break;\r\n                case \"2\":\r\n                    editarVeiculo();\r\n                    break;\r\n                case \"3\":\r\n                    excluirVeiculo();\r\n                    break;\r\n                case \"4\":\r\n                    veiculoDetalhado();\r\n                    break;\r\n                case \"5\":\r\n                    continuar = false;\r\n                    break;\r\n                default:\r\n                    System.out.println(\"digite uma opção valida\");\r\n            }\r\n        }\r\n    }\r\n\r\n    public void adicionarVeiculo() {\r\n        System.out.print(\"Digite marca do veículo: \");\r\n        String marca = scanner.nextLine();\r\n\r\n        System.out.print(\"Digite o modelo do veículo: \");\r\n        String modelo = scanner.nextLine();\r\n\r\n        boolean validado = false;\r\n        String placa = \"\";\r\n        while (!validado) {\r\n            System.out.print(\"Digite a placa do veículo:\");\r\n            placa = scanner.nextLine().toUpperCase();\r\n            if (Validacoes.validarPlaca(placa)) {\r\n                System.out.println(\"Placa validada\");\r\n                validado = true;\r\n            } else {\r\n            System.out.println(\"Placa invalida, digite no padrão MercoSul\");}\r\n        }\r\n        System.out.println(\"\\nQual o tamanho do veículo?\");\r\n        System.out.println(\"\"\"\r\n                Pequeno\r\n                Medio\r\n                SUV\r\n                \"\"\");\r\n        System.out.print(\"->\");\r\n        String tamanhoVeiculo = scanner.nextLine().toUpperCase();\r\n\r\n        Util.Tamanho tamanho = Util.Tamanho.valueOf(tamanhoVeiculo);\r\n        System.out.println(tamanho);\r\n        controller.getSistemaDeAluguel().obterVeiculos().add(new Veiculo(marca, modelo, placa, tamanho));\r\n    }\r\n\r\n    public void editarVeiculo() {\r\n        System.out.println(\"Editar veiculo\");\r\n        Veiculo editarVeiculo = obterVeiculo();\r\n        if (editarVeiculo != null) {\r\n            System.out.print(\"Digite a nova marca: \");\r\n            String marca = scanner.nextLine();\r\n\r\n            System.out.print(\"Digite o novo modelo: \");\r\n            String modelo = scanner.nextLine();\r\n\r\n            String placa = \"\";\r\n            boolean validacao = false;\r\n\r\n            while (!validacao) {\r\n                System.out.print(\"Digite a nova placa: \");\r\n                placa = scanner.nextLine().toUpperCase();\r\n                if (Validacoes.validarPlaca(placa)) {\r\n                    validacao = true;\r\n                } else {\r\n                    System.out.println(\"Placa invalida, digite no padrão MercoSul\");\r\n                }\r\n            }\r\n            System.out.println(\"\\nDigite o novo tamanho\");\r\n            System.out.print(\"\"\"\r\n                    Pequeno\r\n                    Medio\r\n                    Suv\r\n                    \"\"\");\r\n            String tamanhoEnum = scanner.nextLine().toUpperCase();\r\n            Util.Tamanho tamanho = Util.Tamanho.valueOf(tamanhoEnum);\r\n\r\n            controller.getSistemaDeAluguel().obterVeiculos().editar(editarVeiculo, new Veiculo(marca, modelo, placa, tamanho));\r\n\r\n        } else {\r\n            System.out.println(\"Veiculo não encontrado\");\r\n        }\r\n\r\n    }\r\n\r\n    public void excluirVeiculo() {\r\n        Veiculo apagarVeiculo = obterVeiculo();\r\n        if (apagarVeiculo != null) {\r\n            controller.getSistemaDeAluguel().obterVeiculos().remover(apagarVeiculo);\r\n        } else {\r\n            System.out.println(\"Não foi possivel encontar o veiculo\");\r\n        }\r\n    }\r\n\r\n    public void veiculoDetalhado() {\r\n        Veiculo veiculo = obterVeiculo();\r\n        if (veiculo != null) {\r\n            System.out.println(veiculo);\r\n        } else {\r\n            System.out.println(\"Veiculo não encontrado\");\r\n        }\r\n    }\r\n\r\n    public Veiculo obterVeiculo() {\r\n        Util.listar(\"Veiculos\", controller.getSistemaDeAluguel().obterVeiculos().obterLista());\r\n        System.out.println(\"\\nDigite o nome do Veiculo:\");\r\n        String pesquisaVeiculo = scanner.nextLine();\r\n        if (!pesquisaVeiculo.isEmpty()) {\r\n            return controller.getSistemaDeAluguel().obterVeiculos().realizarBusca(pesquisaVeiculo);\r\n        } else {\r\n            return null;\r\n        }\r\n    }\r\n\r\n//    public void listarVeiculo() {\r\n//        System.out.println(\"\\nLista de veiculos\\n\");\r\n//        for (Veiculo veiculo : controller.getSistemaDeAluguel().obterVeiculos().obterLista()) {\r\n//            System.out.println(veiculo.obterNomeOrganizado());\r\n//        }\r\n//    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/br/com/projetos/locadoraveiculos/view/menu/MenuVeiculos.java b/src/br/com/projetos/locadoraveiculos/view/menu/MenuVeiculos.java
+--- a/src/br/com/projetos/locadoraveiculos/view/menu/MenuVeiculos.java	
++++ b/src/br/com/projetos/locadoraveiculos/view/menu/MenuVeiculos.java	
+@@ -1,11 +1,14 @@
+ package br.com.projetos.locadoraveiculos.view.menu;
+ 
+ import br.com.projetos.locadoraveiculos.controller.locadora.ControllerLocadora;
++import br.com.projetos.locadoraveiculos.model.entidades.clientes.ClientePF;
+ import br.com.projetos.locadoraveiculos.model.entidades.veiculo.*;
+ import br.com.projetos.locadoraveiculos.service.Apresentar;
+ import br.com.projetos.locadoraveiculos.util.Util;
+ import br.com.projetos.locadoraveiculos.util.Validacoes;
+ 
++import java.util.TreeSet;
++
+ import static br.com.projetos.locadoraveiculos.view.commandLine.App.scanner;
+ 
+ public class MenuVeiculos implements Apresentar {
+@@ -55,69 +58,144 @@
+     }
+ 
+     public void adicionarVeiculo() {
++
++        boolean validacaoMarca = true;
++        String marca = null;
+         System.out.print("Digite marca do veículo: ");
+-        String marca = scanner.nextLine();
++        do {
++            marca = scanner.nextLine();
++            if (Validacoes.validaNome(marca)) {
++                marca = marca.substring(0, 1).toUpperCase() + marca.substring(1).toLowerCase();
++                validacaoMarca = false;
++            } else {
++                System.out.println("A marca não pode ser vazio!");
++            }
++        } while (validacaoMarca);
+ 
++        boolean validacaoModelo = true;
++        String modelo = null;
+         System.out.print("Digite o modelo do veículo: ");
+-        String modelo = scanner.nextLine();
++        do {
++            modelo = scanner.nextLine();
++            if (Validacoes.validaNome(modelo)) {
++                modelo = modelo.substring(0, 1).toUpperCase() + modelo.substring(1).toLowerCase();
++                validacaoModelo = false;
++            } else {
++                System.out.println("Modelo não pode ser vazio!");
++            }
++        } while (validacaoModelo);
+ 
+-        boolean validado = false;
+-        String placa = "";
+-        while (!validado) {
+-            System.out.print("Digite a placa do veículo:");
++        boolean validacaoplaca = true;
++        String placa = null;
++        System.out.print("Digite a placa do veículo:");
++        do {
+             placa = scanner.nextLine().toUpperCase();
+             if (Validacoes.validarPlaca(placa)) {
+                 System.out.println("Placa validada");
+-                validado = true;
++                validacaoplaca = false;
+             } else {
+-            System.out.println("Placa invalida, digite no padrão MercoSul");}
+-        }
++                System.out.println("Placa invalida, digite no padrão MercoSul");
++            }
++        } while (validacaoplaca);
++
+         System.out.println("\nQual o tamanho do veículo?");
+-        System.out.println("""
+-                Pequeno
+-                Medio
+-                SUV
+-                """);
+-        System.out.print("->");
+-        String tamanhoVeiculo = scanner.nextLine().toUpperCase();
+-
+-        Util.Tamanho tamanho = Util.Tamanho.valueOf(tamanhoVeiculo);
+-        System.out.println(tamanho);
+-        controller.getSistemaDeAluguel().obterVeiculos().add(new Veiculo(marca, modelo, placa, tamanho));
++        Util.Tamanho tamanho = null;
++
++        while (true) {
++            System.out.println("""
++                    Pequeno
++                    Medio
++                    SUV
++                    """);
++            System.out.print("->");
++
++            String tamanhoVeiculo = scanner.nextLine().toUpperCase();
++            if (tamanhoVeiculo.equals("PEQUENO") || tamanhoVeiculo.equals("MEDIO") || tamanhoVeiculo.equals("SUV")) {
++                tamanho = Util.Tamanho.valueOf(tamanhoVeiculo);
++                break;
++            } else {
++                System.out.println("Digite um tamanho válido");
++            }
++        }
++        boolean adicionado = controller.getSistemaDeAluguel().obterVeiculos().add(new Veiculo(marca, modelo, placa, tamanho));
++        if (adicionado) {
++            System.out.println("Veiculo Adicionado com Sucesso!\n");
++        } else {
++            System.out.println("Não foi póssivel criar veiculo, a placa do veiculo já existe!!\n");
++        }
+     }
++
+ 
+     public void editarVeiculo() {
+         System.out.println("Editar veiculo");
+         Veiculo editarVeiculo = obterVeiculo();
++
+         if (editarVeiculo != null) {
+-            System.out.print("Digite a nova marca: ");
+-            String marca = scanner.nextLine();
+ 
+-            System.out.print("Digite o novo modelo: ");
+-            String modelo = scanner.nextLine();
++            boolean validacaoMarca = true;
++            String marca = null;
++            System.out.print("Digite a nova marca do veículo: ");
++            do {
++                marca = scanner.nextLine();
++                if (Validacoes.validaNome(marca)) {
++                    marca = marca.substring(0, 1).toUpperCase() + marca.substring(1).toLowerCase();
++                    validacaoMarca = false;
++                } else {
++                    System.out.println("A marca não pode ser vazio!");
++                }
++            } while (validacaoMarca);
+ 
+-            String placa = "";
+-            boolean validacao = false;
++            boolean validacaoModelo = true;
++            String modelo = null;
++            System.out.print("Digite o novo modelo do veículo: ");
++            do {
++                modelo = scanner.nextLine();
++                if (Validacoes.validaNome(modelo)) {
++                    modelo = modelo.substring(0, 1).toUpperCase() + modelo.substring(1).toLowerCase();
++                    validacaoModelo = false;
++                } else {
++                    System.out.println("Modelo não pode ser vazio!");
++                }
++            } while (validacaoModelo);
+ 
+-            while (!validacao) {
+-                System.out.print("Digite a nova placa: ");
++            boolean validacaoplaca = true;
++            String placa = null;
++            System.out.print("Digite a nova placa do veículo:");
++            do {
+                 placa = scanner.nextLine().toUpperCase();
+                 if (Validacoes.validarPlaca(placa)) {
+-                    validacao = true;
++                    System.out.println("Placa validada");
++                    validacaoplaca = false;
+                 } else {
+                     System.out.println("Placa invalida, digite no padrão MercoSul");
+                 }
+-            }
+-            System.out.println("\nDigite o novo tamanho");
+-            System.out.print("""
+-                    Pequeno
+-                    Medio
+-                    Suv
+-                    """);
+-            String tamanhoEnum = scanner.nextLine().toUpperCase();
+-            Util.Tamanho tamanho = Util.Tamanho.valueOf(tamanhoEnum);
++            } while (validacaoplaca);
++
++            System.out.println("\nDigite o novo tamanho do veículo?");
++            Util.Tamanho tamanho;
++
++            while (true) {
++                System.out.println("""
++                        Pequeno
++                        Medio
++                        SUV
++                        """);
++                System.out.print("->");
+ 
+-            controller.getSistemaDeAluguel().obterVeiculos().editar(editarVeiculo, new Veiculo(marca, modelo, placa, tamanho));
++                String tamanhoVeiculo = scanner.nextLine().toUpperCase();
++                if (tamanhoVeiculo.equals("PEQUENO") || tamanhoVeiculo.equals("MEDIO") || tamanhoVeiculo.equals("SUV")) {
++                    tamanho = Util.Tamanho.valueOf(tamanhoVeiculo);
++                    break;
++                } else {
++                    System.out.println("Digite um tamanho válido");
++                }
++            }
++            if (controller.getSistemaDeAluguel().obterVeiculos().editar(editarVeiculo, new Veiculo(marca, modelo, placa, tamanho))) {
++                System.out.println("Veiculo adicionado com sucesso");
++            } else {
++                System.out.println("Erro");
++            }
++
+ 
+         } else {
+             System.out.println("Veiculo não encontrado");
+@@ -147,17 +225,12 @@
+         Util.listar("Veiculos", controller.getSistemaDeAluguel().obterVeiculos().obterLista());
+         System.out.println("\nDigite o nome do Veiculo:");
+         String pesquisaVeiculo = scanner.nextLine();
++
+         if (!pesquisaVeiculo.isEmpty()) {
+             return controller.getSistemaDeAluguel().obterVeiculos().realizarBusca(pesquisaVeiculo);
++
+         } else {
+             return null;
+         }
+     }
+-
+-//    public void listarVeiculo() {
+-//        System.out.println("\nLista de veiculos\n");
+-//        for (Veiculo veiculo : controller.getSistemaDeAluguel().obterVeiculos().obterLista()) {
+-//            System.out.println(veiculo.obterNomeOrganizado());
+-//        }
+-//    }
+ }
+Index: src/br/com/projetos/locadoraveiculos/model/entidades/veiculo/Veiculo.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package br.com.projetos.locadoraveiculos.model.entidades.veiculo;\r\n\r\nimport br.com.projetos.locadoraveiculos.service.Listar;\r\nimport br.com.projetos.locadoraveiculos.util.Util.Tamanho;\r\n\r\npublic class Veiculo implements Listar {\r\n    private String marca;\r\n    private String modelo;\r\n    private String placa;\r\n    private Tamanho tamanhoVeiculo;\r\n\r\n    public Veiculo(String marca, String modelo, String placa, Tamanho tamanhoVeiculo) {\r\n        this.marca = marca;\r\n        this.modelo = modelo;\r\n        this.placa = placa;\r\n        this.tamanhoVeiculo = tamanhoVeiculo;\r\n    }\r\n\r\n    public String getMarca() {\r\n        return this.marca;\r\n    }\r\n\r\n    public String getModelo() {\r\n        return modelo;\r\n    }\r\n\r\n    public String getPlaca() {\r\n        return placa;\r\n    }\r\n\r\n    public Tamanho getTamanhoVeiculo() {\r\n        return tamanhoVeiculo;\r\n    }\r\n\r\n    public void setMarca(String marca) {\r\n        this.marca = marca;\r\n    }\r\n\r\n    public void setModelo(String modelo) {\r\n        this.modelo = modelo;\r\n    }\r\n\r\n    public void setPlaca(String placa) {\r\n        this.placa = placa;\r\n    }\r\n\r\n    public void setTamanhoVeiculo(Tamanho tamanhoVeiculo) {\r\n        this.tamanhoVeiculo = tamanhoVeiculo;\r\n    }\r\n\r\n    public String obterNomeOrganizado(){\r\n        StringBuilder sb = new StringBuilder();\r\n        sb.append(tamanhoVeiculo).append(\" - \").append(modelo);\r\n        return sb.toString();\r\n    }\r\n    @Override\r\n    public String toString() {\r\n        return \"Marca: \" + marca + \"\\n\" +\r\n               \"Modelo: \" + modelo + \"\\n\" +\r\n               \"Placa: \" + placa + \"\\n\" +\r\n               \"Tamanho: \" + tamanhoVeiculo;\r\n    }\r\n\r\n    @Override\r\n    public boolean equals(Object o) {\r\n        if (this == o) return true;\r\n        if (!(o instanceof Veiculo)) return false;\r\n        Veiculo veiculo = (Veiculo) o;\r\n        return placa.equals(veiculo.placa);\r\n    }\r\n\r\n    @Override\r\n    public int hashCode() {\r\n        return placa.hashCode();\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/br/com/projetos/locadoraveiculos/model/entidades/veiculo/Veiculo.java b/src/br/com/projetos/locadoraveiculos/model/entidades/veiculo/Veiculo.java
+--- a/src/br/com/projetos/locadoraveiculos/model/entidades/veiculo/Veiculo.java	
++++ b/src/br/com/projetos/locadoraveiculos/model/entidades/veiculo/Veiculo.java	
+@@ -48,11 +48,12 @@
+         this.tamanhoVeiculo = tamanhoVeiculo;
+     }
+ 
+-    public String obterNomeOrganizado(){
++    public String obterNomeOrganizado() {
+         StringBuilder sb = new StringBuilder();
+         sb.append(tamanhoVeiculo).append(" - ").append(modelo);
+         return sb.toString();
+     }
++
+     @Override
+     public String toString() {
+         return "Marca: " + marca + "\n" +
+@@ -73,4 +74,5 @@
+     public int hashCode() {
+         return placa.hashCode();
+     }
++
+ }
+Index: src/br/com/projetos/locadoraveiculos/controller/sistemas/SistemaVeiculos.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package br.com.projetos.locadoraveiculos.controller.sistemas;\r\n\r\nimport br.com.projetos.locadoraveiculos.model.entidades.veiculo.Veiculo;\r\nimport br.com.projetos.locadoraveiculos.service.CRUD;\r\nimport br.com.projetos.locadoraveiculos.util.Util;\r\nimport br.com.projetos.locadoraveiculos.util.Validacoes;\r\n\r\nimport java.util.Comparator;\r\nimport java.util.HashSet;\r\nimport java.util.TreeSet;\r\n\r\n\r\npublic class SistemaVeiculos implements CRUD<Veiculo> {\r\n    private HashSet<Veiculo> veiculos;\r\n    public SistemaVeiculos(HashSet<Veiculo> veiculos) {\r\n        this.veiculos = veiculos;\r\n    }\r\n\r\n    @Override\r\n    public boolean add(Veiculo veiculo) {\r\n        veiculos.add(veiculo);\r\n        return true;\r\n    }\r\n\r\n    @Override\r\n    public boolean editar(Veiculo veiculoAnterior, Veiculo veiculoNovo) {\r\n        veiculoAnterior.setMarca(veiculoNovo.getMarca());\r\n        veiculoAnterior.setModelo(veiculoNovo.getModelo());\r\n        veiculoAnterior.setPlaca(veiculoNovo.getPlaca());\r\n        veiculoAnterior.setTamanhoVeiculo(veiculoNovo.getTamanhoVeiculo());\r\n        return false;\r\n    }\r\n\r\n    @Override\r\n    public Veiculo realizarBusca(String nome) {\r\n        if(Validacoes.validaNome(nome)) {\r\n            nome = nome.substring(0, 1).toUpperCase() + nome.substring(1).toLowerCase();\r\n            for (Veiculo veiculo : veiculos) {\r\n                if (veiculo.getModelo().contains(nome)) {\r\n                    return veiculo;\r\n                }\r\n            }\r\n        }\r\n        throw new IllegalStateException (\"Veículo não encontrado!\");\r\n    }\r\n    @Override\r\n    public boolean remover(Veiculo veiculo) {\r\n        veiculos.remove(veiculo);\r\n        return false;\r\n    }\r\n    @Override\r\n    public TreeSet<Veiculo> obterLista() {\r\n        return Util.ordenar(veiculos, Comparator.comparing(Veiculo::getTamanhoVeiculo).thenComparing(Veiculo::obterNomeOrganizado));\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/br/com/projetos/locadoraveiculos/controller/sistemas/SistemaVeiculos.java b/src/br/com/projetos/locadoraveiculos/controller/sistemas/SistemaVeiculos.java
+--- a/src/br/com/projetos/locadoraveiculos/controller/sistemas/SistemaVeiculos.java	
++++ b/src/br/com/projetos/locadoraveiculos/controller/sistemas/SistemaVeiculos.java	
+@@ -12,6 +12,7 @@
+ 
+ public class SistemaVeiculos implements CRUD<Veiculo> {
+     private HashSet<Veiculo> veiculos;
++
+     public SistemaVeiculos(HashSet<Veiculo> veiculos) {
+         this.veiculos = veiculos;
+     }
+@@ -33,21 +34,25 @@
+ 
+     @Override
+     public Veiculo realizarBusca(String nome) {
+-        if(Validacoes.validaNome(nome)) {
+-            nome = nome.substring(0, 1).toUpperCase() + nome.substring(1).toLowerCase();
++        if (Validacoes.validaNome(nome)) {
++            nome = nome.toUpperCase();
+             for (Veiculo veiculo : veiculos) {
+-                if (veiculo.getModelo().contains(nome)) {
++                if (veiculo.getPlaca().contains(nome)) {
+                     return veiculo;
++                } else {
++                    return null;
+                 }
+             }
+         }
+-        throw new IllegalStateException ("Veículo não encontrado!");
++        throw new IllegalStateException("Veículo não encontrado!");
+     }
++
+     @Override
+     public boolean remover(Veiculo veiculo) {
+         veiculos.remove(veiculo);
+         return false;
+     }
++
+     @Override
+     public TreeSet<Veiculo> obterLista() {
+         return Util.ordenar(veiculos, Comparator.comparing(Veiculo::getTamanhoVeiculo).thenComparing(Veiculo::obterNomeOrganizado));
+Index: src/br/com/projetos/locadoraveiculos/util/Util.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package br.com.projetos.locadoraveiculos.util;\r\n\r\nimport br.com.projetos.locadoraveiculos.service.Listar;\r\n\r\n\r\nimport java.util.*;\r\n\r\npublic class Util {\r\n    public enum Tamanho {\r\n        PEQUENO,\r\n        MEDIO,\r\n        SUV\r\n    }\r\n    public static <T> TreeSet<T> ordenar(Set<T> objetos, Comparator<T> comparador) {\r\n        TreeSet<T> ordenado = new TreeSet<>(comparador);\r\n        ordenado.addAll(objetos);\r\n        return ordenado;\r\n    }\r\n\r\n    public static <T> void listar(String mensagem, Set<? extends Listar> conjunto) {\r\n        System.out.println(\"Lista de \" + mensagem + \":\");\r\n        for (Listar elemento : conjunto) {\r\n            System.out.println(elemento.obterNomeOrganizado());\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/br/com/projetos/locadoraveiculos/util/Util.java b/src/br/com/projetos/locadoraveiculos/util/Util.java
+--- a/src/br/com/projetos/locadoraveiculos/util/Util.java	
++++ b/src/br/com/projetos/locadoraveiculos/util/Util.java	
+@@ -11,6 +11,7 @@
+         MEDIO,
+         SUV
+     }
++
+     public static <T> TreeSet<T> ordenar(Set<T> objetos, Comparator<T> comparador) {
+         TreeSet<T> ordenado = new TreeSet<>(comparador);
+         ordenado.addAll(objetos);
+Index: src/br/com/projetos/locadoraveiculos/util/Validacoes.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package br.com.projetos.locadoraveiculos.util;\r\n\r\nimport java.time.LocalDateTime;\r\nimport java.time.format.DateTimeFormatter;\r\nimport java.time.format.DateTimeParseException;\r\nimport java.util.regex.Matcher;\r\nimport java.util.regex.Pattern;\r\n\r\n\r\npublic class Validacoes {\r\n    public static boolean validaNome(String nome) {\r\n        if (nome != null && !nome.isEmpty()) {\r\n            return true;\r\n        } else {\r\n            return false;\r\n        }\r\n    }\r\n\r\n    public static boolean validarDocumento(String documento, String tipo) {\r\n        if (documento.length() == 11 && tipo == \"cpf\") {\r\n            return true;\r\n        }\r\n        if (documento.length() == 14 && tipo == \"cnpj\") {\r\n            return true;\r\n        } else {\r\n            return false;\r\n        }\r\n    }\r\n\r\n    public static boolean validarData(String data) {\r\n        try {\r\n            DateTimeFormatter formatado = DateTimeFormatter.ofPattern(\"dd/MM/yyyy HH:mm\");\r\n            LocalDateTime.parse(data + \" 00:00\", formatado);\r\n            System.out.println(\"Data Validada\");\r\n            return true;\r\n        } catch (DateTimeParseException e) {\r\n            return false;\r\n        }\r\n    }\r\n\r\n    public static boolean validarHora(String hora) {\r\n        try {\r\n            DateTimeFormatter formatado = DateTimeFormatter.ofPattern(\"dd/MM/yyyy HH:mm\");\r\n            LocalDateTime.parse(\"01/01/2024 \" + hora, formatado);\r\n            System.out.println(\"Hora validada.\");\r\n            return true;\r\n        } catch (DateTimeParseException e) {\r\n            return false;\r\n        }\r\n    }\r\n    public static boolean validarPlaca(String placa) {\r\n        String regex = \"^[A-Za-z]{3}[0-9][A-Za-z][0-9]{2}$\";\r\n\r\n        Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);\r\n\r\n        Matcher matcher = pattern.matcher(placa);\r\n\r\n        return matcher.matches();\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/br/com/projetos/locadoraveiculos/util/Validacoes.java b/src/br/com/projetos/locadoraveiculos/util/Validacoes.java
+--- a/src/br/com/projetos/locadoraveiculos/util/Validacoes.java	
++++ b/src/br/com/projetos/locadoraveiculos/util/Validacoes.java	
+@@ -1,8 +1,12 @@
+ package br.com.projetos.locadoraveiculos.util;
+ 
++import br.com.projetos.locadoraveiculos.model.entidades.veiculo.Veiculo;
++
+ import java.time.LocalDateTime;
+ import java.time.format.DateTimeFormatter;
+ import java.time.format.DateTimeParseException;
++
++import java.util.TreeSet;
+ import java.util.regex.Matcher;
+ import java.util.regex.Pattern;
+ 
+@@ -48,6 +52,7 @@
+             return false;
+         }
+     }
++
+     public static boolean validarPlaca(String placa) {
+         String regex = "^[A-Za-z]{3}[0-9][A-Za-z][0-9]{2}$";
+ 
+@@ -57,4 +62,5 @@
+ 
+         return matcher.matches();
+     }
++
+ }
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"f12b4e23-557c-4220-9f76-0a4dd7553fc5\" name=\"Changes\" comment=\"\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/controller/sistemas/SistemaClientes.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/controller/sistemas/SistemaClientes.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/controller/sistemas/SistemaVeiculos.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/controller/sistemas/SistemaVeiculos.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/model/entidades/clientes/Cliente.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/model/entidades/clientes/Cliente.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/model/entidades/veiculo/Veiculo.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/model/entidades/veiculo/Veiculo.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/model/eventos/Aluguel.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/model/eventos/Aluguel.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/model/eventos/Devolucao.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/model/eventos/Devolucao.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/service/CRUD.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/service/CRUD.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/service/Lista.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/service/Listar.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/util/Util.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/util/Util.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/view/menu/MenuAluguel.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/view/menu/MenuAluguel.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/view/menu/MenuClientes.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/view/menu/MenuClientes.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Interface\" />\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"main\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 8\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2dPWBW1udWtcinh8NCPRG7aO71C\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"Application.Menu.executor\": \"Run\",\r\n    \"Application.Run.executor\": \"Run\",\r\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"SHARE_PROJECT_CONFIGURATION_FILES\": \"true\",\r\n    \"git-widget-placeholder\": \"main\",\r\n    \"kotlin-language-version-configured\": \"true\",\r\n    \"last_opened_file_path\": \"C:/Users/Davi Costa/Desktop/Projetos_ADA/catalogo-IMDB\",\r\n    \"node.js.selected.package.tslint\": \"(autodetect)\"\r\n  }\r\n}]]></component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyClassDialog.RECENTS_KEY\">\r\n      <recent name=\"br.com.projetos.locadoraveiculos.model.eventos\" />\r\n      <recent name=\"br.com.projetos.locadoraveiculos.service\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"Run\" type=\"Application\" factoryName=\"Application\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"br.com.projetos.locadoraveiculos.view.commandLine.App\" />\r\n      <module name=\"locadoraveicular\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"f12b4e23-557c-4220-9f76-0a4dd7553fc5\" name=\"Changes\" comment=\"\" />\r\n      <created>1709910134962</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1709910134962</updated>\r\n    </task>\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"XDebuggerManager\">\r\n    <pin-to-top-manager>\r\n      <pinned-members>\r\n        <PinnedItemInfo parentTag=\"br.com.projetos.locadoraveiculos.controller.locadora.ControllerLocadora\" memberName=\"sistemDeAgencias\" />\r\n      </pinned-members>\r\n    </pin-to-top-manager>\r\n    <watches-manager>\r\n      <configuration name=\"Application\">\r\n        <watch expression=\"controller.sistemDeAgencias\" />\r\n        <watch expression=\"controller.sistemDeAgencias\" />\r\n      </configuration>\r\n    </watches-manager>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -6,17 +6,12 @@
+   <component name="ChangeListManager">
+     <list default="true" id="f12b4e23-557c-4220-9f76-0a4dd7553fc5" name="Changes" comment="">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/controller/sistemas/SistemaClientes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/controller/sistemas/SistemaClientes.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/controller/sistemas/SistemaVeiculos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/controller/sistemas/SistemaVeiculos.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/model/entidades/clientes/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/model/entidades/clientes/Cliente.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/model/entidades/veiculo/Veiculo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/model/entidades/veiculo/Veiculo.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/model/eventos/Aluguel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/model/eventos/Aluguel.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/model/eventos/Devolucao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/model/eventos/Devolucao.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/service/CRUD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/service/CRUD.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/service/Lista.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/service/Listar.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/util/Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/util/Util.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/view/menu/MenuAluguel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/view/menu/MenuAluguel.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/view/menu/MenuClientes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/view/menu/MenuClientes.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/util/Validacoes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/util/Validacoes.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/view/commandLine/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/view/commandLine/App.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/view/menu/MenuVeiculos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/view/menu/MenuVeiculos.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -26,8 +21,8 @@
+   <component name="FileTemplateManagerImpl">
+     <option name="RECENT_TEMPLATES">
+       <list>
+-        <option value="Interface" />
+         <option value="Class" />
++        <option value="Interface" />
+       </list>
+     </option>
+   </component>
+@@ -60,7 +55,11 @@
+     "git-widget-placeholder": "main",
+     "kotlin-language-version-configured": "true",
+     "last_opened_file_path": "C:/Users/Davi Costa/Desktop/Projetos_ADA/catalogo-IMDB",
+-    "node.js.selected.package.tslint": "(autodetect)"
++    "node.js.detected.package.eslint": "true",
++    "node.js.selected.package.eslint": "(autodetect)",
++    "node.js.selected.package.tslint": "(autodetect)",
++    "nodejs_package_manager_path": "npm",
++    "vue.rearranger.settings.migration": "true"
+   }
+ }]]></component>
+   <component name="RecentsManager">
+@@ -77,6 +76,13 @@
+         <option name="Make" enabled="true" />
+       </method>
+     </configuration>
++  </component>
++  <component name="SharedIndexes">
++    <attachedChunks>
++      <set>
++        <option value="jdk-17.0.10-corretto-17.0.10-f644763e9732-24fca987" />
++      </set>
++    </attachedChunks>
+   </component>
+   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+   <component name="TaskManager">
+@@ -86,8 +92,13 @@
+       <option name="number" value="Default" />
+       <option name="presentableId" value="Default" />
+       <updated>1709910134962</updated>
++      <workItem from="1710678308261" duration="2133000" />
++      <workItem from="1710680451027" duration="7110000" />
+     </task>
+     <servers />
++  </component>
++  <component name="TypeScriptGeneratedFilesManager">
++    <option name="version" value="3" />
+   </component>
+   <component name="Vcs.Log.Tabs.Properties">
+     <option name="TAB_STATES">
+Index: src/br/com/projetos/locadoraveiculos/view/commandLine/App.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package br.com.projetos.locadoraveiculos.view.commandLine;\r\n\r\nimport br.com.projetos.locadoraveiculos.controller.locadora.*;\r\nimport br.com.projetos.locadoraveiculos.controller.sistemas.*;\r\nimport br.com.projetos.locadoraveiculos.model.eventos.Aluguel;\r\nimport br.com.projetos.locadoraveiculos.model.entidades.agencia.Agencia;\r\nimport br.com.projetos.locadoraveiculos.model.entidades.clientes.*;\r\nimport br.com.projetos.locadoraveiculos.model.entidades.veiculo.*;\r\nimport br.com.projetos.locadoraveiculos.service.*;\r\nimport br.com.projetos.locadoraveiculos.util.Util;\r\nimport br.com.projetos.locadoraveiculos.view.menu.MenuInicial;\r\n\r\nimport java.time.*;\r\n\r\nimport java.util.*;\r\n\r\n\r\npublic class App {\r\n    public static Apresentar menu;\r\n    public static final Scanner scanner = new Scanner(System.in);\r\n\r\n\r\n    public App(ControllerLocadora controllerLocadora) {\r\n        menu = new MenuInicial(controllerLocadora);\r\n    }\r\n\r\n    public void run() {\r\n        menu.escolherOpcao();\r\n    }\r\n\r\n    public static HashSet<Veiculo> loadSampleVeiculos() {\r\n        HashSet<Veiculo> veiculos = new HashSet<>();\r\n        veiculos.add(new Veiculo(\"Ford\", \"Focus\", \"ABC1D23\", Util.Tamanho.MEDIO));\r\n        veiculos.add(new Veiculo(\"Volkswagen\", \"Jetta\", \"XYZ9A87\", Util.Tamanho.SUV));\r\n        veiculos.add(new Veiculo(\"Chevrolet\", \"Cruze\", \"DEF2B45\", Util.Tamanho.PEQUENO));\r\n        veiculos.add(new Veiculo(\"Fiat\", \"Toro\", \"QWE6C78\", Util.Tamanho.PEQUENO));\r\n        veiculos.add(new Veiculo(\"Honda\", \"Civic\", \"FHT7F89\", Util.Tamanho.MEDIO));\r\n        veiculos.add(new Veiculo(\"Toyota\", \"Corolla\", \"DWX8H23\", Util.Tamanho.MEDIO));\r\n        veiculos.add(new Veiculo(\"Renault\", \"Duster\", \"DWX8H27\", Util.Tamanho.SUV));\r\n        return veiculos;\r\n    }\r\n\r\n    public static HashSet<Cliente> loadSampleClientes() {\r\n        HashSet<Cliente> clientes = new HashSet<>();\r\n        clientes.add(new ClientePF(\"Caio Brito\", \"12345678910\"));\r\n        clientes.add(new ClientePF(\"Ingrid Gomes\", \"32165498711\"));\r\n        clientes.add(new ClientePJ(\"COCA COLA\", \"45997418001710\"));\r\n        clientes.add(new ClientePJ(\"PEPSICO DO BRASIL\", \"31565104002030\"));\r\n        return clientes;\r\n    }\r\n    public static HashSet<Aluguel> loadSampleContratos() {\r\n        HashSet<Veiculo> veiculos = loadSampleVeiculos();\r\n        HashSet<Cliente> clientes = loadSampleClientes();\r\n\r\n        HashSet<Aluguel> contratos = new HashSet<>();\r\n        Iterator<Veiculo> veiculoIterator = veiculos.iterator();\r\n        Iterator<Cliente> clienteIterator = clientes.iterator();\r\n\r\n        int index = 0;\r\n        while (veiculoIterator.hasNext() && clienteIterator.hasNext() && index < veiculos.size() && index < clientes.size()) {\r\n            LocalDateTime dataEvento = LocalDateTime.of(2024, Month.MARCH, 10 + index, 10 + (index % 4), 0);\r\n            contratos.add(new Aluguel(veiculoIterator.next(), clienteIterator.next(), dataEvento));\r\n            index++;\r\n        }\r\n        System.out.println(contratos);\r\n        return contratos;\r\n    }\r\n    public static Agencia loadSampleAgencia(){\r\n        Agencia agencia = new Agencia(\"Dois Irmãos\", \"Rua Duque de Caxias\", LocalTime.of(9, 0), LocalTime.of(18, 0),loadSampleContratos());\r\n        return agencia;\r\n    }\r\n\r\n    public static void main(String[] args) {\r\n        Agencia agencia = loadSampleAgencia();\r\n        CRUD<Cliente> sistemaClientes = new SistemaClientes(loadSampleClientes());\r\n        CRUD<Veiculo> sistemaVeiculos = new SistemaVeiculos(loadSampleVeiculos());\r\n\r\n        Alugar sistemaDeAluguel = new SistemaAluguel(agencia, sistemaVeiculos, sistemaClientes);\r\n\r\n        ControllerLocadora controllerLocadora = new ControllerLocadora(sistemaDeAluguel);\r\n\r\n        App cliApp = new App(controllerLocadora);\r\n\r\n        cliApp.run();\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/br/com/projetos/locadoraveiculos/view/commandLine/App.java b/src/br/com/projetos/locadoraveiculos/view/commandLine/App.java
+--- a/src/br/com/projetos/locadoraveiculos/view/commandLine/App.java	
++++ b/src/br/com/projetos/locadoraveiculos/view/commandLine/App.java	
+@@ -37,6 +37,7 @@
+         veiculos.add(new Veiculo("Honda", "Civic", "FHT7F89", Util.Tamanho.MEDIO));
+         veiculos.add(new Veiculo("Toyota", "Corolla", "DWX8H23", Util.Tamanho.MEDIO));
+         veiculos.add(new Veiculo("Renault", "Duster", "DWX8H27", Util.Tamanho.SUV));
++        veiculos.add(new Veiculo("Volkswagen", "Polo", "EFA8I61", Util.Tamanho.PEQUENO));
+         return veiculos;
+     }
+ 

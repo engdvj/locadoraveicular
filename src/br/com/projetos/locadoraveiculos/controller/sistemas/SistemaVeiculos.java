@@ -36,12 +36,12 @@ public class SistemaVeiculos implements CRUD<Veiculo> {
         if(Validacoes.validaNome(nome)) {
             nome = nome.substring(0, 1).toUpperCase() + nome.substring(1).toLowerCase();
             for (Veiculo veiculo : veiculos) {
-                if (veiculo.getModelo().contains(nome)) {
+                if (veiculo.getModelo().equalsIgnoreCase(nome)) {
                     return veiculo;
                 }
             }
         }
-        throw new IllegalStateException ("Veículo não encontrado!");
+        return null;
     }
     @Override
     public boolean remover(Veiculo veiculo) {
