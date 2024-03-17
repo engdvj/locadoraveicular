@@ -7,9 +7,18 @@ import java.util.*;
 
 public class Util {
     public enum Tamanho {
-        PEQUENO,
-        MEDIO,
-        SUV
+        PEQUENO(100),
+        MEDIO(150),
+        SUV(200);
+
+        private final double valor;
+
+        Tamanho(double valor){
+            this.valor = valor;
+        }
+        public double getValor(){
+            return valor;
+        }
     }
     public static <T> TreeSet<T> ordenar(Set<T> objetos, Comparator<T> comparador) {
         TreeSet<T> ordenado = new TreeSet<>(comparador);
