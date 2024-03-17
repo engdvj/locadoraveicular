@@ -13,12 +13,11 @@ import java.time.LocalDateTime;
 import java.time.format.*;
 import java.util.Set;
 
-
-import static br.com.projetos.locadoraveiculos.view.commandLine.App.*;
+import static br.com.projetos.locadoraveiculos.view.commandLine.ConsoleUI.scanner;
 
 public class MenuAluguel implements Apresentar {
     private final ControllerLocadora controller;
-    public MenuAluguel(ControllerLocadora controller) {
+    public MenuAluguel(ControllerLocadora controller,GerenciadorDeMenu gerenciador) {
         this.controller = controller;
     }
     @Override

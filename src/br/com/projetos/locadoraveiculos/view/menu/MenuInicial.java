@@ -3,20 +3,25 @@ package br.com.projetos.locadoraveiculos.view.menu;
 import br.com.projetos.locadoraveiculos.controller.locadora.ControllerLocadora;
 import br.com.projetos.locadoraveiculos.service.Apresentar;
 
-import static br.com.projetos.locadoraveiculos.view.commandLine.App.*;
+import java.util.Scanner;
 
 public class MenuInicial implements Apresentar {
     private final ControllerLocadora controller;
-    public MenuInicial(ControllerLocadora controllerLocadora) {
+    private final GerenciadorDeMenu gerenciadorDeMenu;
+
+    public MenuInicial(ControllerLocadora controllerLocadora, GerenciadorDeMenu gerenciadorDeMenu) {
         this.controller = controllerLocadora;
+        this.gerenciadorDeMenu = gerenciadorDeMenu;
     }
+
     @Override
     public void escolherOpcao() {
         boolean sair = false;
-        while (!sair) {
+        Scanner scanner = new Scanner(System.in); // Considerar mover para uma dependência injetada se usada em múltiplos locais
 
-            System.out.println("\nSeja Bem Vindo a " + controller.getSistemaDeAluguel().getAgencia().nome()+"\n");
-            System.out.println("""               
+        while (!sair) {
+            System.out.println("\nSeja Bem Vindo a " + controller.getSistemaDeAluguel().getAgencia().nome() + "\n");
+            System.out.println("""
                     Escolha uma opção abaixo:
                      (1) - Clientes
                      (2) - Veículos
@@ -26,16 +31,13 @@ public class MenuInicial implements Apresentar {
             String option = scanner.nextLine();
             switch (option) {
                 case "1":
-                    menu = new MenuClientes(controller);
-                    menu.escolherOpcao();
+                    gerenciadorDeMenu.setMenuAtual(new MenuClientes(controller, gerenciadorDeMenu));
                     break;
                 case "2":
-                    menu = new MenuVeiculos(controller);
-                    menu.escolherOpcao();
+                    gerenciadorDeMenu.setMenuAtual(new MenuVeiculos(controller, gerenciadorDeMenu));
                     break;
                 case "3":
-                    menu = new MenuAluguel(controller);
-                    menu.escolherOpcao();
+                    gerenciadorDeMenu.setMenuAtual(new MenuAluguel(controller, gerenciadorDeMenu));
                     break;
                 case "4":
                     System.out.println("Saindo...");
@@ -43,6 +45,9 @@ public class MenuInicial implements Apresentar {
                     break;
                 default:
                     System.out.println("Opção Inválida!");
+            }
+            if (!sair) {
+                gerenciadorDeMenu.exibirMenuAtual();
             }
         }
     }

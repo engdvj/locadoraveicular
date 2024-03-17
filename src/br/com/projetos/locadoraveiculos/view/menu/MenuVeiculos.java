@@ -6,12 +6,13 @@ import br.com.projetos.locadoraveiculos.service.Apresentar;
 import br.com.projetos.locadoraveiculos.util.Util;
 import br.com.projetos.locadoraveiculos.util.Validacoes;
 
-import static br.com.projetos.locadoraveiculos.view.commandLine.App.scanner;
+import static br.com.projetos.locadoraveiculos.view.commandLine.ConsoleUI.scanner;
+
 
 public class MenuVeiculos implements Apresentar {
     private final ControllerLocadora controller;
 
-    public MenuVeiculos(ControllerLocadora controller) {
+    public MenuVeiculos(ControllerLocadora controller,GerenciadorDeMenu gerenciador) {
         this.controller = controller;
     }
 
