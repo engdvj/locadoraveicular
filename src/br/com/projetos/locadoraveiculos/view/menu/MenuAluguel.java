@@ -176,8 +176,19 @@ public class MenuAluguel implements Apresentar {
     }
     private String buscarVeiculoLivre() {
         Util.listar("Veiculos Disponíveis", controller.getSistemaDeAluguel().obterVeiculosDisponiveis().obterLista());
-        System.out.println("\nDigite o modelo de um veículo:");
-        return scanner.nextLine();
+        Veiculo veiculo = null;
+        while (veiculo == null) {
+            System.out.println("\nDigite o modelo de um veículo:");
+            String modeloVeiculo = scanner.nextLine();
+
+            veiculo = controller.getSistemaDeAluguel().obterVeiculosDisponiveis().realizarBusca(modeloVeiculo);
+
+            if (veiculo == null) {
+                System.out.println("Veículo não encontrado ou não disponível. Por favor, tente novamente.");
+            }
+        }
+
+        return veiculo.getModelo(); // Retorna o veículo encontrado ou null se o usuário optar por sair
     }
     private String buscarVeiculoOcupado(Cliente cliente) {
 
