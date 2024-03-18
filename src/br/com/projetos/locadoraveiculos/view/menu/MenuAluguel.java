@@ -11,7 +11,7 @@ import br.com.projetos.locadoraveiculos.util.Validacoes;
 
 import java.time.LocalDateTime;
 import java.time.format.*;
-import java.util.Set;
+import java.util.*;
 
 import static br.com.projetos.locadoraveiculos.view.commandLine.ConsoleUI.scanner;
 
@@ -146,7 +146,20 @@ public class MenuAluguel implements Apresentar {
         return devolucao;
     }
     private String buscarCliente() {
-        Util.listar("Clientes Cadastados", controller.getSistemaDeAluguel().obterClientes().obterLista());
+        Set<Cliente> clientesComVeiculosAlugados = new HashSet<>();
+        for (Cliente cliente : controller.getSistemaDeAluguel().obterClientes().obterLista()) {
+            Set<Aluguel> contratosAtivos = controller.getSistemaDeAluguel().obterContratosCliente(cliente);
+            if (!contratosAtivos.isEmpty()) {
+                clientesComVeiculosAlugados.add(cliente);
+            }
+        }
+
+        if (clientesComVeiculosAlugados.isEmpty()) {
+            System.out.println("Nenhum cliente com veículos alugados no momento.");
+            return null;
+        }
+
+        Util.listar("Clientes com Veículos Alugados", clientesComVeiculosAlugados);
         System.out.println("\nDigite o nome de um cliente:");
         return scanner.nextLine();
     }
