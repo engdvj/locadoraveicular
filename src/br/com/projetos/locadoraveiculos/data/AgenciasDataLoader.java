@@ -5,7 +5,7 @@ import java.time.LocalTime;
 
 public class AgenciasDataLoader {
     public static Agencia loadSampleAgencia() {
-        String nome = "Dois Irmãos";
+        String nome = "Locadora de Veículos Ada Tech";
         String endereco = "Rua Duque de Caxias";
         LocalTime horarioAbertura = LocalTime.of(9, 0);
         LocalTime horarioFechamento = LocalTime.of(18, 0);

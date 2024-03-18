@@ -17,7 +17,7 @@ public class ContratosDataLoader {
     public ResultadoContratos processarContratos(String endereco) {
         HashSet<Aluguel> contratosAtivos = criarContratosAtivos(endereco);
         HashSet<Devolucao> contratosInativos = inativarContratos(contratosAtivos);
-        imprimirContratos(contratosAtivos, contratosInativos);
+//      imprimirContratos(contratosAtivos, contratosInativos);
 
         return new ResultadoContratos(contratosAtivos, contratosInativos);
     }
@@ -59,17 +59,17 @@ public class ContratosDataLoader {
         return contratosInativos;
     }
 
-    private void imprimirContratos(HashSet<Aluguel> contratosAtivos, HashSet<Devolucao> contratosInativos) {
-        System.out.println("---------------Contratos Ativos---------------");
-        for (Aluguel aluguel : contratosAtivos) {
-            System.out.println(aluguel);
-        }
-
-        System.out.println("---------------Contratos Inativos---------------");
-        for (Devolucao devolucao : contratosInativos) {
-            System.out.println(devolucao);
-        }
-    }
+//    private void imprimirContratos(HashSet<Aluguel> contratosAtivos, HashSet<Devolucao> contratosInativos) {
+//        System.out.println("---------------Contratos Ativos---------------");
+//        for (Aluguel aluguel : contratosAtivos) {
+//            System.out.println(aluguel);
+//        }
+//
+//        System.out.println("---------------Contratos Inativos---------------");
+//        for (Devolucao devolucao : contratosInativos) {
+//            System.out.println(devolucao);
+//        }
+//    }
 
     public static class ResultadoContratos {
         private HashSet<Aluguel> contratosAtivos;

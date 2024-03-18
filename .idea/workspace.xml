@@ -6,8 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="f12b4e23-557c-4220-9f76-0a4dd7553fc5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/controller/sistemas/SistemaPagamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/controller/sistemas/SistemaPagamento.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/data/AgenciasDataLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/data/AgenciasDataLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/data/ContratosDataLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/data/ContratosDataLoader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/view/menu/MenuAluguel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/view/menu/MenuAluguel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/view/menu/MenuClientes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/projetos/locadoraveiculos/view/menu/MenuClientes.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
