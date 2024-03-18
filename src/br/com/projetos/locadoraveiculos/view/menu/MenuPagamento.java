@@ -27,36 +27,32 @@ public class MenuPagamento implements Apresentar {
         boolean sair = false;
         Scanner scanner = new Scanner(System.in); // Considerar mover para uma dependência injetada se usada em múltiplos locais
 
-        while (!sair) {
-            System.out.println("""
-                    Escolha uma opção abaixo:
-                     (1) - Realizar Pagamento - Cartão de Crédito
-                     (2) - Realizar Pagamento - PIX
-                    """);
-            String option = scanner.nextLine();
-            switch (option) {
-                case "1":
-                    pagamentoCartao();
-                    break;
-                case "2":
-                    pagamentoPix();
-                    break;
-                default:
-                    System.out.println("Opção Inválida!");
-            }
-            if (!sair) {
-                gerenciadorDeMenu.exibirMenuAtual();
-            }
+        System.out.println("""
+                Escolha uma opção abaixo:
+                 (1) - Realizar Pagamento - Cartão de Crédito
+                 (2) - Realizar Pagamento - PIX
+                """);
+        String option = scanner.nextLine();
+        switch (option) {
+            case "1":
+                pagamentoCartao();
+                break;
+            case "2":
+                pagamentoPix();
+                break;
+            default:
+                System.out.println("Opção Inválida!");
         }
     }
 
-    private void pagamentoCartao(){
+    private void pagamentoCartao() {
         ArrayList<Double> valores = controller.getSistemaDePagamento().calcularPagamento(devolucao);
         controller.getSistemaDePagamento().imprimirRecido(valores);
 
 
     }
-    private void pagamentoPix(){
+
+    private void pagamentoPix() {
         controller.getSistemaDePagamento().calcularPagamento(devolucao);
     }
 }

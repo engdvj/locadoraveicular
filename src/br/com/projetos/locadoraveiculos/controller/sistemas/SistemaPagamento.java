@@ -54,7 +54,7 @@ public class SistemaPagamento implements Pagar {
 
     @Override
     public void imprimirRecido(ArrayList<Double> dadosPagamento) {
-        System.out.printf("Numero de diarias: %.0f\n Desconto Aplicado: %.2f\n Valor Total: %.2f ",dadosPagamento.get(0),dadosPagamento.get(1),dadosPagamento.get(2));
+        System.out.printf("Numero de diarias: %.0f\nDesconto Aplicado: %.2f\nValor Total: %.2f \n\n",dadosPagamento.get(0),dadosPagamento.get(1),dadosPagamento.get(2));
     }
 
 
