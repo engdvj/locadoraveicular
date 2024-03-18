@@ -1,5 +1,6 @@
 package br.com.projetos.locadoraveiculos.util;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -29,10 +30,16 @@ public class Validacoes {
 
     public static boolean validarData(String data) {
         try {
-            DateTimeFormatter formatado = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-            LocalDateTime.parse(data + " 00:00", formatado);
-            System.out.println("Data Validada");
-            return true;
+            DateTimeFormatter formatado = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate hoje = LocalDate.now();
+            LocalDate dataValidada = LocalDate.parse(data, formatado);
+            if (!dataValidada.isBefore(hoje)) {
+                System.out.println("Data válida.");
+                return true;
+            } else {
+                System.out.println("A data fornecida é anterior à data atual.");
+                return false;
+            }
         } catch (DateTimeParseException e) {
             return false;
         }
@@ -41,10 +48,18 @@ public class Validacoes {
     public static boolean validarHora(String hora) {
         try {
             DateTimeFormatter formatado = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-            LocalDateTime.parse("01/01/2024 " + hora, formatado);
-            System.out.println("Hora validada.");
-            return true;
+            LocalDateTime agora = LocalDateTime.now();
+            String dataHoraFutura = agora.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + " " + hora;
+            LocalDateTime dataHoraValidada = LocalDateTime.parse(dataHoraFutura, formatado);
+            if (dataHoraValidada.isAfter(agora) || dataHoraValidada.toLocalDate().isEqual(agora.toLocalDate())) {
+                System.out.println("Hora válida.");
+                return true;
+            } else {
+                System.out.println("A hora fornecida é anterior à hora atual.");
+                return false;
+            }
         } catch (DateTimeParseException e) {
+            System.out.println("Formato de hora inválido.");
             return false;
         }
     }

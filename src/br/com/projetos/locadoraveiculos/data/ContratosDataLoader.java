@@ -32,7 +32,7 @@ public class ContratosDataLoader {
 
         int index = 0;
         while (veiculoIterator.hasNext() && clienteIterator.hasNext()) {
-            LocalDateTime dataEvento = LocalDateTime.of(2024, Month.MARCH, 10 + index, 10 + (index % 4), 0);
+            LocalDateTime dataEvento = LocalDateTime.of(2024, Month.MARCH, 18 + index, 10 + (index % 4), 0);
             Aluguel aluguel = new Aluguel(veiculoIterator.next(), clienteIterator.next(), dataEvento, endereco);
             contratosAtivos.add(aluguel);
             index++;
