@@ -34,7 +34,6 @@ public class Validacoes {
             LocalDate hoje = LocalDate.now();
             LocalDate dataValidada = LocalDate.parse(data, formatado);
             if (!dataValidada.isBefore(hoje)) {
-                System.out.println("Data válida.");
                 return true;
             } else {
                 System.out.println("A data fornecida é anterior à data atual.");
@@ -52,7 +51,6 @@ public class Validacoes {
             String dataHoraFutura = agora.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + " " + hora;
             LocalDateTime dataHoraValidada = LocalDateTime.parse(dataHoraFutura, formatado);
             if (dataHoraValidada.isAfter(agora) || dataHoraValidada.toLocalDate().isEqual(agora.toLocalDate())) {
-                System.out.println("Hora válida.");
                 return true;
             } else {
                 System.out.println("A hora fornecida é anterior à hora atual.");
