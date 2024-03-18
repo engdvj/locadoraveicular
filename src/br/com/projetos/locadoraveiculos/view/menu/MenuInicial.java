@@ -48,7 +48,6 @@ public class MenuInicial implements Apresentar {
             }
             if (!sair) {
                 gerenciadorDeMenu.exibirMenuAtual();
-                break;
             }
         }
     }

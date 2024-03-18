@@ -7,6 +7,7 @@ import br.com.projetos.locadoraveiculos.service.Apresentar;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static br.com.projetos.locadoraveiculos.view.commandLine.ConsoleUI.scanner;
 
 public class MenuPagamento implements Apresentar {
 
@@ -26,6 +27,7 @@ public class MenuPagamento implements Apresentar {
         boolean sair = false;
         Scanner scanner = new Scanner(System.in); // Considerar mover para uma dependência injetada se usada em múltiplos locais
 
+        while (!sair) {
             System.out.println("""
                     Escolha uma opção abaixo:
                      (1) - Realizar Pagamento - Cartão de Crédito
@@ -35,8 +37,6 @@ public class MenuPagamento implements Apresentar {
             switch (option) {
                 case "1":
                     pagamentoCartao();
-                    gerenciadorDeMenu.setMenuAtual(new MenuInicial(controller, gerenciadorDeMenu));
-                    gerenciadorDeMenu.exibirMenuAtual();
                     break;
                 case "2":
                     pagamentoPix();
@@ -44,6 +44,10 @@ public class MenuPagamento implements Apresentar {
                 default:
                     System.out.println("Opção Inválida!");
             }
+            if (!sair) {
+                gerenciadorDeMenu.exibirMenuAtual();
+            }
+        }
     }
 
     private void pagamentoCartao(){

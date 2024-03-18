@@ -40,7 +40,7 @@ public class MenuClientes implements Apresentar {
                     excluirCliente();
                     break;
                 case "5":
-                    continuar = false;
+                    continuar = false; // Encerra o loop, voltando ao menu anterior
                     break;
                 default:
                     System.out.println("Opção Inválida!");
