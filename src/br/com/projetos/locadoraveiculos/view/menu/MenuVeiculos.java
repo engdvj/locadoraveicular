@@ -115,7 +115,7 @@ public class MenuVeiculos implements Apresentar {
                 System.out.println("Digite um tamanho válido");
             }
         }
-            boolean adicionado = controller.getSistemaDeAluguel().obterVeiculos().add(new Veiculo(marca, modelo, placa, tamanho));
+        boolean adicionado = controller.getSistemaDeAluguel().obterVeiculos().add(new Veiculo(marca, modelo, placa, tamanho));
         if (adicionado){
             System.out.println("Veiculo adicionado com sucesso!");
         }else{
@@ -131,7 +131,7 @@ public class MenuVeiculos implements Apresentar {
 
             boolean validacaoMarca = true;
             String novaMarca = null;
-            System.out.print("qual a nova marca do veículo: ");
+            System.out.print("qual a no\nva marca do veículo: ");
             do {
                 novaMarca = scanner.nextLine();
                 if (Validacoes.validaNome(novaMarca)) {
@@ -157,7 +157,7 @@ public class MenuVeiculos implements Apresentar {
 
             boolean validacaoplaca = true;
             String novaPlaca = null;
-            System.out.print("Digite a placa do veículo:");
+            System.out.print("Digite a placa do veículo no modelo AAA0A00:");
             do {
                 novaPlaca = scanner.nextLine().toUpperCase();
                 if (Validacoes.validarPlaca(novaPlaca)) {
@@ -188,7 +188,7 @@ public class MenuVeiculos implements Apresentar {
                 }
             }
 
-            if (controller.getSistemaDeAluguel().obterVeiculos().editar(editarVeiculo, new Veiculo(novaMarca, novoModelo, novaPlaca, tamanho))){
+            if (!controller.getSistemaDeAluguel().obterVeiculos().editar(editarVeiculo, new Veiculo(novaMarca, novoModelo, novaPlaca, tamanho))){
                 System.out.println("Veiculo editado com sucesso");
             }else{
                 System.out.println("Não foi possivel adicionar veiculo");
@@ -204,6 +204,7 @@ public class MenuVeiculos implements Apresentar {
         Veiculo apagarVeiculo = obterVeiculo();
         if (apagarVeiculo != null) {
             controller.getSistemaDeAluguel().obterVeiculos().remover(apagarVeiculo);
+            System.out.println("Veiculo excluido com sucesso");
         } else {
             System.out.println("Não foi possivel encontar o veiculo");
         }
@@ -220,7 +221,7 @@ public class MenuVeiculos implements Apresentar {
 
     public Veiculo obterVeiculo() {
         Util.listar("Veiculos", controller.getSistemaDeAluguel().obterVeiculos().obterLista());
-        System.out.println("\nDigite o nome do Veiculo:");
+        System.out.println("\nDigite a placa do Veiculo:");
         String pesquisaVeiculo = scanner.nextLine();
         if (!pesquisaVeiculo.isEmpty()) {
             return controller.getSistemaDeAluguel().obterVeiculos().realizarBusca(pesquisaVeiculo);
