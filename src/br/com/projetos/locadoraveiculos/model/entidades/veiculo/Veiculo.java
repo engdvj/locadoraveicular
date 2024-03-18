@@ -50,7 +50,7 @@ public class Veiculo implements Listar {
 
     public String obterNomeOrganizado(){
         StringBuilder sb = new StringBuilder();
-        sb.append(tamanhoVeiculo).append(" - ").append(modelo);
+        sb.append(tamanhoVeiculo).append(" - ").append(modelo).append(" - ").append(placa);
         return sb.toString();
     }
     @Override

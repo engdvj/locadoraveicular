@@ -12,14 +12,18 @@ import java.util.TreeSet;
 
 public class SistemaVeiculos implements CRUD<Veiculo> {
     private HashSet<Veiculo> veiculos;
+
     public SistemaVeiculos(HashSet<Veiculo> veiculos) {
         this.veiculos = veiculos;
     }
 
     @Override
     public boolean add(Veiculo veiculo) {
-        veiculos.add(veiculo);
-        return true;
+        if (veiculos.add(veiculo)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
@@ -33,21 +37,23 @@ public class SistemaVeiculos implements CRUD<Veiculo> {
 
     @Override
     public Veiculo realizarBusca(String nome) {
-        if(Validacoes.validaNome(nome)) {
+        if (Validacoes.validaNome(nome)) {
             nome = nome.substring(0, 1).toUpperCase() + nome.substring(1).toLowerCase();
             for (Veiculo veiculo : veiculos) {
-                if (veiculo.getModelo().equalsIgnoreCase(nome)) {
+                if (veiculo.getPlaca().equalsIgnoreCase(nome)) {
                     return veiculo;
                 }
             }
         }
         return null;
     }
+
     @Override
     public boolean remover(Veiculo veiculo) {
         veiculos.remove(veiculo);
         return false;
     }
+
     @Override
     public TreeSet<Veiculo> obterLista() {
         return Util.ordenar(veiculos, Comparator.comparing(Veiculo::getTamanhoVeiculo).thenComparing(Veiculo::obterNomeOrganizado));
